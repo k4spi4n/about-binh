@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { X, Eye, FileText } from "lucide-react";
+import { useLoading } from "../contexts/LoadingContext";
 
 const skills = [
   // Education
@@ -96,6 +97,7 @@ const categories = [
 export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState("Toàn bộ");
   const [selectedPdf, setSelectedPdf] = useState(null);
+  const { triggerLoading } = useLoading();
 
   const filteredSkills = skills.filter(
     (skill) =>
@@ -107,6 +109,14 @@ export const SkillsSection = () => {
       ? import.meta.env.BASE_URL.slice(0, -1)
       : import.meta.env.BASE_URL;
     return `${baseUrl}/skills/${filename}`;
+  };
+
+  const handleSkillClick = (skill) => {
+    if (skill.file) {
+      triggerLoading(() => {
+        setSelectedPdf(skill.file);
+      });
+    }
   };
 
   useEffect(() => {
@@ -148,7 +158,7 @@ export const SkillsSection = () => {
           {filteredSkills.map((skill, key) => (
             <div
               key={key}
-              onClick={() => skill.file && setSelectedPdf(skill.file)}
+              onClick={() => handleSkillClick(skill)}
               className={cn(
                 "bg-card p-6 rounded-lg shadow-xs card-hover relative group overflow-hidden transition-all duration-300",
                 skill.file && "cursor-pointer"

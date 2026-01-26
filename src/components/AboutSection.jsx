@@ -1,10 +1,24 @@
 import { Code, Gamepad2, PencilRuler } from "lucide-react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { useLoading } from "../contexts/LoadingContext";
 
 const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026.pdf`;
 
 export const AboutSection = () => {
   const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });
+  const { triggerLoading } = useLoading();
+
+  const handleDownload = (e) => {
+    e.preventDefault();
+    triggerLoading(() => {
+      const link = document.createElement("a");
+      link.href = cvUrl;
+      link.download = "Thai Binh - CV-2026.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  };
 
   return (
     <section id="about" className="py-24 px-4 relative">
@@ -50,8 +64,8 @@ export const AboutSection = () => {
               </a>
               <a
                 href={cvUrl}
-                download="Thai Binh - CV-2026.pdf"
-                className="px-6 py-2 rounded-full border border-primary text-primary font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+                onClick={handleDownload}
+                className="px-6 py-2 rounded-full border border-primary text-primary font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
               >
                 Download CV
               </a>
