@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types"; // 1. Import PropTypes
 import { cn } from "@/lib/utils";
 
 export const LoadingScreen = ({ onComplete, duration = 1000 }) => {
-  const [loadingText, setLoadingText] = useState("Travelling to star");
+  // 2. Sửa lỗi 1: Bỏ setLoadingText vì không dùng đến
+  const [loadingText] = useState("Travelling to star");
+
   const [dots, setDots] = useState("");
   const [isExiting, setIsExiting] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -43,7 +46,7 @@ export const LoadingScreen = ({ onComplete, duration = 1000 }) => {
     <div
       className={cn(
         "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#030014] transition-opacity duration-700",
-        isExiting ? "opacity-0 pointer-events-none" : "opacity-100"
+        isExiting ? "opacity-0 pointer-events-none" : "opacity-100",
       )}
     >
       {/* Background Grid Effect */}
@@ -67,26 +70,27 @@ export const LoadingScreen = ({ onComplete, duration = 1000 }) => {
 
         {/* Central Core */}
         <div className="relative w-16 h-16 bg-black rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.5)]">
-           <div className="absolute inset-0 bg-gradient-to-tr from-primary to-fuchsia-600 rounded-full animate-pulse opacity-80 blur-sm"></div>
-           <div className="relative w-12 h-12 bg-[#030014] rounded-full z-10 flex items-center justify-center overflow-hidden">
-             {/* Core inner rotation */}
-             <div className="absolute inset-0 bg-gradient-to-t from-transparent via-primary/30 to-transparent animate-[spin_2s_linear_infinite]"></div>
-           </div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary to-fuchsia-600 rounded-full animate-pulse opacity-80 blur-sm"></div>
+          <div className="relative w-12 h-12 bg-[#030014] rounded-full z-10 flex items-center justify-center overflow-hidden">
+            {/* Core inner rotation */}
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-primary/30 to-transparent animate-[spin_2s_linear_infinite]"></div>
+          </div>
         </div>
       </div>
 
       {/* Loading Text */}
       <div className="mt-12 space-y-2 text-center z-10">
         <h2 className="text-xl md:text-2xl font-bold tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-primary via-fuchsia-400 to-cyan-400 animate-pulse">
-          {loadingText}{dots}
+          {loadingText}
+          {dots}
         </h2>
         <div className="h-1 w-64 mx-auto bg-secondary/30 rounded-full overflow-hidden relative">
-            <div 
-              className="h-full bg-gradient-to-r from-primary via-fuchsia-500 to-cyan-500 transition-all duration-75 ease-linear"
-              style={{ width: `${progress}%` }}
-            >
-              <div className="absolute right-0 top-0 bottom-0 w-2 bg-white/50 blur-[2px]"></div>
-            </div>
+          <div
+            className="h-full bg-gradient-to-r from-primary via-fuchsia-500 to-cyan-500 transition-all duration-75 ease-linear"
+            style={{ width: `${progress}%` }}
+          >
+            <div className="absolute right-0 top-0 bottom-0 w-2 bg-white/50 blur-[2px]"></div>
+          </div>
         </div>
         <div className="flex justify-between w-64 mx-auto text-[10px] text-muted-foreground font-mono mt-1">
           <span>SYSTEM_CHECK</span>
@@ -95,4 +99,10 @@ export const LoadingScreen = ({ onComplete, duration = 1000 }) => {
       </div>
     </div>
   );
+};
+
+// 3. Sửa lỗi 2: Thêm PropTypes validation
+LoadingScreen.propTypes = {
+  onComplete: PropTypes.func,
+  duration: PropTypes.number,
 };
