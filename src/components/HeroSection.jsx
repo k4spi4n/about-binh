@@ -1,6 +1,11 @@
 import { ArrowDown } from "lucide-react";
 
 export const HeroSection = () => {
+  const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+  const avatarUrl = `${baseUrl}/documents/avatar.png`;
+
   return (
     <section
       id="hero"
@@ -9,7 +14,7 @@ export const HeroSection = () => {
       <div className="container max-w-4xl mx-auto text-center z-10">
         <div className="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center rounded-full profile-picture-container">
           <img
-            src="/about-binh/me.png"
+            src={avatarUrl}
             alt="picture of me"
             className="w-[90%] h-[90%] rounded-full object-cover shadow-lg relative z-20"
           />

@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import cvUrl from '/CV-2026.pdf?url';
+
+const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026.pdf`;
 
 const navItems = [
   { name: "Trang chủ", href: "#hero" },

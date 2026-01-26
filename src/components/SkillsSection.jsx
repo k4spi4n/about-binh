@@ -33,6 +33,14 @@ const skills = [
   },
 
   {
+    name: "Chứng chỉ Deep Learning của NVIDIA DLI",
+    institution:
+      "Hoàn thành khóa học về Học sâu của NVIDIA Deep Learning Institute",
+    year: "(2025)",
+    category: "Học vấn",
+  },
+
+  {
     name: "Từng là học sinh khối chuyên Ngữ tại",
     institution: "THPT chuyên Nguyễn Trãi - Hải Dương",
     year: "(2021-2024)",
@@ -87,7 +95,8 @@ export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState("Toàn bộ");
 
   const filteredSkills = skills.filter(
-    (skill) => activeCategory === "Toàn bộ" || skill.category === activeCategory
+    (skill) =>
+      activeCategory === "Toàn bộ" || skill.category === activeCategory,
   );
   return (
     <section id="skills" className="py-24 px-4 relative bg-secondary/30">
@@ -105,7 +114,7 @@ export const SkillsSection = () => {
                 "px-5 py-2 rounded-full transition-colors duration-300 capitalize",
                 activeCategory === category
                   ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/70 text-forefround hover:bd-secondary"
+                  : "bg-secondary/70 text-forefround hover:bd-secondary",
               )}
             >
               {category}

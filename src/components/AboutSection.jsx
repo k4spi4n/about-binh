@@ -1,6 +1,7 @@
 import { Code, Gamepad2, PencilRuler } from "lucide-react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import cvUrl from '/CV-2026.pdf?url';
+
+const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026.pdf`;
 
 export const AboutSection = () => {
   const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });

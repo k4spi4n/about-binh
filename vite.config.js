@@ -10,7 +10,10 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/about-binh",
+  base: "/about-binh/",
+  server: {
+    host: true,
+  },
   resolve: {
     alias: {
       "@": path.resolve(".", "./src"),
