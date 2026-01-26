@@ -134,7 +134,7 @@ export const SkillsSection = () => {
     <section id="skills" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Kỹ Năng <span className="text-primary"> Cá Nhân</span>
+          Hồ Sơ <span className="text-primary"> Kỹ Năng</span>
         </h2>
 
         <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -161,18 +161,22 @@ export const SkillsSection = () => {
               onClick={() => handleSkillClick(skill)}
               className={cn(
                 "bg-card p-6 rounded-lg shadow-xs card-hover relative group overflow-hidden transition-all duration-300",
-                skill.file && "cursor-pointer"
+                skill.file && "cursor-pointer",
               )}
             >
               {/* Content Container that slides up */}
-              <div className={cn(
-                "transition-transform duration-300 h-full flex flex-col justify-between",
-                skill.file && "group-hover:-translate-y-4"
-              )}>
+              <div
+                className={cn(
+                  "transition-transform duration-300 h-full flex flex-col justify-between",
+                  skill.file && "group-hover:-translate-y-4",
+                )}
+              >
                 <div className="text-left mb-4">
                   <h3 className="font-semibold text-lg flex items-center gap-2">
                     {skill.name}
-                    {skill.file && <FileText className="w-4 h-4 text-primary" />}
+                    {skill.file && (
+                      <FileText className="w-4 h-4 text-primary" />
+                    )}
                   </h3>
                   {skill.category === "Học vấn" && (
                     <p className="text-muted-foreground text-sm">
@@ -180,7 +184,7 @@ export const SkillsSection = () => {
                     </p>
                   )}
                 </div>
-                
+
                 {skill.category !== "Học vấn" && (
                   <div>
                     <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
@@ -214,11 +218,11 @@ export const SkillsSection = () => {
 
       {/* PDF Modal remains the same */}
       {selectedPdf && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200"
           onClick={() => setSelectedPdf(null)}
         >
-          <div 
+          <div
             className="bg-background w-full max-w-5xl h-[85vh] rounded-xl shadow-2xl relative flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
@@ -234,11 +238,11 @@ export const SkillsSection = () => {
               </button>
             </div>
             <div className="flex-1 bg-secondary/20 relative">
-               <iframe 
-                 src={getPdfUrl(selectedPdf)}
-                 className="w-full h-full border-none"
-                 title="Certificate Viewer"
-               />
+              <iframe
+                src={getPdfUrl(selectedPdf)}
+                className="w-full h-full border-none"
+                title="Certificate Viewer"
+              />
             </div>
           </div>
         </div>

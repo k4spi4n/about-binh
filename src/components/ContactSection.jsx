@@ -7,6 +7,7 @@ import {
   Send,
   Twitch,
   Twitter,
+  Github,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -91,6 +92,13 @@ export const ContactSection = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4"> Kết nối nào! </h4>
               <div className="flex space-x-4 justify-center">
+                <a
+                  href="https://github.com/k4spi4n"
+                  target="_blank"
+                  className="hover:text-primary transition-colors"
+                >
+                  <Github />
+                </a>
                 <a
                   href="https://www.facebook.com/binh.thai.60194/"
                   target="_blank"

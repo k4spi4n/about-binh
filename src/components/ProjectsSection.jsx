@@ -12,7 +12,7 @@ const projects = [
     image: "projects/project4.png",
     tags: ["PostgreSQL", "Supabase", "NextJS"],
     demoUrl: "",
-    githubUrl: "https://github.com/AkasameVN26/cmec-hms-web-app",
+    githubUrl: "https://github.com/k4spi4n/cmec-hms-web-app",
   },
   {
     id: 2,

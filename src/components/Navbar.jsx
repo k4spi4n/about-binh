@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Github } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { useLoading } from "../contexts/LoadingContext";
 
 const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026.pdf`;
+const githubUrl = "https://github.com/k4spi4n";
 
 const navItems = [
   { name: "Trang chủ", href: "#hero" },
@@ -87,13 +88,24 @@ export const Navbar = () => {
               {item.name}
             </a>
           ))}
-          <a
-            href={cvUrl}
-            onClick={handleDownload}
-            className="px-4 py-2 rounded-full border border-primary text-primary text-sm font-semibold hover:bg-primary/10 transition-colors duration-300 cursor-pointer"
-          >
-            Download CV
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              aria-label="GitHub Profile"
+            >
+              <Github className="w-6 h-6" />
+            </a>
+            <a
+              href={cvUrl}
+              onClick={handleDownload}
+              className="px-4 py-2 rounded-full border border-primary text-primary text-sm font-semibold hover:bg-primary/10 transition-colors duration-300 cursor-pointer"
+            >
+              Download CV
+            </a>
+          </div>
         </div>
 
         {/* mobile nav */}
@@ -126,13 +138,24 @@ export const Navbar = () => {
                 {item.name}
               </a>
             ))}
-            <a
-              href={cvUrl}
-              onClick={handleDownload}
-              className="px-6 py-3 rounded-full border border-primary text-primary text-lg font-semibold hover:bg-primary/10 transition-colors duration-300 mt-6 cursor-pointer"
-            >
-              Download CV
-            </a>
+            <div className="flex flex-col items-center gap-6 mt-6">
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                aria-label="GitHub Profile"
+              >
+                <Github className="w-8 h-8" />
+              </a>
+              <a
+                href={cvUrl}
+                onClick={handleDownload}
+                className="px-6 py-3 rounded-full border border-primary text-primary text-lg font-semibold hover:bg-primary/10 transition-colors duration-300 cursor-pointer"
+              >
+                Download CV
+              </a>
+            </div>
           </div>
         </div>
       </div>
