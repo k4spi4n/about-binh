@@ -58,30 +58,28 @@ const skills = [
   },
 
   // Frontend
-  { name: "HTML/CSS", level: 90, category: "Frontend" },
-  { name: "JavaScript", level: 90, category: "Frontend" },
-  { name: "React", level: 90, category: "Frontend" },
-  { name: "TypeScript", level: 85, category: "Frontend" },
-  { name: "Tailwind CSS", level: 90, category: "Frontend" },
+  { name: "HTML/CSS/JavaScript", level: 85, category: "Frontend" },
+  { name: "React/Next.js", level: 80, category: "Frontend" },
+  { name: "TypeScript", level: 80, category: "Frontend" },
+  { name: "Tailwind CSS", level: 85, category: "Frontend" },
 
   // Backend
-  { name: "Django", level: 80, category: "Backend" },
-  { name: "MongoDB", level: 80, category: "Backend" },
-  { name: "Node.js", level: 75, category: "Backend" },
+  { name: "Django/FastAPI", level: 85, category: "Backend" },
+  { name: "MongoDB/PostgreSQL", level: 80, category: "Backend" },
+  { name: "Node.js/NestJS", level: 80, category: "Backend" },
   { name: "Java/C++/C#", level: 80, category: "Backend" },
   { name: ".NET", level: 75, category: "Backend" },
-  { name: "PostgreSQL/SQL Server", level: 75, category: "Backend" },
 
   // AI
-  { name: "Python", level: 90, category: "AI" },
-  { name: "Numpy", level: 75, category: "AI" },
-  { name: "OpenCV", level: 75, category: "AI" },
+  { name: "Python/PyTorch", level: 90, category: "AI" },
+  { name: "NumPy/Pandas", level: 85, category: "AI" },
+  { name: "OpenCV", level: 85, category: "AI" },
 
   // Tools
   { name: "Unity", level: 85, category: "Công cụ" },
-  { name: "Adobe Photoshop/Premiere/Audition", level: 80, category: "Công cụ" },
-  { name: "Unreal Engine", level: 70, category: "Công cụ" },
-  { name: "Git/GitHub", level: 75, category: "Công cụ" },
+  { name: "Photoshop/Premiere/Audition", level: 80, category: "Công cụ" },
+  { name: "Office 365", level: 90, category: "Công cụ" },
+  { name: "Git/GitHub", level: 85, category: "Công cụ" },
   { name: "VS Code", level: 80, category: "Công cụ" },
 ];
 
