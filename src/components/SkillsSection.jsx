@@ -31,8 +31,6 @@ const skills = [
       "Hoàn thành khóa học chuyên sâu về Trí tuệ nhân tạo do Samsung Electronics Việt Nam xác nhận và bảo chứng",
     year: "(2025)",
     category: "Học vấn",
-    // Placeholder if you have this file later
-    // file: "samsung_AI.pdf" 
   },
 
   {
@@ -104,7 +102,6 @@ export const SkillsSection = () => {
       activeCategory === "Toàn bộ" || skill.category === activeCategory,
   );
 
-  // Helper to construct safe URL
   const getPdfUrl = (filename) => {
     const baseUrl = import.meta.env.BASE_URL.endsWith("/")
       ? import.meta.env.BASE_URL.slice(0, -1)
@@ -112,7 +109,6 @@ export const SkillsSection = () => {
     return `${baseUrl}/skills/${filename}`;
   };
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedPdf) {
       document.body.style.overflow = "hidden";
@@ -154,52 +150,59 @@ export const SkillsSection = () => {
               key={key}
               onClick={() => skill.file && setSelectedPdf(skill.file)}
               className={cn(
-                "bg-card p-6 rounded-lg shadow-xs card-hover relative group overflow-hidden",
+                "bg-card p-6 rounded-lg shadow-xs card-hover relative group overflow-hidden transition-all duration-300",
                 skill.file && "cursor-pointer"
               )}
             >
-              {/* Hover Overlay for File */}
-              {skill.file && (
-                <div className="absolute inset-0 bg-primary/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 text-primary-foreground">
-                  <Eye className="w-8 h-8 mb-2" />
-                  <span className="font-semibold text-sm">Click để xem chi tiết</span>
-                  <span className="text-xs mt-1 opacity-80">(PDF)</span>
+              {/* Content Container that slides up */}
+              <div className={cn(
+                "transition-transform duration-300 h-full flex flex-col justify-between",
+                skill.file && "group-hover:-translate-y-4"
+              )}>
+                <div className="text-left mb-4">
+                  <h3 className="font-semibold text-lg flex items-center gap-2">
+                    {skill.name}
+                    {skill.file && <FileText className="w-4 h-4 text-primary" />}
+                  </h3>
+                  {skill.category === "Học vấn" && (
+                    <p className="text-muted-foreground text-sm">
+                      {skill.institution} {skill.year}
+                    </p>
+                  )}
                 </div>
-              )}
-
-              <div className="text-left mb-4 relative z-0">
-                <h3 className="font-semibold text-lg flex items-center gap-2">
-                   {skill.name}
-                   {skill.file && <FileText className="w-4 h-4 text-primary" />}
-                </h3>
-                {skill.category === "Học vấn" && (
-                  <p className="text-muted-foreground text-sm">
-                    {skill.institution} {skill.year}
-                  </p>
+                
+                {skill.category !== "Học vấn" && (
+                  <div>
+                    <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
+                      <div
+                        className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]"
+                        style={{ width: skill.level + "%" }}
+                      />
+                    </div>
+                    <div className="text-right mt-1">
+                      <span className="text-sm text-muted-foreground">
+                        {skill.level}%
+                      </span>
+                    </div>
+                  </div>
                 )}
               </div>
-              {skill.category !== "Học vấn" && (
-                <>
-                  <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden relative z-0">
-                    <div
-                      className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]"
-                      style={{ width: skill.level + "%" }}
-                    />
-                  </div>
 
-                  <div className="text-right mt-1 relative z-0">
-                    <span className="text-sm text-muted-foreground">
-                      {skill.level}%
-                    </span>
-                  </div>
-                </>
+              {/* Reveal text at bottom */}
+              {skill.file && (
+                <div className="absolute bottom-0 left-0 w-full p-2 bg-primary flex items-center justify-center gap-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <Eye className="w-4 h-4 text-primary-foreground" />
+                  <span className="text-primary-foreground text-xs font-bold uppercase tracking-wider">
+                    Click để xem chi tiết
+                  </span>
+                </div>
               )}
             </div>
           ))}
         </div>
       </div>
 
-      {/* PDF Modal */}
+      {/* PDF Modal remains the same */}
       {selectedPdf && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200"
@@ -209,10 +212,9 @@ export const SkillsSection = () => {
             className="bg-background w-full max-w-5xl h-[85vh] rounded-xl shadow-2xl relative flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className="font-semibold text-lg truncate pr-4">
-                Xem chứng chỉ: {selectedPdf}
+                Chứng chỉ: {selectedPdf}
               </h3>
               <button
                 onClick={() => setSelectedPdf(null)}
@@ -221,26 +223,12 @@ export const SkillsSection = () => {
                 <X className="w-5 h-5" />
               </button>
             </div>
-
-            {/* PDF Viewer */}
             <div className="flex-1 bg-secondary/20 relative">
                <iframe 
                  src={getPdfUrl(selectedPdf)}
-                 className="w-full h-full"
+                 className="w-full h-full border-none"
                  title="Certificate Viewer"
                />
-            </div>
-            
-            {/* Footer (Optional, for mobile fallback) */}
-            <div className="p-3 border-t bg-secondary/10 flex justify-end md:hidden">
-               <a 
-                 href={getPdfUrl(selectedPdf)} 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 className="text-primary text-sm font-medium hover:underline"
-               >
-                 Mở trong tab mới nếu không xem được
-               </a>
             </div>
           </div>
         </div>
