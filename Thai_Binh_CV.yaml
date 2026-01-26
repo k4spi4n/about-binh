@@ -1,0 +1,69 @@
+cv:
+  name: Thái Bình
+  location: Hà Đông, Hà Nội, Việt Nam
+  email: thaibinhakashi2@gmail.com
+  phone: "+84 904 098 225"
+  social_networks:
+    - network: GitHub
+      username: AkasameVN26
+  sections:
+    summary:
+      - Sinh viên K3 khoa Kỹ thuật phần mềm của trường Đại học CMC với học bổng toàn phần. Đam mê xây dựng các ứng dụng web tương tác và phát triển game. Có kinh nghiệm làm việc với React, Next.js, Django và các công nghệ AI như OpenCV.
+    education:
+      - institution: Đại Học CMC
+        area: Kỹ Thuật Phần Mềm
+        degree: Cử nhân
+        start_date: 2024-09
+        end_date: 2027-06
+        highlights:
+          - "GPA: 3.61/4.0 (Tính đến học kỳ Thu 2025)"
+          - Học bổng toàn phần
+          - Thành viên đội tuyển Olympic Tin Học và team Nghiên cứu Khoa học
+      - institution: THPT Chuyên Nguyễn Trãi - Hải Dương
+        area: Khối chuyên Ngữ
+        degree: Tốt nghiệp THPT
+        start_date: 2021-09
+        end_date: 2024-06
+    projects:
+      - name: Hệ thống Quản lý Bệnh viện Thông minh (Smart Hospital Management System)
+        date: 2025
+        link: https://github.com/AkasameVN26/cmec-hms-web-app
+        highlights:
+          - Phát triển hệ thống thông tin và quản lý bệnh viện toàn diện.
+          - Tích hợp AI để hỗ trợ giải trình, tóm tắt hồ sơ y tế và phối hợp chẩn đoán.
+          - "Công nghệ: PostgreSQL, Supabase, Next.js, AI"
+      - name: Website hỗ trợ cá nhân hoá học tập dựa trên AI
+        date: 2025
+        highlights:
+          - Tự động hóa quy trình tạo đề thi và bài tập.
+          - Cá nhân hóa trải nghiệm học tập cho học sinh bằng gợi ý và phân tích dựa trên AI.
+          - "Công nghệ: Angular, .NET, MongoDB"
+      - name: ML AIMBOT VALORANT
+        date: 2023
+        highlights:
+          - Phát triển aimbot thời gian thực sử dụng Computer Vision.
+          - Nghiên cứu và ứng dụng các kỹ thuật xử lý ảnh nâng cao.
+          - "Công nghệ: OpenCV, NumPy, Computer Vision"
+      - name: "Touhou: Goblin Invasion"
+        date: 2022
+        link: https://daindadev.itch.io/touhou-goblins-invasion
+        highlights:
+          - Game bắn súng lấy cảm hứng từ Touhou Project.
+          - Đã phát hành trên itch.io.
+          - "Công nghệ: Unity, C#"
+    skills:
+      - label: Ngôn ngữ lập trình
+        details: Python, JavaScript, TypeScript, Java, C++, C#, HTML/CSS
+      - label: Frameworks & Libraries
+        details: React, Next.js, Django, Node.js, .NET, Tailwind CSS, OpenCV, NumPy
+      - label: Cơ sở dữ liệu
+        details: PostgreSQL, MongoDB, SQL Server
+      - label: Công cụ
+        details: Git, GitHub, VS Code, Unity, Unreal Engine, Adobe Photoshop/Premiere
+      - label: Ngoại ngữ
+        details: Tiếng Anh (IELTS 8.0)
+      - label: Chứng chỉ
+        details: Chứng chỉ AI Samsung Innovation Campus (SIC)
+
+design:
+  theme: engineeringresumes
