@@ -1,88 +1,39 @@
 [{
 	"resource": "/d:/CODE/react-tailwind-portfolio/src/components/SkillRadar.jsx",
 	"owner": "eslint2",
-	"code": {
-		"value": "no-unused-vars",
-		"target": {
-			"$mid": 1,
-			"path": "/docs/latest/rules/no-unused-vars",
-			"scheme": "https",
-			"authority": "eslint.org"
-		}
-	},
 	"severity": 8,
-	"message": "'React' is defined but never used.",
+	"message": "Parsing error: Expected corresponding JSX closing tag for <motion.div>",
 	"source": "eslint",
-	"startLineNumber": 1,
-	"startColumn": 8,
-	"endLineNumber": 1,
-	"endColumn": 13,
-	"modelVersionId": 1,
-	"tags": [
-		1
-	],
-	"origin": "extHost1"
-},{
-	"resource": "/d:/CODE/react-tailwind-portfolio/src/components/SkillRadar.jsx",
-	"owner": "eslint2",
-	"code": {
-		"value": "react/prop-types",
-		"target": {
-			"$mid": 1,
-			"path": "/jsx-eslint/eslint-plugin-react/tree/master/docs/rules/prop-types.md",
-			"scheme": "https",
-			"authority": "github.com"
-		}
-	},
-	"severity": 8,
-	"message": "'skills' is missing in props validation",
-	"source": "eslint",
-	"startLineNumber": 5,
-	"startColumn": 30,
-	"endLineNumber": 5,
-	"endColumn": 36,
+	"startLineNumber": 157,
+	"startColumn": 7,
+	"endLineNumber": 157,
+	"endColumn": 7,
 	"modelVersionId": 1,
 	"origin": "extHost1"
 },{
 	"resource": "/d:/CODE/react-tailwind-portfolio/src/components/SkillRadar.jsx",
-	"owner": "eslint2",
-	"code": {
-		"value": "react/prop-types",
-		"target": {
-			"$mid": 1,
-			"path": "/jsx-eslint/eslint-plugin-react/tree/master/docs/rules/prop-types.md",
-			"scheme": "https",
-			"authority": "github.com"
-		}
-	},
+	"owner": "typescript",
+	"code": "17002",
 	"severity": 8,
-	"message": "'skills.filter' is missing in props validation",
-	"source": "eslint",
-	"startLineNumber": 19,
-	"startColumn": 32,
-	"endLineNumber": 19,
-	"endColumn": 38,
+	"message": "Expected corresponding JSX closing tag for 'motion.div'.",
+	"source": "ts",
+	"startLineNumber": 157,
+	"startColumn": 9,
+	"endLineNumber": 157,
+	"endColumn": 12,
 	"modelVersionId": 1,
 	"origin": "extHost1"
 },{
 	"resource": "/d:/CODE/react-tailwind-portfolio/src/components/SkillRadar.jsx",
-	"owner": "eslint2",
-	"code": {
-		"value": "react-hooks/exhaustive-deps",
-		"target": {
-			"$mid": 1,
-			"path": "/facebook/react/issues/14920",
-			"scheme": "https",
-			"authority": "github.com"
-		}
-	},
-	"severity": 4,
-	"message": "React Hook useMemo has a missing dependency: 'categories'. Either include it or remove the dependency array.",
-	"source": "eslint",
-	"startLineNumber": 31,
-	"startColumn": 6,
-	"endLineNumber": 31,
-	"endColumn": 14,
+	"owner": "typescript",
+	"code": "17002",
+	"severity": 8,
+	"message": "Expected corresponding JSX closing tag for 'motion.div'.",
+	"source": "ts",
+	"startLineNumber": 195,
+	"startColumn": 7,
+	"endLineNumber": 195,
+	"endColumn": 10,
 	"modelVersionId": 1,
 	"origin": "extHost1"
 }]
