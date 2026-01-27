@@ -1,38 +1,88 @@
-8:01:13 p.m. [vite] Internal server error: Failed to resolve import "/CV-2026.pdf?url" from "src/components/Navbar.jsx". Does the file exist?
-  Plugin: vite:import-analysis
-  File: D:/CODE/react-tailwind-portfolio/src/components/Navbar.jsx:4:18
-  19 |  import { Menu, X } from "lucide-react";
-  20 |  import { useEffect, useState, useRef } from "react";
-  21 |  import cvUrl from "/CV-2026.pdf?url";
-     |                     ^
-  22 |  const navItems = [
-  23 |    { name: "Trang chủ", href: "#hero" },
-      at TransformPluginContext._formatError (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:49258:41)
-      at TransformPluginContext.error (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:49253:16)
-      at normalizeUrl (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:64241:23)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:64373:39
-      at async Promise.all (index 6)
-      at async TransformPluginContext.transform (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:64300:7)
-      at async PluginContainer.transform (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:49099:18)
-      at async loadAndTransform (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:51938:27)  
-8:01:13 p.m. [vite] Pre-transform error: Failed to resolve import "/CV-2026.pdf?url" from "src/components/Navbar.jsx". Does the file exist?
-8:01:19 p.m. [vite] Internal server error: Failed to resolve import "/CV-2026.pdf?url" from "src/components/Navbar.jsx". Does the file exist?
-  Plugin: vite:import-analysis
-  File: D:/CODE/react-tailwind-portfolio/src/components/Navbar.jsx:4:18
-  19 |  import { Menu, X } from "lucide-react";
-  20 |  import { useEffect, useState, useRef } from "react";
-  21 |  import cvUrl from "/CV-2026.pdf?url";
-     |                     ^
-  22 |  const navItems = [
-  23 |    { name: "Trang chủ", href: "#hero" },
-      at TransformPluginContext._formatError (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:49258:41)
-      at TransformPluginContext.error (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:49253:16)
-      at normalizeUrl (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:64241:23)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:64373:39
-      at async Promise.all (index 6)
-      at async TransformPluginContext.transform (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:64300:7)
-      at async PluginContainer.transform (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:49099:18)
-      at async loadAndTransform (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:51938:27)  
-      at async viteTransformMiddleware (file:///D:/CODE/react-tailwind-portfolio/node_modules/vite/dist/node/chunks/dep-DbT5NFX0.js:62055:24)
+[{
+	"resource": "/d:/CODE/react-tailwind-portfolio/src/components/SkillRadar.jsx",
+	"owner": "eslint2",
+	"code": {
+		"value": "no-unused-vars",
+		"target": {
+			"$mid": 1,
+			"path": "/docs/latest/rules/no-unused-vars",
+			"scheme": "https",
+			"authority": "eslint.org"
+		}
+	},
+	"severity": 8,
+	"message": "'React' is defined but never used.",
+	"source": "eslint",
+	"startLineNumber": 1,
+	"startColumn": 8,
+	"endLineNumber": 1,
+	"endColumn": 13,
+	"modelVersionId": 1,
+	"tags": [
+		1
+	],
+	"origin": "extHost1"
+},{
+	"resource": "/d:/CODE/react-tailwind-portfolio/src/components/SkillRadar.jsx",
+	"owner": "eslint2",
+	"code": {
+		"value": "react/prop-types",
+		"target": {
+			"$mid": 1,
+			"path": "/jsx-eslint/eslint-plugin-react/tree/master/docs/rules/prop-types.md",
+			"scheme": "https",
+			"authority": "github.com"
+		}
+	},
+	"severity": 8,
+	"message": "'skills' is missing in props validation",
+	"source": "eslint",
+	"startLineNumber": 5,
+	"startColumn": 30,
+	"endLineNumber": 5,
+	"endColumn": 36,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/d:/CODE/react-tailwind-portfolio/src/components/SkillRadar.jsx",
+	"owner": "eslint2",
+	"code": {
+		"value": "react/prop-types",
+		"target": {
+			"$mid": 1,
+			"path": "/jsx-eslint/eslint-plugin-react/tree/master/docs/rules/prop-types.md",
+			"scheme": "https",
+			"authority": "github.com"
+		}
+	},
+	"severity": 8,
+	"message": "'skills.filter' is missing in props validation",
+	"source": "eslint",
+	"startLineNumber": 19,
+	"startColumn": 32,
+	"endLineNumber": 19,
+	"endColumn": 38,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/d:/CODE/react-tailwind-portfolio/src/components/SkillRadar.jsx",
+	"owner": "eslint2",
+	"code": {
+		"value": "react-hooks/exhaustive-deps",
+		"target": {
+			"$mid": 1,
+			"path": "/facebook/react/issues/14920",
+			"scheme": "https",
+			"authority": "github.com"
+		}
+	},
+	"severity": 4,
+	"message": "React Hook useMemo has a missing dependency: 'categories'. Either include it or remove the dependency array.",
+	"source": "eslint",
+	"startLineNumber": 31,
+	"startColumn": 6,
+	"endLineNumber": 31,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+}]

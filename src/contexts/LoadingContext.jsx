@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback } from "react";
 import { LoadingScreen } from "../components/LoadingScreen";
+import PropTypes from "prop-types";
 
 const LoadingContext = createContext(null);
 
@@ -28,6 +29,11 @@ export const LoadingProvider = ({ children }) => {
   );
 };
 
+LoadingProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLoading = () => {
   const context = useContext(LoadingContext);
   if (!context) {
