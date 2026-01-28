@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 // Move categories outside so it's constant and doesn't trigger hook deps warnings
 const categories = [
   "Backend",
-  "AI",
-  "Ngôn ngữ lập trình",
-  "Công cụ",
   "Frontend",
+  "Công cụ",
+  "Ngôn ngữ lập trình",
+  "AI",
 ];
 
 const skillLabels = ["Novice", "Familiar", "Intermediate", "Proficient", "Expert"];
@@ -129,24 +129,33 @@ export const SkillRadar = ({ skills }) => {
           {/* Data Points & Labels */}
           {radarData.map((d, i) => {
             const coords = getCoordinates(d.value, i);
-            const labelCoords = getCoordinates(6.5, i); // Adjusted for 1-5 scale (was 130 on 100 scale)
+            const labelCoords = getCoordinates(6.2, i); // Adjusted to 6.2 for better spacing
 
             return (
               <motion.g 
                 key={i} 
                 onClick={() => setActiveCategory(activeCategory === d.category ? null : d.category)} 
                 className="cursor-pointer group"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.1 }}
               >
+                {/* Larger invisible hit area for better mobile/desktop clicking */}
+                <circle
+                  cx={coords.x}
+                  cy={coords.y}
+                  r="20"
+                  fill="transparent"
+                  className="pointer-events-auto"
+                />
+
                 {/* Pulsing Halo for interactivity hint */}
                 {!activeCategory && (
                   <motion.circle
                     cx={coords.x}
                     cy={coords.y}
-                    r="8"
+                    r="12"
                     fill="hsl(var(--primary))"
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: [0, 0.15, 0], scale: [0.8, 1.8, 0.8] }}
+                    animate={{ opacity: [0, 0.2, 0], scale: [0.8, 2, 0.8] }}
                     transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.5 }}
                   />
                 )}
@@ -214,10 +223,10 @@ export const SkillRadar = ({ skills }) => {
 
               <div className="space-y-4 flex-1">
                  {radarData.find(d => d.category === activeCategory)?.skills.map((skill, idx) => (
-                     <div key={idx} className="mb-4 last:mb-0 group">
+                     <div key={idx} className="mb-4 last:mb-0 group/skill">
                          <div className="flex justify-between mb-1">
-                             <span className="font-medium group-hover:text-primary transition-colors">{skill.name}</span>
-                             <span className="text-xs text-muted-foreground uppercase font-semibold tracking-wider">
+                             <span className="font-medium group-hover/skill:text-primary transition-colors">{skill.name}</span>
+                             <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300">
                                 {skillLabels[Math.min(skill.level - 1, 4)]}
                              </span>
                          </div>
