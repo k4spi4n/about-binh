@@ -12,6 +12,8 @@ const categories = [
   "Frontend",
 ];
 
+const skillLabels = ["Novice", "Familiar", "Intermediate", "Proficient", "Expert"];
+
 export const SkillRadar = ({ skills }) => {
   const [activeCategory, setActiveCategory] = useState(null);
 
@@ -40,7 +42,7 @@ export const SkillRadar = ({ skills }) => {
 
   const getCoordinates = (value, index) => {
     const angle = index * angleStep - Math.PI / 2; // Start from top
-    const r = (value / 100) * radius;
+    const r = (value / 5) * radius;
     return {
       x: center + r * Math.cos(angle),
       y: center + r * Math.sin(angle),
@@ -55,8 +57,8 @@ export const SkillRadar = ({ skills }) => {
     })
     .join(" ");
 
-  // Generate grid levels (20%, 40%, 60%, 80%, 100%)
-  const levels = [20, 40, 60, 80, 100];
+  // Generate grid levels (1 to 5)
+  const levels = [1, 2, 3, 4, 5];
   
   return (
     <motion.div 
@@ -95,7 +97,7 @@ export const SkillRadar = ({ skills }) => {
 
           {/* Axes */}
           {categories.map((_, i) => {
-            const end = getCoordinates(100, i);
+            const end = getCoordinates(5, i);
             return (
               <line
                 key={i}
@@ -127,7 +129,7 @@ export const SkillRadar = ({ skills }) => {
           {/* Data Points & Labels */}
           {radarData.map((d, i) => {
             const coords = getCoordinates(d.value, i);
-            const labelCoords = getCoordinates(130, i); // Pulled in closer to vertices (was 135)
+            const labelCoords = getCoordinates(6.5, i); // Adjusted for 1-5 scale (was 130 on 100 scale)
 
             return (
               <motion.g 
@@ -215,13 +217,22 @@ export const SkillRadar = ({ skills }) => {
                      <div key={idx} className="mb-4 last:mb-0 group">
                          <div className="flex justify-between mb-1">
                              <span className="font-medium group-hover:text-primary transition-colors">{skill.name}</span>
-                             <span className="text-xs text-muted-foreground">{skill.level}%</span>
+                             <span className="text-xs text-muted-foreground uppercase font-semibold tracking-wider">
+                                {skillLabels[Math.min(skill.level - 1, 4)]}
+                             </span>
                          </div>
-                         <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
+                         <div className="relative h-2 w-full bg-secondary">
+                             {/* Separators/Masks for chunks */}
+                             <div className="absolute inset-0 flex w-full h-full z-20 pointer-events-none justify-evenly">
+                                {[1, 2, 3, 4].map(i => (
+                                    <div key={i} className="h-full w-[2px] bg-background/80 backdrop-blur-md"></div>
+                                ))}
+                             </div>
+                             
                              <motion.div 
-                                className="h-full bg-primary"
+                                className="h-full bg-gradient-to-r from-primary/40 to-primary absolute top-0 left-0 z-10"
                                 initial={{ width: 0 }}
-                                animate={{ width: `${skill.level}%` }}
+                                animate={{ width: `${(skill.level / 5) * 100}%` }}
                                 transition={{ duration: 0.8, delay: idx * 0.1 }}
                              />
                          </div>

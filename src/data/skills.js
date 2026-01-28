@@ -54,31 +54,31 @@ export const skills = [
   },
 
   // Ngôn ngữ lập trình
-  { name: "Python", level: 90, category: "Ngôn ngữ lập trình" },
-  { name: "JavaScript", level: 85, category: "Ngôn ngữ lập trình" },
-  { name: "TypeScript", level: 80, category: "Ngôn ngữ lập trình" },
-  { name: "Java/C++/C#", level: 80, category: "Ngôn ngữ lập trình" },
-  { name: "HTML/CSS", level: 85, category: "Ngôn ngữ lập trình" },
+  { name: "Python", level: 5, category: "Ngôn ngữ lập trình" },
+  { name: "JavaScript", level: 4, category: "Ngôn ngữ lập trình" },
+  { name: "TypeScript", level: 3, category: "Ngôn ngữ lập trình" },
+  { name: "Java/C++/C#", level: 3, category: "Ngôn ngữ lập trình" },
+  { name: "HTML/CSS", level: 4, category: "Ngôn ngữ lập trình" },
 
   // Frontend
-  { name: "React/Next.js", level: 80, category: "Frontend" },
-  { name: "Tailwind CSS", level: 85, category: "Frontend" },
+  { name: "React/Next.js", level: 3, category: "Frontend" },
+  { name: "Tailwind CSS", level: 4, category: "Frontend" },
 
   // Backend
-  { name: "Django/FastAPI", level: 85, category: "Backend" },
-  { name: "MongoDB/PostgreSQL", level: 80, category: "Backend" },
-  { name: "Node.js/NestJS", level: 80, category: "Backend" },
-  { name: ".NET", level: 75, category: "Backend" },
+  { name: "Django/FastAPI", level: 4, category: "Backend" },
+  { name: "MongoDB/PostgreSQL", level: 3, category: "Backend" },
+  { name: "Node.js/NestJS", level: 3, category: "Backend" },
+  { name: ".NET", level: 2, category: "Backend" },
 
   // AI
-  { name: "PyTorch", level: 90, category: "AI" },
-  { name: "NumPy/Pandas", level: 85, category: "AI" },
-  { name: "OpenCV", level: 85, category: "AI" },
+  { name: "PyTorch", level: 5, category: "AI" },
+  { name: "NumPy/Pandas", level: 4, category: "AI" },
+  { name: "OpenCV", level: 4, category: "AI" },
 
   // Tools
-  { name: "Unity", level: 85, category: "Công cụ" },
-  { name: "Photoshop/Premiere", level: 80, category: "Công cụ" },
-  { name: "Office 365", level: 90, category: "Công cụ" },
-  { name: "Git/GitHub", level: 85, category: "Công cụ" },
-  { name: "VS Code", level: 80, category: "Công cụ" },
+  { name: "Unity", level: 4, category: "Công cụ" },
+  { name: "Photoshop/Premiere", level: 3, category: "Công cụ" },
+  { name: "Office 365", level: 5, category: "Công cụ" },
+  { name: "Git/GitHub", level: 4, category: "Công cụ" },
+  { name: "VS Code", level: 3, category: "Công cụ" },
 ];
