@@ -58,11 +58,12 @@ export const skills = [
   { name: "JavaScript", level: 4, category: "Ngôn ngữ lập trình" },
   { name: "TypeScript", level: 3, category: "Ngôn ngữ lập trình" },
   { name: "Java/C++/C#", level: 3, category: "Ngôn ngữ lập trình" },
-  { name: "HTML/CSS", level: 4, category: "Ngôn ngữ lập trình" },
 
   // Frontend
-  { name: "React/Next.js", level: 3, category: "Frontend" },
+  { name: "React/Next.js", level: 4, category: "Frontend" },
   { name: "Tailwind CSS", level: 4, category: "Frontend" },
+  { name: "Ant Design", level: 4, category: "Frontend" },
+  { name: "HTML/CSS", level: 4, category: "Frontend" },
 
   // Backend
   { name: "Django/FastAPI", level: 4, category: "Backend" },
@@ -71,14 +72,16 @@ export const skills = [
   { name: ".NET", level: 2, category: "Backend" },
 
   // AI
-  { name: "PyTorch", level: 5, category: "AI" },
+  { name: "PyTorch", level: 4, category: "AI" },
   { name: "NumPy/Pandas", level: 4, category: "AI" },
-  { name: "OpenCV", level: 4, category: "AI" },
+  { name: "OpenCV", level: 3, category: "AI" },
+  { name: "ComfyUI", level: 4, category: "AI" },
+  { name: "Transformers", level: 4, category: "AI" },
 
   // Tools
   { name: "Unity", level: 4, category: "Công cụ" },
   { name: "Photoshop/Premiere", level: 3, category: "Công cụ" },
-  { name: "Office 365", level: 5, category: "Công cụ" },
+  { name: "Office 365", level: 4, category: "Công cụ" },
   { name: "Git/GitHub", level: 4, category: "Công cụ" },
-  { name: "VS Code", level: 3, category: "Công cụ" },
+  { name: "VS Code", level: 5, category: "Công cụ" },
 ];
