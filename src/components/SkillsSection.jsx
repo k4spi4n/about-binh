@@ -33,15 +33,16 @@ const skills = [
       "Hoàn thành khóa học chuyên sâu về Trí tuệ nhân tạo do Samsung Electronics Việt Nam xác nhận và bảo chứng",
     year: "(2025)",
     category: "Học vấn",
+    file: "cert_SAMSUNG_AI.pdf",
   },
 
   {
     name: "Chứng chỉ Deep Learning của NVIDIA DLI",
     institution:
-      "Hoàn thành khóa học về Học sâu của NVIDIA Deep Learning Institute",
+      "Hoàn thành khóa đào tạo về Neural Networks, Data Augmentation và tối ưu hóa mô hình của NVIDIA Deep Learning Institute",
     year: "(2025)",
     category: "Học vấn",
-    file: "nvidia_DL.pdf",
+    file: "cert_NVIDIA-DLI_DL.pdf",
   },
 
   {
@@ -92,8 +93,12 @@ export const SkillsSection = () => {
   const [selectedPdf, setSelectedPdf] = useState(null);
   const { triggerLoading } = useLoading();
 
-  const educationSkills = skills.filter((skill) => skill.category === "Học vấn");
-  const technicalSkills = skills.filter((skill) => skill.category !== "Học vấn");
+  const educationSkills = skills.filter(
+    (skill) => skill.category === "Học vấn",
+  );
+  const technicalSkills = skills.filter(
+    (skill) => skill.category !== "Học vấn",
+  );
 
   const getPdfUrl = (filename) => {
     const baseUrl = import.meta.env.BASE_URL.endsWith("/")
@@ -131,7 +136,7 @@ export const SkillsSection = () => {
         {/* Education Section */}
         <div className="mb-16">
           <h3 className="text-2xl font-semibold mb-8 text-center md:text-left flex items-center justify-center md:justify-start gap-3">
-             Học Vấn & Chứng Chỉ
+            Học Vấn & Chứng Chỉ
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {educationSkills.map((skill, key) => (
@@ -177,8 +182,8 @@ export const SkillsSection = () => {
 
         {/* Technical Skills - Radar Chart */}
         <div>
-           <h3 className="text-2xl font-semibold mb-8 text-center md:text-left flex items-center justify-center md:justify-start gap-3">
-             Tech Stack
+          <h3 className="text-2xl font-semibold mb-8 text-center md:text-left flex items-center justify-center md:justify-start gap-3">
+            Tech Stack
           </h3>
           <SkillRadar skills={technicalSkills} />
         </div>
