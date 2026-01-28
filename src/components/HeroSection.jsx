@@ -15,7 +15,7 @@ export const HeroSection = () => {
         <div className="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center rounded-full profile-picture-container">
           <img
             src={avatarUrl}
-            alt="picture of me"
+            alt="Thai Binh - Fullstack Dev"
             className="w-[90%] h-[90%] rounded-full object-cover shadow-lg relative z-20"
           />
         </div>
