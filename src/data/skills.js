@@ -67,7 +67,8 @@ export const skills = [
 
   // Backend
   { name: "Django/FastAPI", level: 4, category: "Backend" },
-  { name: "MongoDB/PostgreSQL", level: 3, category: "Backend" },
+  { name: "NoSQL (MongoDB)", level: 3, category: "Backend" },
+  { name: "SQL (PostgreSQL)", level: 4, category: "Backend" },
   { name: "Node.js/NestJS", level: 3, category: "Backend" },
   { name: ".NET", level: 2, category: "Backend" },
 
