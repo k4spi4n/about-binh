@@ -28,12 +28,15 @@ export const StarBackground = () => {
     const newStars = [];
 
     for (let i = 0; i < numberOfStars; i++) {
+      const isSmall = Math.random() < 0.8;
+      const size = isSmall ? Math.random() * 1.5 + 0.5 : Math.random() * 2 + 2;
+      
       newStars.push({
         id: i,
-        size: Math.random() * 3 + 1,
+        size: size,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        opacity: Math.random() * 0.5 + 0.5,
+        opacity: isSmall ? Math.random() * 0.5 + 0.2 : Math.random() * 0.5 + 0.5,
         animationDuration: Math.random() * 4 + 2,
       });
     }
