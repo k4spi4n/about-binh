@@ -76,8 +76,8 @@ export const skills = [
   { name: "PyTorch", level: 4, category: "AI" },
   { name: "NumPy/Pandas", level: 4, category: "AI" },
   { name: "OpenCV", level: 3, category: "AI" },
-  { name: "ComfyUI", level: 4, category: "AI" },
-  { name: "Transformers", level: 4, category: "AI" },
+  { name: "Generative AI (ComfyUI)", level: 4, category: "AI" },
+  { name: "Transformers (LLM/VISION)", level: 4, category: "AI" },
 
   // Tools
   { name: "Unity", level: 4, category: "Công cụ" },
