@@ -185,7 +185,7 @@ export const ContactSection = () => {
                 type="submit"
                 disabled={isSubmitting}
                 className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2"
+                  "animated-gradient-border w-full flex items-center justify-center gap-2 px-6 py-2 rounded-full text-primary font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
                 )}
               >
                 {isSubmitting ? "Đang Gửi..." : "Gửi"}

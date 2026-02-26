@@ -116,7 +116,9 @@
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }
 
@@ -150,6 +152,34 @@
   @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
 }
 
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@utility animated-gradient-border {
+  border: 1px solid transparent;
+  background-image:
+    linear-gradient(hsl(var(--background)), hsl(var(--background))),
+    conic-gradient(
+      from var(--border-angle),
+      hsl(var(--primary)),
+      #d946ef,
+      #8b5cf6,
+      hsl(var(--primary))
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  animation: rotate-border 3s linear infinite;
+}
+
+@keyframes rotate-border {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
 @utility gradient-border {
   @apply relative rounded-md;
   background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
@@ -174,7 +204,10 @@
     content: "";
     @apply absolute top-1/2 left-1/2 w-[110%] h-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full;
     border: 4px solid #ffdd00;
-    box-shadow: 0 0 40px #ffdd00, 0 0 60px #ff8c00, inset 0 0 20px #ff8c00;
+    box-shadow:
+      0 0 40px #ffdd00,
+      0 0 60px #ff8c00,
+      inset 0 0 20px #ff8c00;
     transform: rotateX(45deg);
     animation: rotate-ring 20s linear infinite;
     z-index: 10;
