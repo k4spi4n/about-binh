@@ -4,7 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import { useLoading } from "../contexts/LoadingContext";
 
 const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026.pdf`;
-const githubUrl = "https://github.com/k4spi4n";
+const githubUsername = "k4spi4n";
+const githubUrl = `https://github.com/${githubUsername}`;
 
 const navItems = [
   { name: "Trang chủ", href: "#hero" },
@@ -93,10 +94,10 @@ export const Navbar = () => {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
-              aria-label="GitHub Profile"
+              className="flex items-center gap-1 text-foreground/80 hover:text-primary transition-colors duration-300"
             >
               <Github className="w-6 h-6" />
+              <span className="text-sm">@{githubUsername}</span>
             </a>
             <a
               href={cvUrl}
@@ -143,10 +144,10 @@ export const Navbar = () => {
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                aria-label="GitHub Profile"
+                className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors duration-300"
               >
                 <Github className="w-8 h-8" />
+                <span>@{githubUsername}</span>
               </a>
               <a
                 href={cvUrl}
