@@ -93,10 +93,11 @@ export const Navbar = () => {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
-              aria-label="GitHub Profile"
+              className="flex items-center gap-1 text-foreground/80 hover:text-primary transition-colors duration-300"
+              aria-label="GitHub Profile - @k4spi4n"
             >
               <Github className="w-6 h-6" />
+              <span className="text-sm font-medium">@k4spi4n</span>
             </a>
             <a
               href={cvUrl}
@@ -143,10 +144,11 @@ export const Navbar = () => {
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                aria-label="GitHub Profile"
+                className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors duration-300"
+                aria-label="GitHub Profile - @k4spi4n"
               >
                 <Github className="w-8 h-8" />
+                <span className="text-lg font-medium">@k4spi4n</span>
               </a>
               <a
                 href={cvUrl}
