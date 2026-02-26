@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Menu, X, Github } from "lucide-react";
+import { Menu, X, Github, Download } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { useLoading } from "../contexts/LoadingContext";
 
@@ -63,8 +63,10 @@ export const Navbar = () => {
     <nav
       className={cn(
         "fixed w-full z-40 transition-all duration-300",
-        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5",
-        shouldShowNav ? "top-0" : "-top-24"
+        isScrolled
+          ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"
+          : "py-5",
+        shouldShowNav ? "top-0" : "-top-24",
       )}
     >
       <div className="container flex items-center justify-between">
@@ -93,16 +95,20 @@ export const Navbar = () => {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-sm font-semibold hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300"
+              style={{ border: "1px solid transparent", backgroundImage: "linear-gradient(hsl(var(--background)), hsl(var(--background))), linear-gradient(to right, hsl(var(--primary)), #d946ef)", backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box" }}
               aria-label="GitHub Profile"
             >
-              <Github className="w-6 h-6" />
+              <Github className="w-5 h-5" />
+              <span className="text-sm font-medium">@k4spi4n</span>
             </a>
             <a
               href={cvUrl}
               onClick={handleDownload}
-              className="px-4 py-2 rounded-full border border-primary text-primary text-sm font-semibold hover:bg-primary/10 transition-colors duration-300 cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-sm font-semibold hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 cursor-pointer"
+              style={{ border: "1px solid transparent", backgroundImage: "linear-gradient(hsl(var(--background)), hsl(var(--background))), linear-gradient(to right, hsl(var(--primary)), #d946ef)", backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box" }}
             >
+              <Download className="w-5 h-5" />
               Download CV
             </a>
           </div>
@@ -124,7 +130,7 @@ export const Navbar = () => {
             "transition-all duration-300 md:hidden",
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
+              : "opacity-0 pointer-events-none",
           )}
         >
           <div className="flex flex-col space-y-8 text-xl items-center">
@@ -143,16 +149,20 @@ export const Navbar = () => {
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                className="flex items-center gap-2 px-6 py-3 rounded-full text-primary text-lg font-semibold hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300"
+                style={{ border: "1px solid transparent", backgroundImage: "linear-gradient(hsl(var(--background)), hsl(var(--background))), linear-gradient(to right, hsl(var(--primary)), #d946ef)", backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box" }}
                 aria-label="GitHub Profile"
               >
-                <Github className="w-8 h-8" />
+                <Github className="w-7 h-7" />
+                <span className="text-base font-medium">@k4spi4n</span>
               </a>
               <a
                 href={cvUrl}
                 onClick={handleDownload}
-                className="px-6 py-3 rounded-full border border-primary text-primary text-lg font-semibold hover:bg-primary/10 transition-colors duration-300 cursor-pointer"
+                className="flex items-center gap-2 px-6 py-3 rounded-full text-primary text-lg font-semibold hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 cursor-pointer"
+                style={{ border: "1px solid transparent", backgroundImage: "linear-gradient(hsl(var(--background)), hsl(var(--background))), linear-gradient(to right, hsl(var(--primary)), #d946ef)", backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box" }}
               >
+                <Download className="w-6 h-6" />
                 Download CV
               </a>
             </div>
