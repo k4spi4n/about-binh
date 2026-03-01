@@ -148,6 +148,13 @@
   text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
 }
 
+@utility text-primary-glow {
+  text-shadow: 
+    0 0 10px rgba(167, 139, 250, 0.39),
+    0 0 20px rgba(167, 139, 250, 0.29),
+    0 0 30px rgba(167, 139, 250, 0.20);
+}
+
 @utility card-hover {
   @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
 }

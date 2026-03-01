@@ -26,7 +26,7 @@ export const HeroSection = () => {
               {" "}
               Xin Chào, mình là
             </span>
-            <span className="text-primary opacity-0 animate-fade-in-delay-1">
+            <span className="text-primary text-primary-glow opacity-0 animate-fade-in-delay-1">
               {" "}
               Thái Bình
             </span>
@@ -45,13 +45,13 @@ export const HeroSection = () => {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-delay-4">
             <a
               href="#skills"
-              className="animated-gradient-border px-8 py-3 rounded-full text-primary font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+              className="animated-gradient-border px-8 py-3 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
             >
               Xem hồ sơ kỹ năng
             </a>
             <a
               href="#projects"
-              className="animated-gradient-border px-8 py-3 rounded-full text-primary font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+              className="animated-gradient-border px-8 py-3 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
             >
               Xem dự án nổi bật
             </a>
