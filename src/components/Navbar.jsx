@@ -71,7 +71,7 @@ export const Navbar = () => {
     >
       <div className="container flex items-center justify-between">
         <a
-          className="text-xl font-bold text-primary flex items-center"
+          className="text-xl font-bold text-primary text-primary-glow flex items-center"
           href="#hero"
         >
           <span className="relative z-10">
@@ -95,7 +95,7 @@ export const Navbar = () => {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="animated-gradient-border flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-sm font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+              className="animated-gradient-border flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-primary-glow text-sm font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
               aria-label="GitHub Profile"
             >
               <Github className="w-5 h-5" />
@@ -104,7 +104,7 @@ export const Navbar = () => {
             <a
               href={cvUrl}
               onClick={handleDownload}
-              className="animated-gradient-border flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-sm font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
+              className="animated-gradient-border flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-primary-glow text-sm font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
             >
               <Download className="w-5 h-5" />
               Download CV
@@ -147,7 +147,7 @@ export const Navbar = () => {
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="animated-gradient-border flex items-center gap-2 px-6 py-3 rounded-full text-primary text-lg font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+                className="animated-gradient-border flex items-center gap-2 px-6 py-3 rounded-full text-primary text-primary-glow text-lg font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
                 aria-label="GitHub Profile"
               >
                 <Github className="w-7 h-7" />
@@ -156,7 +156,7 @@ export const Navbar = () => {
               <a
                 href={cvUrl}
                 onClick={handleDownload}
-                className="animated-gradient-border flex items-center gap-2 px-6 py-3 rounded-full text-primary text-lg font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
+                className="animated-gradient-border flex items-center gap-2 px-6 py-3 rounded-full text-primary text-primary-glow text-lg font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
               >
                 <Download className="w-6 h-6" />
                 Download CV

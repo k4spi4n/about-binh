@@ -46,7 +46,7 @@ export const SkillsSection = () => {
     <section id="skills" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-6xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Hồ Sơ <span className="text-primary"> Kỹ Năng</span>
+          Hồ Sơ <span className="text-primary text-primary-glow"> Kỹ Năng</span>
         </h2>
 
         {/* Education Section */}

@@ -9,7 +9,7 @@ export const ProjectsSection = () => {
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           {" "}
           Những Dự Án
-          <span className="text-primary"> Nổi Bật </span>
+          <span className="text-primary text-primary-glow"> Nổi Bật </span>
         </h2>
 
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
@@ -24,7 +24,7 @@ export const ProjectsSection = () => {
               key={project.id}
               className={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}
             >
-              <div className="timeline-year text-primary font-bold">
+              <div className="timeline-year text-primary text-primary-glow font-bold">
                 {project.year}
               </div>
               <div className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover">
@@ -105,9 +105,9 @@ export const ProjectsSection = () => {
 
         <div className="text-center mt-12">
           <a
-            className="animated-gradient-border w-fit flex items-center mx-auto gap-2 px-6 py-2 rounded-full text-primary font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+            className="animated-gradient-border w-fit flex items-center mx-auto gap-2 px-6 py-2 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
             target="_blank"
-            href=""
+            href="https://github.com/k4spi4n"
           >
             Ghé qua Github của mình nhé! <ArrowRight size={16} />
           </a>

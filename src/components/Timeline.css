@@ -81,12 +81,12 @@
   transform: translateY(-50%);
   --year-gap: 1.15rem;
   z-index: 4;
-  padding: 0.25rem 0.7rem;
+  padding: 0.5rem 0.7rem;
   border-radius: 9999px;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--card));
   color: hsl(var(--primary));
-  font-size: 0.76rem;
+  font-size: 0.9rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1;

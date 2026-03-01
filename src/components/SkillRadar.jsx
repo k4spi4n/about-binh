@@ -243,7 +243,7 @@ export const SkillRadar = ({ skills }) => {
             className="w-full max-w-md bg-card/50 backdrop-blur-sm border rounded-xl p-6 shadow-sm min-h-[300px] flex flex-col"
           >
             <div className="mb-6 flex items-center justify-between border-b pb-4">
-              <h3 className="text-xl font-bold text-primary">
+              <h3 className="text-xl font-bold text-primary text-primary-glow">
                 {activeCategory}
               </h3>
             </div>
