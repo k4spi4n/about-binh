@@ -1,159 +1,160 @@
 .timeline {
-    position: relative;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0.75rem 0 0.5rem;
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 0 0.5rem;
 }
 
 .timeline::after {
-    content: "";
-    position: absolute;
-    width: 2px;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(
-        to bottom,
-        hsl(var(--border)) 0%,
-        hsl(var(--primary) / 0.65) 18%,
-        hsl(var(--primary) / 0.65) 82%,
-        hsl(var(--border)) 100%
-    );
+  content: "";
+  position: absolute;
+  width: 2px;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--border)) 0%,
+    hsl(var(--primary) / 0.65) 18%,
+    hsl(var(--primary) / 0.65) 82%,
+    hsl(var(--border)) 100%
+  );
 }
 
 .timeline-item {
-    position: relative;
-    width: 50%;
-    margin-bottom: 2.25rem;
-    padding: 0 2.5rem;
+  position: relative;
+  width: 50%;
+  margin-bottom: 2.25rem;
+  padding: 0 2.5rem;
 }
 
 .left {
-    left: 0;
+  left: 0;
 }
 
 .right {
-    left: 50%;
+  left: 50%;
 }
 
 .timeline-item::before {
-    content: "";
-    position: absolute;
-    top: 2.05rem;
-    height: 1px;
-    width: 1.35rem;
-    background: hsl(var(--border));
-    z-index: 2;
+  content: "";
+  position: absolute;
+  top: 2.05rem;
+  height: 1px;
+  width: 1.35rem;
+  background: hsl(var(--border));
+  z-index: 2;
 }
 
 .left::before {
-    right: 0.55rem;
+  right: 0.55rem;
 }
 
 .right::before {
-    left: 0.55rem;
+  left: 0.55rem;
 }
 
 .timeline-item::after {
-    content: "";
-    position: absolute;
-    top: 1.65rem;
-    width: 0.9rem;
-    height: 0.9rem;
-    border-radius: 9999px;
-    background: hsl(var(--background));
-    border: 2px solid hsl(var(--primary));
-    z-index: 3;
+  content: "";
+  position: absolute;
+  top: 1.65rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 9999px;
+  background: hsl(var(--background));
+  border: 2px solid hsl(var(--primary));
+  z-index: 3;
 }
 
 .left::after {
-    right: -0.45rem;
+  right: -0.45rem;
 }
 
 .right::after {
-    left: -0.45rem;
+  left: -0.45rem;
 }
 
 .timeline-year {
-    position: absolute;
-    top: 2.1rem;
-    transform: translateY(-50%);
-    --year-gap: 1.15rem;
-    z-index: 4;
-    padding: 0.25rem 0.7rem;
-    border-radius: 9999px;
-    border: 1px solid hsl(var(--border));
-    background: hsl(var(--card));
-    color: hsl(var(--primary));
-    font-size: 0.76rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    line-height: 1;
-    white-space: nowrap;
+  position: absolute;
+  top: 2.1rem;
+  transform: translateY(-50%);
+  --year-gap: 1.15rem;
+  z-index: 4;
+  padding: 0.25rem 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  color: hsl(var(--primary));
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .left .timeline-year {
-    left: calc(100% + var(--year-gap));
+  left: calc(100% + var(--year-gap));
 }
 
 .right .timeline-year {
-    left: auto;
-    right: calc(100% + var(--year-gap));
+  left: auto;
+  right: calc(100% + var(--year-gap));
 }
 
 .timeline-item > .group {
-    border-radius: 1rem;
-    border: 1px solid transparent;
-    background:
-        linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
-        linear-gradient(
-                145deg,
-                hsl(var(--border)),
-                hsl(var(--primary) / 0.38),
-                hsl(var(--border))
-            ) border-box;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+    linear-gradient(
+        145deg,
+        hsl(var(--border)),
+        hsl(var(--primary) / 0.38),
+        hsl(var(--border))
+      )
+      border-box;
 }
 
 .timeline-item .p-6 {
-    border-top: 1px solid hsl(var(--border));
+  border-top: 1px solid hsl(var(--border));
 }
 
 @media screen and (max-width: 900px) {
-    .timeline {
-        padding-top: 0;
-    }
+  .timeline {
+    padding-top: 0;
+  }
 
-    .timeline::after {
-        left: 1rem;
-        transform: none;
-    }
+  .timeline::after {
+    left: 1rem;
+    transform: none;
+  }
 
-    .timeline-item,
-    .right,
-    .left {
-        width: 100%;
-        left: 0;
-        padding: 0 0 1.5rem 2.85rem;
-        margin-bottom: 1.2rem;
-    }
+  .timeline-item,
+  .right,
+  .left {
+    width: 100%;
+    left: 0;
+    padding: 0 0 1.5rem 2.85rem;
+    margin-bottom: 1.2rem;
+  }
 
-    .timeline-item::before {
-        top: 1.5rem;
-        left: 1rem;
-        width: 1.25rem;
-    }
+  .timeline-item::before {
+    top: 1.5rem;
+    left: 1rem;
+    width: 1.25rem;
+  }
 
-    .timeline-item::after {
-        top: 1.1rem;
-        left: 0.56rem;
-    }
+  .timeline-item::after {
+    top: 1.1rem;
+    left: 0.56rem;
+  }
 
-    .timeline-year,
-    .left .timeline-year,
-    .right .timeline-year {
-        top: 1.5rem;
-        left: 2.35rem;
-        right: auto;
-    }
+  .timeline-year,
+  .left .timeline-year,
+  .right .timeline-year {
+    top: 1.5rem;
+    left: 2.35rem;
+    right: auto;
+  }
 }
