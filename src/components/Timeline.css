@@ -104,7 +104,7 @@
 
 .timeline-item > .group {
   border-radius: 1rem;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   background:
     linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
     linear-gradient(
