@@ -15,17 +15,14 @@ export const HeroSection = () => {
         <div className="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center rounded-full profile-picture-container">
           <img
             src={avatarUrl}
-            alt="Thai Binh - Fullstack Dev"
+            alt="Thai Binh - Full-stack & AI Engineer"
             className="w-[90%] h-[90%] rounded-full object-cover shadow-lg relative z-20"
           />
         </div>
 
         <div className="space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="opacity-0 animate-fade-in">
-              {" "}
-              Xin Chào, mình là
-            </span>
+            <span className="opacity-0 animate-fade-in"> Xin chào, tôi là</span>
             <span className="text-primary text-primary-glow opacity-0 animate-fade-in-delay-1">
               {" "}
               Thái Bình
@@ -35,11 +32,15 @@ export const HeroSection = () => {
             </span>
           </h1>
 
+          <p className="text-base md:text-lg font-semibold text-primary text-primary-glow opacity-0 animate-fade-in-delay-2">
+            Full-stack Engineer • AI Engineer
+          </p>
+
           <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
-            Sinh viên K3 khoa Kỹ thuật phần mềm của trường Đại học CMC. Là một
-            nhà phát triển tương lai, mình xây dựng những không gian web tương
-            tác và kiến tạo những thế giới game sống động. Đây là nơi hội tụ
-            giữa đam mê, logic và sáng tạo của mình.
+            Sinh viên Kỹ thuật Phần mềm tại Đại học CMC, theo đuổi lộ trình
+            Full-stack và AI Engineering với định hướng xây dựng sản phẩm có
+            kiến trúc vững chắc, hiệu năng cao và tác động thực tiễn cho người
+            dùng.
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-delay-4">
@@ -62,7 +63,7 @@ export const HeroSection = () => {
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
         <span className="text-sm text-muted-foreground mb-2">
           {" "}
-          Kéo xuống để biết thêm về mình!{" "}
+          Cuộn xuống để khám phá thêm{" "}
         </span>
         <ArrowDown className="h-5 w-5 text-primary" />
       </div>

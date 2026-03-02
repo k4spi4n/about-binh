@@ -13,9 +13,9 @@ export const ProjectsSection = () => {
         </h2>
 
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Xin giới thiệu một số dự án tâm huyết của minh. Mỗi sản phẩm là thành
-          quả của quá trình trau chuốt cẩn thận, đặt trọng tâm vào từng chi
-          tiết, hiệu suất hoạt động và trải nghiệm mang lại cho người dùng.
+          Dưới đây là những dự án tiêu biểu tôi đã trực tiếp tham gia phát
+          triển. Mỗi sản phẩm đều được đầu tư vào kiến trúc, hiệu năng và trải
+          nghiệm người dùng nhằm đảm bảo chất lượng triển khai thực tế.
         </p>
 
         <div className="timeline">
@@ -109,7 +109,7 @@ export const ProjectsSection = () => {
             target="_blank"
             href="https://github.com/k4spi4n"
           >
-            Ghé qua Github của mình nhé! <ArrowRight size={16} />
+            Xem thêm dự án trên GitHub <ArrowRight size={16} />
           </a>
         </div>
       </div>

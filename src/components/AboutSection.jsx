@@ -28,7 +28,8 @@ export const AboutSection = () => {
             isIntersecting ? "animate-scroll-fade-in" : "opacity-0"
           }`}
         >
-          Về<span className="text-primary text-primary-glow"> Mình</span>
+          Giới Thiệu
+          <span className="text-primary text-primary-glow"> Bản Thân</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -39,20 +40,22 @@ export const AboutSection = () => {
             style={{ animationDelay: "0.2s" }}
           >
             <h3 className="text-2xl font-semibold">
-              Một Lập Trình Viên đầy Đam Mê
+              Định Hướng Full-stack & AI Engineer
             </h3>
 
             <p className="text-muted-foreground">
-              Với hơn 5 năm kinh nghiệm, mình thổi hồn vào các sản phẩm số, từ
-              những ứng dụng web thích ứng mượt mà trên mọi thiết bị, cho đến
-              những thế giới game đầy mê hoặc.
+              Trọng tâm phát triển của tôi là Full-stack Engineering và AI
+              Engineering, hướng đến thiết kế các hệ thống có kiến trúc rõ ràng,
+              khả năng mở rộng bền vững và năng lực vận hành ổn định ở môi
+              trường thực tế.
             </p>
 
             <p className="text-muted-foreground">
-              Động lực của mình đến từ việc giải quyết những thách thức phức tạp
-              bằng các giải pháp sáng tạo và tinh tế. Mình luôn trong hành trình
-              khám phá những công nghệ mới, đặc biệt là ứng dụng AI để đưa ra
-              những sản phẩm hữu ích nhất.
+              Tôi làm việc theo tư duy sản phẩm: phân tích bài toán đến gốc,
+              triển khai giải pháp có thể đo lường và liên tục tối ưu trải
+              nghiệm người dùng. Song song đó, tôi phát triển thêm năng lực Game
+              Development để nâng chiều sâu về thiết kế tương tác và hệ thống
+              thời gian thực.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
@@ -67,7 +70,7 @@ export const AboutSection = () => {
                 onClick={handleDownload}
                 className="animated-gradient-border px-6 py-2 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
               >
-                Download CV
+                Tải xuống CV
               </a>
             </div>
           </div>
@@ -86,8 +89,8 @@ export const AboutSection = () => {
                 <div className="text-left">
                   <h4 className="font-semibold text-lg"> Phát triển Web</h4>
                   <p className="text-muted-foreground">
-                    Kiến tạo các website và ứng dụng web hiện đại, mang lại trải
-                    nghiệm mượt mà và hiệu quả.
+                    Xây dựng website và ứng dụng web hiện đại, chú trọng hiệu
+                    năng, tính ổn định và khả năng mở rộng.
                   </p>
                 </div>
               </div>
@@ -105,8 +108,8 @@ export const AboutSection = () => {
                 <div className="text-left">
                   <h4 className="font-semibold text-lg">Thiết kế UI/UX</h4>
                   <p className="text-muted-foreground">
-                    Phác thảo những giao diện trực quan và xây dựng hành trình
-                    người dùng liền mạch, không gián đoạn.
+                    Thiết kế giao diện trực quan và tổ chức luồng trải nghiệm
+                    người dùng liền mạch, dễ tiếp cận.
                   </p>
                 </div>
               </div>
@@ -125,8 +128,8 @@ export const AboutSection = () => {
                 <div className="text-left">
                   <h4 className="font-semibold text-lg">Phát triển Game</h4>
                   <p className="text-muted-foreground">
-                    Xây dựng thế giới, luật chơi và câu chuyện. Biến ý tưởng
-                    thành những cuộc phiêu lưu tương tác hấp dẫn.
+                    Phát triển gameplay, cơ chế vận hành và nội dung tương tác,
+                    chuyển hóa ý tưởng thành trải nghiệm có chiều sâu.
                   </p>
                 </div>
               </div>

@@ -1,14 +1,14 @@
 export const skills = [
   // Education
   {
-    name: "Cử Nhân ngành Kỹ Thuật Phần Mềm với Học Bổng Toàn Phần",
+    name: "Cử nhân Kỹ thuật Phần mềm (Học bổng toàn phần)",
     institution: "Đại Học CMC",
     year: "(2024-2027)",
     category: "Học vấn",
   },
 
   {
-    name: "GPA: 3.61 (Tính đến học kỳ Thu năm học 2025-2026)",
+    name: "GPA: 3.61 (tính đến học kỳ Thu năm học 2025-2026)",
     institution: "Đại Học CMC",
     year: "(2025)",
     category: "Học vấn",
@@ -16,7 +16,7 @@ export const skills = [
 
   {
     name: "IELTS 8.0",
-    institution: "Mình có thể giao tiếp tốt bằng Tiếng Anh",
+    institution: "Năng lực giao tiếp và làm việc hiệu quả bằng tiếng Anh",
     year: "",
     category: "Học vấn",
   },
@@ -24,7 +24,7 @@ export const skills = [
   {
     name: "Chứng chỉ AI của Samsung Innovation Campus (SIC)",
     institution:
-      "Hoàn thành khóa học chuyên sâu về Trí tuệ nhân tạo do Samsung Electronics Việt Nam xác nhận và bảo chứng",
+      "Hoàn thành chương trình đào tạo chuyên sâu về Trí tuệ nhân tạo do Samsung Electronics Việt Nam xác nhận",
     year: "(2025)",
     category: "Học vấn",
     file: "cert_SAMSUNG_AI.pdf",
@@ -33,21 +33,21 @@ export const skills = [
   {
     name: "Chứng chỉ Deep Learning của NVIDIA DLI",
     institution:
-      "Hoàn thành khóa đào tạo về Neural Networks, Data Augmentation và tối ưu hóa mô hình của NVIDIA Deep Learning Institute",
+      "Hoàn thành khóa đào tạo về Neural Networks, Data Augmentation và tối ưu hóa mô hình từ NVIDIA Deep Learning Institute",
     year: "(2025)",
     category: "Học vấn",
     file: "cert_NVIDIA-DLI_DL.pdf",
   },
 
   {
-    name: "Từng là học sinh khối chuyên Ngữ tại",
+    name: "Học sinh khối chuyên Ngữ",
     institution: "THPT chuyên Nguyễn Trãi - Hải Dương",
     year: "(2021-2024)",
     category: "Học vấn",
   },
 
   {
-    name: "Thành viên đội tuyển Olympic Tin Học của trường và team Nghiên cứu Khoa học",
+    name: "Thành viên đội tuyển Olympic Tin học và nhóm Nghiên cứu khoa học",
     institution: "Đại Học CMC",
     year: "(2025)",
     category: "Học vấn",

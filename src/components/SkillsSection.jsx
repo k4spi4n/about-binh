@@ -87,7 +87,7 @@ export const SkillsSection = () => {
                   <div className="absolute bottom-0 left-0 w-full p-2 bg-primary flex items-center justify-center gap-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <Eye className="w-4 h-4 text-primary-foreground" />
                     <span className="text-primary-foreground text-xs font-bold uppercase tracking-wider">
-                      Click để xem chi tiết
+                      Nhấn để xem chi tiết
                     </span>
                   </div>
                 )}

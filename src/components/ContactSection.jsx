@@ -24,8 +24,8 @@ export const ContactSection = () => {
 
     setTimeout(() => {
       toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
+        title: "Đã gửi tin nhắn",
+        description: "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.",
       });
       setIsSubmitting(false);
     }, 1500);
@@ -34,14 +34,14 @@ export const ContactSection = () => {
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Bạn muốn{" "}
-          <span className="text-primary text-primary-glow"> Hợp Tác?</span>
+          Sẵn Sàng{" "}
+          <span className="text-primary text-primary-glow"> Hợp Tác</span>
         </h2>
 
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Mình rất vui khi bạn đã đọc đến tận đây! nếu bạn có một ý tưởng thú vị
-          và cảm thấy những kỹ năng của mình có giá trị thì đừng ngần ngại mời
-          mình hợp tác nhé!
+          Cảm ơn bạn đã dành thời gian theo dõi hồ sơ của tôi. Nếu bạn đang tìm
+          kiếm cộng sự cho dự án công nghệ hoặc có cơ hội hợp tác phù hợp, tôi
+          luôn sẵn sàng trao đổi.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -68,7 +68,7 @@ export const ContactSection = () => {
                   <Phone className="h-6 w-6 text-primary" />{" "}
                 </div>
                 <div>
-                  <h4 className="font-medium"> Phone</h4>
+                  <h4 className="font-medium"> Số điện thoại</h4>
                   <a
                     href="tel:+11234567890"
                     className="text-muted-foreground hover:text-primary transition-colors"
@@ -91,7 +91,7 @@ export const ContactSection = () => {
             </div>
 
             <div className="pt-8">
-              <h4 className="font-medium mb-4"> Kết nối nào! </h4>
+              <h4 className="font-medium mb-4"> Kết nối với tôi </h4>
               <div className="flex space-x-4 justify-center">
                 <a
                   href="https://github.com/k4spi4n"
@@ -125,7 +125,7 @@ export const ContactSection = () => {
           >
             <h3 className="text-2xl font-semibold mb-6">
               {" "}
-              Để lại một lời nhắn{" "}
+              Gửi lời nhắn cho tôi{" "}
             </h3>
 
             <form className="space-y-6">
@@ -189,7 +189,7 @@ export const ContactSection = () => {
                   "animated-gradient-border w-full flex items-center justify-center gap-2 px-6 py-2 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent",
                 )}
               >
-                {isSubmitting ? "Đang Gửi..." : "Gửi"}
+                {isSubmitting ? "Đang gửi..." : "Gửi tin nhắn"}
                 <Send size={16} />
               </button>
             </form>

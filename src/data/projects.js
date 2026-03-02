@@ -4,7 +4,7 @@ export const projects = [
     title:
       "Hệ thống Quản lý Bệnh viện Thông minh tích hợp AI hỗ trợ Chẩn đoán và Tóm tắt Hồ sơ Y tế",
     description:
-      "Ứng dụng Full-Stack Hệ thống Thông tin và Quản lý Bệnh viện toàn diện, số hóa quy trình vận hành trên nền tảng số. Được tích hợp AI để hỗ trợ giải trình, tóm tắt hồ sơ y tế và phối hợp chẩn đoán, nâng cao hiệu quả trong quản lý và điều trị.",
+      "Nền tảng quản lý bệnh viện Full-stack giúp số hóa quy trình vận hành, đồng bộ dữ liệu và tối ưu tác vụ nghiệp vụ. Hệ thống tích hợp AI để hỗ trợ tóm tắt hồ sơ y tế và đề xuất chẩn đoán, nâng cao hiệu quả quản trị và chất lượng điều trị.",
     year: "2025",
     image: "projects/project4.png",
     tags: ["NextJS", "FastAPI", "SQL Database", "AI"],
@@ -15,7 +15,7 @@ export const projects = [
     id: 2,
     title: "Website hỗ trợ cá nhân hoá học tập dựa trên AI",
     description:
-      "Nền tảng nâng cao chất lượng và hiệu quả giáo dục thông qua việc tự động hóa quy trình tạo đề thi, bài tập, đồng thời cá nhân hóa trải nghiệm học tập cho học sinh bằng các gợi ý và phân tích chuyên sâu dựa trên AI. Hệ thống giúp giáo viên dễ dàng quản lý lớp học và theo dõi tiến độ học tập của từng cá nhân, góp phần tối ưu hóa công tác giảng dạy trong kỷ nguyên số.",
+      "Nền tảng giáo dục ứng dụng AI, tự động hóa quy trình tạo đề thi và bài tập, đồng thời cá nhân hóa lộ trình học cho từng học sinh. Hệ thống hỗ trợ giáo viên quản lý lớp học, theo dõi tiến độ và đưa ra quyết định giảng dạy dựa trên dữ liệu.",
     image: "projects/project1.png",
     year: "2025",
     tags: ["Angular", ".NET", "MongoDB", "AI"],
@@ -28,7 +28,7 @@ export const projects = [
     id: 3,
     title: "ML AIMBOT VALORANT",
     description:
-      "Ứng dụng các kỹ thuật mô phỏng thiết bị ngoại vi, xử lý hình ảnh và tối ưu hóa sâu (Deep Optimization) để tạo ra aimbot có độ chính xác và tốc độ phản hồi cực cao trong thời gian thực và môi trường hỗn loạn của game.",
+      "Dự án nghiên cứu kỹ thuật thị giác máy tính thời gian thực kết hợp mô phỏng thiết bị ngoại vi và tối ưu mô hình. Trọng tâm là nâng cao độ chính xác nhận diện mục tiêu và tốc độ phản hồi trong môi trường game có biến động cao.",
     image: "projects/project2.mp4",
     year: "2023 - 2024",
     tags: ["Low-level Programming", "Computer Vision", "Python"],
@@ -39,7 +39,7 @@ export const projects = [
     id: 4,
     title: "Touhou: Goblin Invasion",
     description:
-      "Một dự án game khá hoàn chỉnh đã được publish trên itch.io. Lấy cảm hứng bối cảnh cùng dàn nhân vật từ series game nổi tiếng Touhou Project, gameplay bắn quái và hiệu ứng đồ hoạ đẹp mắt",
+      "Dự án game đã phát hành trên itch.io, lấy cảm hứng từ bối cảnh và nhân vật của Touhou Project. Sản phẩm tập trung vào lối chơi hành động nhịp độ nhanh, hiệu ứng hình ảnh nổi bật và trải nghiệm chiến đấu mượt mà.",
     image: "projects/project3.png",
     year: "2022",
     tags: ["Unity", "C#", "3D", "Game Development"],
@@ -49,7 +49,8 @@ export const projects = [
   {
     id: 5,
     title: "Vài dự án demo game đơn giản",
-    description: "Khởi đầu của hành trình vào thế giới lập trình",
+    description:
+      "Các dự án game demo giai đoạn đầu, đặt nền tảng cho tư duy thiết kế gameplay và kỹ năng lập trình tương tác.",
     image: "projects/project0.mp4",
     year: "2021 - 2022",
     tags: ["Unity", "Unreal Engine"],

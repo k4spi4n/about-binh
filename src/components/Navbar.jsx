@@ -75,7 +75,7 @@ export const Navbar = () => {
           href="#hero"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground"> About </span> Me
+            <span className="text-glow text-foreground"> Hồ sơ </span> cá nhân
           </span>
         </a>
 
@@ -107,7 +107,7 @@ export const Navbar = () => {
               className="animated-gradient-border flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-primary-glow text-sm font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
             >
               <Download className="w-5 h-5" />
-              Download CV
+              Tải xuống CV
             </a>
           </div>
         </div>
@@ -159,7 +159,7 @@ export const Navbar = () => {
                 className="animated-gradient-border flex items-center gap-2 px-6 py-3 rounded-full text-primary text-primary-glow text-lg font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
               >
                 <Download className="w-6 h-6" />
-                Download CV
+                Tải xuống CV
               </a>
             </div>
           </div>
