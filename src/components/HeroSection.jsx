@@ -33,7 +33,7 @@ export const HeroSection = () => {
           </h1>
 
           <p className="text-base md:text-lg font-semibold text-primary text-primary-glow opacity-0 animate-fade-in-delay-2">
-            Full-stack Engineer • AI Engineer • Game Developer
+            Full-stack • AI • Game Engineer
           </p>
 
           <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
