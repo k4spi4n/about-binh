@@ -1,23 +1,18 @@
 import { Code, Gamepad2, PencilRuler } from "lucide-react";
+import { useState } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { useLoading } from "../contexts/LoadingContext";
+import { CVDownloadModal } from "./CVDownloadModal";
 
-const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026.pdf`;
+const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026-VI.pdf`;
 
 export const AboutSection = () => {
   const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });
-  const { triggerLoading } = useLoading();
+  const [isCVModalOpen, setIsCVModalOpen] = useState(false);
 
   const handleDownload = (e) => {
     e.preventDefault();
-    triggerLoading(() => {
-      const link = document.createElement("a");
-      link.href = cvUrl;
-      link.download = "Thai Binh - CV-2026.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+    setIsCVModalOpen(true);
   };
 
   return (
@@ -137,6 +132,7 @@ export const AboutSection = () => {
           </div>
         </div>
       </div>
+      <CVDownloadModal isOpen={isCVModalOpen} onClose={() => setIsCVModalOpen(false)} />
     </section>
   );
 };

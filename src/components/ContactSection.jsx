@@ -1,14 +1,16 @@
 import {
-  Instagram,
-  Facebook,
   Mail,
   MapPin,
   Phone,
   Send,
+} from "lucide-react";
+import {
+  Instagram,
+  Facebook,
   Twitch,
   Twitter,
   Github,
-} from "lucide-react";
+} from "./BrandIcons";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";

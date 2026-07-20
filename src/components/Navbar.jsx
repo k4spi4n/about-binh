@@ -1,9 +1,11 @@
 import { cn } from "@/lib/utils";
-import { Menu, X, Github, Download } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
+import { Github } from "./BrandIcons";
 import { useEffect, useState, useRef } from "react";
 import { useLoading } from "../contexts/LoadingContext";
+import { CVDownloadModal } from "./CVDownloadModal";
 
-const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026.pdf`;
+const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026-VI.pdf`;
 const githubUrl = "https://github.com/k4spi4n";
 
 const navItems = [
@@ -18,20 +20,14 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldShowNav, setShouldShowNav] = useState(true);
+  const [isCVModalOpen, setIsCVModalOpen] = useState(false);
   const lastYPos = useRef(0);
   const { triggerLoading } = useLoading();
 
   const handleDownload = (e) => {
     e.preventDefault();
     setIsMenuOpen(false);
-    triggerLoading(() => {
-      const link = document.createElement("a");
-      link.href = cvUrl;
-      link.download = "Thai Binh - CV-2026.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+    setIsCVModalOpen(true);
   };
 
   useEffect(() => {
@@ -165,6 +161,7 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
+      <CVDownloadModal isOpen={isCVModalOpen} onClose={() => setIsCVModalOpen(false)} />
     </nav>
   );
 };

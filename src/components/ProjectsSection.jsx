@@ -1,4 +1,5 @@
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import { Github } from "./BrandIcons";
 import "./Timeline.css";
 import { projects } from "../data/projects";
 

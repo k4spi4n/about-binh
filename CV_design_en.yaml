@@ -1,0 +1,102 @@
+cv:
+  name: Dang Thai Binh
+  location: Ha Dong, Ha Noi, Vietnam
+  email: thaibinhakashi2@gmail.com
+  phone: "+84 904 098 225"
+  website: https://k4spi4n.github.io/about-binh/
+  photo: public/documents/cv_face.png
+  social_networks:
+    - network: GitHub
+      username: k4spi4n
+  sections:
+    summary:
+      - K3 Software Engineering student at CMC University with a full scholarship. Passionate about building interactive web applications, game development, and AI integration. Experienced in React, Flutter, Supabase, Next.js, .NET, and Computer Vision.
+    education:
+      - institution: CMC University
+        area: Software Engineering
+        degree: Bachelor's Degree
+        start_date: 2024-09
+        end_date: 2027-06
+        highlights:
+          - "GPA: 3.5/4.0 (As of Summer 2026)"
+          - Full scholarship recipient
+          - Member of the Olympic IT team and the Scientific Research team
+      - institution: Nguyen Trai High School for the Gifted - Hai Duong
+        area: Foreign Language Major
+        degree: High School Graduate
+        start_date: 2021-09
+        end_date: 2024-06
+    projects:
+      - name: DynaTour - Real Estate 3D Tour Solution from Mobile Video
+        date: 2026
+        link: https://dynatour.io.vn/
+        highlights:
+          - Automatically converts walkthrough videos from mobile phones into interactive and vivid 3D tours for real estate.
+          - Facilitates remote space viewing, optimizing conversion rates and accelerating deal closure.
+          - "Technologies: React, WebGL / Three.js, Computer Vision, 3D Reconstruction"
+      - name: Runny AI - Intelligent Running Assistant with AI Coach
+        date: 2025 - 2026
+        link: https://github.com/k4spi4n/runny-ai
+        highlights:
+          - Developed a personal running assistant combining training data tracking, AI Coach consultation, and community.
+          - Implemented Strava API synchronization, Pace/Heart Rate visualization, and shoe wear monitoring (Shoe Tracker).
+          - "Technologies: Flutter, Supabase (Database, Auth, Edge Functions), AI Coach"
+      - name: Smart Hospital Management System
+        date: 2025
+        link: https://github.com/k4spi4n/cmec-hms-web-app
+        highlights:
+          - Developed a comprehensive full-stack hospital information system to digitize operational workflows.
+          - Integrated AI to support medical record summarization, automated diagnosis suggestions, and clinical decisions.
+          - "Technologies: PostgreSQL, Supabase, Next.js, FastAPI, AI"
+      - name: AI-Based Personalized Learning Web App
+        date: 2025
+        highlights:
+          - Automated exam and assignment generation, personalizing the learning experience for students using AI.
+          - Provided teacher dashboards for class management, progress tracking, and data-driven teaching decisions.
+          - "Technologies: Angular, .NET, MongoDB, AI"
+      - name: ML AIMBOT VALORANT
+        date: 2023 - 2024
+        highlights:
+          - Researched real-time computer vision techniques combined with peripheral emulation and model optimization.
+          - Enhanced target recognition accuracy and reaction times in high-volatility game environments.
+          - "Technologies: OpenCV, NumPy, Computer Vision, Python"
+    skills:
+      - label: Programming Languages
+        details: Python, JavaScript, TypeScript, Dart, Java, C++, C#, HTML/CSS
+      - label: Frameworks & Libraries
+        details: React, Flutter, Next.js, Django, Node.js, .NET, Tailwind CSS, OpenCV, NumPy, Three.js
+      - label: Databases & BaaS
+        details: PostgreSQL, Supabase, MongoDB, SQL Server
+      - label: Tools & Platforms
+        details: Git, GitHub, Docker, VS Code, Unity, Unreal Engine, Adobe Photoshop
+      - label: Languages
+        details: English (IELTS 8.0), Vietnamese (Native)
+      - label: Certifications
+        details: Samsung Innovation Campus (SIC) AI Certification
+
+design:
+  theme: engineeringresumes
+  header:
+    photo_width: 2.8cm
+    photo_position: right
+    connections:
+      show_icons: true
+  page:
+    size: a4
+    top_margin: 0.45in
+    bottom_margin: 0.45in
+    left_margin: 0.45in
+    right_margin: 0.45in
+  colors:
+    body: rgb(30, 41, 59)
+    name: rgb(15, 23, 42)
+    section_titles: rgb(13, 148, 136)
+    links: rgb(13, 148, 136)
+  typography:
+    font_family: Source Sans 3
+    line_spacing: 0.45em
+    alignment: justified
+  sections:
+    space_between_regular_entries: 0.55em
+    space_between_text_based_entries: 0.25em
+

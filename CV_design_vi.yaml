@@ -1,8 +1,10 @@
 cv:
-  name: Thái Bình
+  name: Đặng Thái Bình
   location: Hà Đông, Hà Nội, Việt Nam
   email: thaibinhakashi2@gmail.com
   phone: "+84 904 098 225"
+  website: https://k4spi4n.github.io/about-binh/
+  photo: public/documents/cv_face.png
   social_networks:
     - network: GitHub
       username: k4spi4n
@@ -16,9 +18,9 @@ cv:
         start_date: 2024-09
         end_date: 2027-06
         highlights:
-          - "GPA: 3.61/4.0 (Tính đến học kỳ Thu 2025)"
+          - "GPA: 3.5/4.0 (Tính đến học kỳ Hè 2026)"
           - Học bổng toàn phần
-          - Thành viên đội tuyển Olympic Tin Học và team Nghiên cứu Khoa học
+          - Thành viên đội tuyển Olympic Tin Học và nhóm Nghiên cứu Khoa học
       - institution: THPT Chuyên Nguyễn Trãi - Hải Dương
         area: Khối chuyên Ngữ
         degree: Tốt nghiệp THPT
@@ -36,7 +38,7 @@ cv:
         date: 2025 - 2026
         link: https://github.com/k4spi4n/runny-ai
         highlights:
-          - Phát triển ứng dụng trợ lý chạy bộ cá nhân kết hợp dữ liệu tập luyện, AI Coach và cộng đồng.
+          - Phát triển ứng dụng trợ lý chạy bộ cá nhân kết hợp dữ liệu tập luyện, HLV ảo AI Coach và cộng đồng.
           - Tự động đồng bộ Strava API, trực quan hóa Pace/Heart Rate và quản lý hao mòn giày (Shoe Tracker).
           - "Công nghệ: Flutter, Supabase (Database, Auth, Edge Functions), AI Coach"
       - name: Hệ thống Quản lý Bệnh viện Thông minh (Smart Hospital Management System)
@@ -68,18 +70,23 @@ cv:
       - label: Công cụ
         details: Git, GitHub, Docker, VS Code, Unity, Unreal Engine, Adobe Photoshop
       - label: Ngoại ngữ
-        details: Tiếng Anh (IELTS 8.0)
+        details: Tiếng Anh (IELTS 8.0), Tiếng Việt (Bản xứ)
       - label: Chứng chỉ
         details: Chứng chỉ AI Samsung Innovation Campus (SIC)
 
 design:
   theme: engineeringresumes
+  header:
+    photo_width: 2.8cm
+    photo_position: right
+    connections:
+      show_icons: true
   page:
     size: a4
-    top_margin: 0.5in
-    bottom_margin: 0.5in
-    left_margin: 0.5in
-    right_margin: 0.5in
+    top_margin: 0.45in
+    bottom_margin: 0.45in
+    left_margin: 0.45in
+    right_margin: 0.45in
   colors:
     body: rgb(30, 41, 59)
     name: rgb(15, 23, 42)
@@ -87,5 +94,9 @@ design:
     links: rgb(13, 148, 136)
   typography:
     font_family: Source Sans 3
-    line_spacing: 0.55em
+    line_spacing: 0.45em
     alignment: justified
+  sections:
+    space_between_regular_entries: 0.55em
+    space_between_text_based_entries: 0.25em
+
