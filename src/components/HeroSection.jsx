@@ -1,4 +1,13 @@
+import { useRef } from "react";
 import { ArrowDown } from "lucide-react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { DripText } from "./motion/DripText";
+import { AstralButton } from "./motion/AstralButton";
 
 export const HeroSection = () => {
   const baseUrl = import.meta.env.BASE_URL.endsWith("/")
@@ -6,13 +15,42 @@ export const HeroSection = () => {
     : import.meta.env.BASE_URL;
   const avatarUrl = `${baseUrl}/documents/avatar.png`;
 
+  // As the hero scrolls away it recedes: lifts, shrinks slightly and goes
+  // out of focus, so the next section feels like a new scene arriving.
+  const sectionRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const sceneOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const sceneY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const sceneBlur = useTransform(
+    scrollYProgress,
+    [0, 0.8],
+    ["blur(0px)", "blur(10px)"],
+  );
+  const sceneStyle = reduceMotion
+    ? undefined
+    : {
+        opacity: sceneOpacity,
+        scale: sceneScale,
+        y: sceneY,
+        filter: sceneBlur,
+      };
+
   return (
     <section
+      ref={sectionRef}
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4"
     >
-      <div className="container max-w-4xl mx-auto text-center z-10">
-        <div className="relative w-48 h-48 mx-auto mb-10 flex items-center justify-center rounded-full profile-picture-container">
+      <motion.div
+        className="container max-w-4xl mx-auto text-center z-10"
+        style={sceneStyle}
+      >
+        <div className="relative w-48 h-48 mx-auto mb-10 flex items-center justify-center rounded-full profile-picture-container bloom-in">
           {/* Ambient bloom */}
           <span className="avatar-bloom" aria-hidden="true" />
           {/* Rotating aurora ring + its blurred halo */}
@@ -63,50 +101,63 @@ export const HeroSection = () => {
 
         <div className="space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="opacity-0 animate-fade-in"> Xin chào, tôi là</span>
-            <span className="text-primary text-primary-glow opacity-0 animate-fade-in-delay-1">
-              {" "}
-              Thái Bình
-            </span>
-            <span className="text-gradient ml-2 opacity-0 animate-fade-in-delay-2">
-              {" "}
-            </span>
+            <DripText text="Xin chào, tôi là" />{" "}
+            <DripText
+              text="Thái Bình"
+              startIndex={15}
+              stagger={70}
+              className="text-primary text-primary-glow"
+            />
           </h1>
 
-          <p className="text-base md:text-lg font-semibold text-primary text-primary-glow opacity-0 animate-fade-in-delay-2">
+          <p
+            className="text-base md:text-lg font-semibold text-primary text-primary-glow rise-in"
+            style={{ "--rise-delay": "1.1s" }}
+          >
             Full-stack • AI • Game Engineer
           </p>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
+          <p
+            className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto rise-in"
+            style={{ "--rise-delay": "1.3s" }}
+          >
             Sinh viên Kỹ thuật Phần mềm tại Đại học CMC, theo đuổi lộ trình
             Full-stack và AI Engineering với định hướng xây dựng sản phẩm có
             kiến trúc vững chắc, hiệu năng cao và tác động thực tiễn cho người
             dùng.
           </p>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-delay-4">
-            <a
+          <div
+            className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 rise-in"
+            style={{ "--rise-delay": "1.5s" }}
+          >
+            <AstralButton
               href="#skills"
-              className="animated-gradient-border px-8 py-3 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+              className="px-8 py-3"
             >
               Xem hồ sơ kỹ năng
-            </a>
-            <a
+            </AstralButton>
+            <AstralButton
               href="#projects"
-              className="animated-gradient-border px-8 py-3 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+              className="px-8 py-3"
             >
               Xem dự án nổi bật
-            </a>
+            </AstralButton>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-        <span className="text-sm text-muted-foreground mb-2">
-          {" "}
-          Cuộn xuống để khám phá thêm{" "}
-        </span>
-        <ArrowDown className="h-5 w-5 text-primary" />
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 rise-in"
+        style={{ "--rise-delay": "2s" }}
+      >
+        <div className="flex flex-col items-center animate-bounce">
+          <span className="text-sm text-muted-foreground mb-2">
+            {" "}
+            Cuộn xuống để khám phá thêm{" "}
+          </span>
+          <ArrowDown className="h-5 w-5 text-primary" />
+        </div>
       </div>
     </section>
   );

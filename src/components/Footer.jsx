@@ -1,4 +1,5 @@
 import { ArrowUp } from "lucide-react";
+import { AstralButton } from "./motion/AstralButton";
 
 export const Footer = () => {
   return (
@@ -8,12 +9,11 @@ export const Footer = () => {
         {" "}
         &copy; {new Date().getFullYear()} Thai Binh
       </p>
-      <a
+      <AstralButton icon
         href="#hero"
-        className="animated-gradient-border p-2 rounded-full text-primary transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
       >
         <ArrowUp size={20} />
-      </a>
+      </AstralButton>
     </footer>
   );
 };

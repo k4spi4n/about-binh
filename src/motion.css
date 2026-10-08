@@ -1,0 +1,1054 @@
+/* ════════════════════════════════════════════════════════════════════
+   Motion system
+   Intro veil · dripping glyphs · focus-in reveals · afterimage section
+   jumps · hairline progress · side rail · drifting atmosphere.
+   Every effect collapses to its resting state under reduced motion.
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* How long the hero waits for the intro veil (main.jsx sets data-intro) */
+  --intro-delay: 0s;
+  --scroll-p: 0;
+  --ease-settle: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-glide: cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+:root[data-intro="play"] {
+  --intro-delay: 1.35s;
+}
+
+/* While the veil is up nothing underneath should be scrollable. The lock sits
+   on <html> because SkillsSection writes an inline overflow on <body>, which
+   would override any stylesheet rule there. The gutter is reserved so the
+   page doesn't shift sideways when the scrollbar returns. */
+:root {
+  scrollbar-gutter: stable;
+}
+
+:root[data-intro="play"]:not([data-veil="gone"]) {
+  overflow: hidden;
+}
+
+/* ── Intro veil ────────────────────────────────────────────────────── */
+
+@property --veil-hole {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  --veil-hole: 0px;
+  animation: veil-open 1s 1.3s var(--ease-glide) forwards;
+}
+
+/* The dark sheet with a widening circular window punched through it */
+.veil-sheet {
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--background));
+  -webkit-mask: radial-gradient(
+    circle at 50% 50%,
+    transparent var(--veil-hole),
+    #000 calc(var(--veil-hole) + 1.5px)
+  );
+  mask: radial-gradient(
+    circle at 50% 50%,
+    transparent var(--veil-hole),
+    #000 calc(var(--veil-hole) + 1.5px)
+  );
+}
+
+/* Light catching the edge of the window as it opens */
+.veil-rim {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent calc(var(--veil-hole) - 40px),
+    hsl(var(--primary) / 0.35) calc(var(--veil-hole) - 6px),
+    hsl(292 84% 75% / 0.8) var(--veil-hole),
+    transparent calc(var(--veil-hole) + 3px)
+  );
+  animation: veil-rim 1s 1.3s ease-out forwards;
+}
+
+.veil-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(62vmin, 360px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  animation: veil-recede 0.9s 1.3s var(--ease-glide) forwards;
+}
+
+.veil-core {
+  position: absolute;
+  inset: 34%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    hsl(250 90% 85% / 0.9) 0%,
+    hsl(var(--primary) / 0.55) 30%,
+    hsl(292 84% 61% / 0.18) 60%,
+    transparent 72%
+  );
+  filter: blur(4px);
+  opacity: 0;
+  transform: scale(0.4);
+  animation:
+    veil-core-in 0.9s 0.1s var(--ease-settle) forwards,
+    veil-core-pulse 1.6s 1s ease-in-out infinite;
+}
+
+.veil-orbit {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  rotate: var(--ring-turn);
+  animation: veil-spin 6s linear infinite;
+}
+
+.veil-arc {
+  fill: none;
+  stroke: var(--ring-color);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 3px var(--ring-color));
+  animation: veil-draw 1.1s calc(0.15s + var(--ring-delay)) var(--ease-settle)
+    forwards;
+}
+
+.veil-spark {
+  fill: #fff;
+  opacity: 0;
+  filter: drop-shadow(0 0 4px var(--ring-color));
+  transform-box: fill-box;
+  animation: veil-spark-in 0.5s calc(0.9s + var(--ring-delay)) ease-out
+    forwards;
+}
+
+@keyframes veil-open {
+  to {
+    --veil-hole: 150vmax;
+  }
+}
+
+@keyframes veil-rim {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes veil-recede {
+  to {
+    opacity: 0;
+    transform: scale(1.6) rotate(8deg);
+    filter: blur(6px);
+  }
+}
+
+@keyframes veil-core-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes veil-core-pulse {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes veil-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes veil-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes veil-spark-in {
+  from {
+    opacity: 0;
+    scale: 0.2;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* The page settles as the window opens, like eyes refocusing. Fill mode is
+   backwards only: a lingering scale/filter on <main> would become the
+   containing block for the fixed-position modals inside it. */
+:root[data-intro="play"] .page-land {
+  animation: page-land 1.2s 1.3s var(--ease-settle) backwards;
+}
+
+@keyframes page-land {
+  from {
+    scale: 1.04;
+    filter: blur(3px);
+  }
+  to {
+    scale: 1;
+    filter: none;
+  }
+}
+
+/* ── Dripping glyphs ───────────────────────────────────────────────── */
+
+.drip-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.drip-c {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, filter, opacity;
+}
+
+.drip[data-play="true"] .drip-c {
+  animation: drip-in 1.1s var(--ease-settle) both;
+  animation-delay: calc(
+    var(--intro-delay) + var(--drip-delay, 0s) + var(--i) * var(--stagger)
+  );
+}
+
+/* Headings further down don't wait on the intro */
+.drip[data-scroll][data-play="true"] .drip-c {
+  animation-delay: calc(var(--drip-delay, 0s) + var(--i) * var(--stagger));
+}
+
+@keyframes drip-in {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--fall)) rotate(var(--tilt)) scale(1.08);
+    filter: blur(8px);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Thin seam under section titles, drawn outward after the text lands */
+.section-title {
+  position: relative;
+  padding-bottom: 0.9rem;
+}
+
+.section-seam {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(9rem, 40%);
+  height: 1px;
+  translate: -50% 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--primary)),
+    #d946ef,
+    transparent
+  );
+  transform: scaleX(0);
+  transition: transform 1.2s 0.6s var(--ease-settle);
+}
+
+.section-title:has(.drip[data-play="true"]) .section-seam {
+  transform: scaleX(1);
+}
+
+/* ── Hero entrance pieces (timed against the veil) ────────────────── */
+
+.rise-in {
+  animation: rise-in 1.1s var(--ease-settle) both;
+  animation-delay: calc(var(--intro-delay) + var(--rise-delay, 0s));
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.bloom-in {
+  animation: bloom-in 1.4s var(--ease-settle) both;
+  animation-delay: calc(var(--intro-delay) - 0.15s);
+}
+
+@keyframes bloom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+    filter: blur(12px) brightness(1.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* ── Focus-in reveal on scroll ─────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.985);
+  filter: blur(10px);
+  transition:
+    opacity 0.9s var(--ease-settle),
+    transform 1.1s var(--ease-settle),
+    filter 1s var(--ease-settle);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ── Afterimage section jumps (View Transitions) ──────────────────── */
+
+::view-transition-old(root) {
+  animation: afterimage-fade 1.05s var(--ease-glide) both;
+}
+
+::view-transition-new(root) {
+  animation: afterimage-focus 0.8s 0.15s var(--ease-settle) both;
+}
+
+@keyframes afterimage-fade {
+  0% {
+    opacity: 1;
+    filter: none;
+  }
+  30% {
+    opacity: 0.55;
+    filter: blur(2px) brightness(1.05) hue-rotate(-8deg);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(16px) brightness(1.25) hue-rotate(-20deg);
+    transform: scale(1.025);
+  }
+}
+
+@keyframes afterimage-focus {
+  from {
+    opacity: 0;
+    filter: blur(8px) saturate(0.5);
+    transform: scale(0.992);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* ── Hairline scroll progress ──────────────────────────────────────── */
+
+.hairline-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary) / 0.2),
+    hsl(var(--primary)),
+    #d946ef 80%,
+    #22d3ee
+  );
+}
+
+.hairline-head {
+  position: absolute;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  margin: -2px 0 0 -2.5px;
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow:
+    0 0 6px 2px hsl(292 84% 70% / 0.9),
+    0 0 18px 6px hsl(var(--primary) / 0.45);
+}
+
+/* ── Side rail ─────────────────────────────────────────────────────── */
+
+.rail {
+  position: fixed;
+  right: 1.75rem;
+  top: 22vh;
+  bottom: 22vh;
+  z-index: 35;
+}
+
+.rail-track {
+  position: relative;
+  height: 100%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    hsl(var(--border)) 12%,
+    hsl(var(--border)) 88%,
+    transparent
+  );
+}
+
+.rail-tick {
+  position: absolute;
+  left: 0;
+  top: calc(var(--at) * 100%);
+  width: 9px;
+  height: 9px;
+  translate: -4px -4px;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  transition:
+    border-color 0.4s,
+    background-color 0.4s,
+    scale 0.4s var(--ease-settle);
+}
+
+.rail-tick:hover,
+.rail-tick.is-active {
+  border-color: hsl(var(--primary));
+  scale: 1.25;
+}
+
+.rail-tick-label {
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  translate: 6px -50%;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: hsl(var(--foreground) / 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s,
+    translate 0.4s var(--ease-settle);
+}
+
+.rail-tick:hover .rail-tick-label {
+  opacity: 1;
+  translate: 0 -50%;
+}
+
+/* The probe rides down the track with scroll progress */
+.rail-probe {
+  position: absolute;
+  left: 0;
+  top: calc(var(--scroll-p) * 100%);
+  pointer-events: none;
+  transition: top 0.25s linear;
+}
+
+.rail-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  translate: -3px -3px;
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow:
+    0 0 8px 2px hsl(var(--primary) / 0.9),
+    0 0 20px 6px hsl(292 84% 61% / 0.3);
+  animation: rail-breathe 3.2s ease-in-out infinite;
+}
+
+.rail-capsule {
+  position: absolute;
+  right: 0.9rem;
+  top: 0;
+  translate: 0 -50%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--primary) / 0.25);
+  background: hsl(var(--background) / 0.7);
+  backdrop-filter: blur(8px);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: hsl(var(--foreground) / 0.85);
+}
+
+.rail-capsule-text {
+  display: inline-block;
+  animation: rail-swap 0.6s var(--ease-settle) both;
+}
+
+.rail-wave {
+  width: 32px;
+  height: 10px;
+  overflow: visible;
+}
+
+.rail-wave path {
+  stroke: hsl(var(--primary));
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 6 4;
+  animation: rail-signal 1.4s linear infinite;
+}
+
+@keyframes rail-breathe {
+  50% {
+    scale: 1.35;
+  }
+}
+
+@keyframes rail-swap {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes rail-signal {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* ── Navbar link underline ─────────────────────────────────────────── */
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-settle);
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ── Atmosphere ────────────────────────────────────────────────────── */
+
+.atmo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.atmo-fog {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.22;
+}
+
+.atmo-fog--a {
+  left: -25vmax;
+  top: -20vmax;
+  background: radial-gradient(circle, hsl(var(--primary)), transparent 65%);
+  animation: atmo-drift-a 38s ease-in-out infinite alternate;
+}
+
+.atmo-fog--b {
+  right: -30vmax;
+  bottom: -25vmax;
+  background: radial-gradient(
+    circle,
+    hsl(calc(292 - var(--scroll-p) * 105) 84% 61%),
+    transparent 65%
+  );
+  opacity: calc(0.12 + var(--scroll-p) * 0.14);
+  animation: atmo-drift-b 46s ease-in-out infinite alternate;
+}
+
+/* A low glow on the horizon that brightens as you reach the end */
+.atmo-dawn {
+  position: absolute;
+  inset: auto -10% -30vh;
+  height: 60vh;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    hsl(292 84% 61% / 0.35),
+    hsl(var(--primary) / 0.15) 40%,
+    transparent 70%
+  );
+  opacity: calc(var(--scroll-p) * 0.9);
+  transition: opacity 0.4s linear;
+}
+
+@keyframes atmo-drift-a {
+  to {
+    transform: translate(18vw, 14vh) scale(1.15);
+  }
+}
+
+@keyframes atmo-drift-b {
+  to {
+    transform: translate(-16vw, -10vh) scale(0.9);
+  }
+}
+
+/* ── Astral buttons ────────────────────────────────────────────────
+   Layers, back to front: ::before halo (blurred, follows the comet) →
+   ::after hull (dark glass fill + rim with the comet riding it) → nebula
+   fill → starfield → sparkles → label. The comet angle is one inherited
+   property so the halo and rim stay in lockstep. */
+
+@property --comet {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.astral-btn {
+  --rim: hsl(var(--primary) / 0.45);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 600;
+  color: hsl(250 100% 92%);
+  text-shadow:
+    0 0 10px hsl(var(--primary) / 0.9),
+    0 0 22px hsl(292 84% 61% / 0.35);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: comet-orbit 4.2s linear infinite;
+  transition:
+    transform 0.45s var(--ease-settle),
+    color 0.3s;
+}
+
+.astral-btn--icon {
+  padding: 0.6rem;
+}
+
+/* Halo: a blurred copy of the comet, so the glow brightens where it is */
+.astral-btn::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  z-index: -2;
+  border-radius: inherit;
+  background:
+    conic-gradient(
+      from var(--comet),
+      transparent 0deg 200deg,
+      hsl(var(--primary) / 0.7) 280deg,
+      hsl(292 84% 66% / 0.9) 330deg,
+      hsl(190 90% 70% / 0.8) 352deg,
+      transparent 360deg
+    ),
+    radial-gradient(closest-side, hsl(var(--primary) / 0.35), transparent);
+  filter: blur(10px);
+  opacity: 0.7;
+  animation: halo-pulse 3.6s ease-in-out infinite;
+  transition:
+    opacity 0.45s,
+    inset 0.45s var(--ease-settle),
+    filter 0.45s;
+}
+
+/* Hull: dark glass inside, rim with a bright comet head and fading tail */
+.astral-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background:
+    radial-gradient(
+        130% 160% at 50% 130%,
+        hsl(var(--primary) / 0.32),
+        transparent 62%
+      )
+      padding-box,
+    linear-gradient(hsl(232 50% 7% / 0.92), hsl(232 50% 7% / 0.92))
+      padding-box,
+    conic-gradient(
+        from var(--comet),
+        var(--rim) 0deg 230deg,
+        hsl(var(--primary)) 290deg,
+        #f0abfc 332deg,
+        #fff 350deg,
+        var(--rim) 360deg
+      )
+      border-box;
+  box-shadow: inset 0 0 14px -5px hsl(var(--primary) / 0.7);
+}
+
+/* Nebula fill, revealed on hover */
+.astral-nebula {
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 30% 20%, hsl(0 0% 100% / 0.25), transparent 35%),
+    linear-gradient(
+      115deg,
+      hsl(var(--primary)) 0%,
+      #c026d3 35%,
+      #6d28d9 55%,
+      #0891b2 80%,
+      hsl(var(--primary)) 100%
+    );
+  background-size:
+    100% 100%,
+    260% 100%;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: nebula-pan 7s ease-in-out infinite alternate;
+  transition:
+    opacity 0.5s var(--ease-settle),
+    transform 0.6s var(--ease-settle);
+}
+
+/* Faint stars inside the button, tiled so they can scroll sideways */
+.astral-stars {
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background-image:
+    radial-gradient(circle 1px at 8% 30%, #fff 98%, transparent),
+    radial-gradient(circle 1px at 22% 75%, #e9d5ff 98%, transparent),
+    radial-gradient(circle 1.4px at 37% 22%, #fff 98%, transparent),
+    radial-gradient(circle 1px at 51% 68%, #a5f3fc 98%, transparent),
+    radial-gradient(circle 1px at 66% 35%, #fff 98%, transparent),
+    radial-gradient(circle 1.4px at 79% 78%, #f5d0fe 98%, transparent),
+    radial-gradient(circle 1px at 92% 28%, #fff 98%, transparent);
+  background-size: 140px 100%;
+  background-repeat: repeat-x;
+  opacity: 0.55;
+  animation:
+    stars-drift 24s linear infinite,
+    stars-twinkle 2.8s ease-in-out infinite alternate;
+}
+
+/* Four-pointed sparkles */
+.astral-spark {
+  position: absolute;
+  z-index: 2;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  background: #fff;
+  clip-path: polygon(
+    50% 0%,
+    60% 40%,
+    100% 50%,
+    60% 60%,
+    50% 100%,
+    40% 60%,
+    0% 50%,
+    40% 40%
+  );
+  filter: drop-shadow(0 0 3px #f0abfc)
+    drop-shadow(0 0 6px hsl(var(--primary)));
+  opacity: 0;
+  transform: scale(0);
+}
+
+.astral-spark--a {
+  top: -5px;
+  right: 14%;
+  /* The one sparkle that glints on its own while idle */
+  animation: spark-glint 5s 1.2s ease-in-out infinite;
+}
+
+.astral-spark--b {
+  bottom: -4px;
+  left: 12%;
+  width: 8px;
+  height: 8px;
+}
+
+.astral-spark--c {
+  top: 30%;
+  left: -6px;
+  width: 7px;
+  height: 7px;
+}
+
+.astral-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+}
+
+/* ── Hover / focus: ignite ── */
+
+.astral-btn:hover,
+.astral-btn:focus-visible {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.astral-btn:hover::before,
+.astral-btn:focus-visible::before {
+  inset: -9px;
+  opacity: 1;
+  filter: blur(14px);
+}
+
+.astral-btn:hover .astral-nebula,
+.astral-btn:focus-visible .astral-nebula {
+  opacity: 0.95;
+  transform: none;
+}
+
+.astral-btn:hover .astral-stars,
+.astral-btn:focus-visible .astral-stars {
+  opacity: 0.9;
+  animation:
+    stars-drift 0.9s linear infinite,
+    stars-twinkle 0.6s ease-in-out infinite alternate;
+}
+
+.astral-btn:hover .astral-spark--a,
+.astral-btn:focus-visible .astral-spark--a {
+  animation: spark-burst-a 1.6s var(--ease-settle) infinite;
+}
+
+.astral-btn:hover .astral-spark--b,
+.astral-btn:focus-visible .astral-spark--b {
+  animation: spark-burst-b 1.6s 0.25s var(--ease-settle) infinite;
+}
+
+.astral-btn:hover .astral-spark--c,
+.astral-btn:focus-visible .astral-spark--c {
+  animation: spark-burst-c 1.6s 0.5s var(--ease-settle) infinite;
+}
+
+.astral-btn:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.1s;
+}
+
+.astral-btn:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 4px;
+}
+
+.astral-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+@keyframes comet-orbit {
+  to {
+    --comet: 360deg;
+  }
+}
+
+@keyframes halo-pulse {
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes nebula-pan {
+  to {
+    background-position:
+      0 0,
+      100% 0;
+  }
+}
+
+@keyframes stars-drift {
+  to {
+    background-position: -140px 0;
+  }
+}
+
+@keyframes stars-twinkle {
+  from {
+    filter: brightness(0.8);
+  }
+  to {
+    filter: brightness(1.6);
+  }
+}
+
+@keyframes spark-glint {
+  0%,
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+  90% {
+    opacity: 0;
+    transform: scale(0.3) rotate(90deg);
+  }
+}
+
+@keyframes spark-burst-a {
+  0% {
+    opacity: 0;
+    transform: translate(0, 4px) scale(0) rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(4px, -4px) scale(1.2) rotate(60deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(10px, -14px) scale(0.2) rotate(180deg);
+  }
+}
+
+@keyframes spark-burst-b {
+  0% {
+    opacity: 0;
+    transform: translate(0, -4px) scale(0) rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-3px, 4px) scale(1.1) rotate(-60deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-10px, 12px) scale(0.2) rotate(-180deg);
+  }
+}
+
+@keyframes spark-burst-c {
+  0% {
+    opacity: 0;
+    transform: translate(4px, 0) scale(0) rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-4px, -2px) scale(1) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-14px, -6px) scale(0.2) rotate(160deg);
+  }
+}
+
+/* ── Reduced motion: everything rests in place ────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .veil {
+    display: none;
+  }
+
+  .drip-c,
+  .drip[data-play] .drip-c,
+  .rise-in,
+  .bloom-in,
+  .page-land {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .section-seam {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  .astral-btn,
+  .astral-btn::before,
+  .astral-nebula,
+  .astral-stars,
+  .astral-spark,
+  .astral-btn:hover .astral-stars,
+  .astral-btn:hover .astral-spark,
+  .atmo-fog,
+  .rail-dot,
+  .rail-wave path,
+  .rail-capsule-text {
+    animation: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

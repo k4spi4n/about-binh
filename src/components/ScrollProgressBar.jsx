@@ -23,6 +23,11 @@ export const ScrollProgressBar = () => {
         Math.max(0, scrollTop / scrollableHeight),
       );
 
+      // Shared with the atmosphere fog and the side rail probe.
+      document.documentElement.style.setProperty(
+        "--scroll-p",
+        nextProgress.toFixed(4),
+      );
       setProgress(nextProgress);
     };
 
@@ -71,23 +76,28 @@ export const ScrollProgressBar = () => {
     };
   }, []);
 
+  // A hairline with a glowing comet head riding at the current position.
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-1"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-px"
       aria-hidden="true"
     >
       <div
-        className={`absolute inset-0 bg-border/60 transition-opacity duration-300 ${
-          isIdle ? "opacity-60" : "opacity-100"
+        className={`absolute inset-0 bg-border/50 transition-opacity duration-500 ${
+          isIdle ? "opacity-40" : "opacity-100"
         }`}
       />
       <div
-        className={`h-full origin-left rounded-r-full bg-gradient-to-r from-primary via-fuchsia-500 to-violet-400 shadow-[0_0_12px_rgba(139,92,246,0.45)] transition-[transform,opacity,filter] duration-300 ease-out ${
-          isIdle
-            ? "opacity-45 blur-[0.4px] saturate-75"
-            : "opacity-95 blur-0 saturate-95"
+        className={`hairline-fill transition-opacity duration-500 ${
+          isIdle ? "opacity-50" : "opacity-100"
         }`}
         style={{ transform: `scaleX(${progress})` }}
+      />
+      <i
+        className={`hairline-head transition-opacity duration-500 ${
+          isIdle || progress === 0 ? "opacity-0" : "opacity-100"
+        }`}
+        style={{ left: `${progress * 100}%` }}
       />
     </div>
   );

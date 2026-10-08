@@ -2,19 +2,16 @@ import { cn } from "@/lib/utils";
 import { Menu, X, Download } from "lucide-react";
 import { Github } from "./BrandIcons";
 import { useEffect, useState, useRef } from "react";
-import { useLoading } from "../contexts/LoadingContext";
 import { CVDownloadModal } from "./CVDownloadModal";
+import { navItems } from "../data/navigation";
+import { useActiveSection } from "../hooks/useActiveSection";
+import { AstralButton } from "./motion/AstralButton";
+
+const sectionIds = navItems.map((item) => item.href.slice(1));
 
 const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026-VI.pdf`;
 const githubUrl = "https://github.com/k4spi4n";
 
-const navItems = [
-  { name: "Trang chủ", href: "#hero" },
-  { name: "Thông tin cá nhân", href: "#about" },
-  { name: "Kỹ năng", href: "#skills" },
-  { name: "Dự án", href: "#projects" },
-  { name: "Liên hệ", href: "#contact" },
-];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,7 +19,7 @@ export const Navbar = () => {
   const [shouldShowNav, setShouldShowNav] = useState(true);
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
   const lastYPos = useRef(0);
-  const { triggerLoading } = useLoading();
+  const activeSection = useActiveSection(sectionIds);
 
   const handleDownload = (e) => {
     e.preventDefault();
@@ -81,30 +78,33 @@ export const Navbar = () => {
             <a
               key={key}
               href={item.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              className={cn(
+                "nav-link text-foreground/80 hover:text-primary transition-colors duration-300",
+                item.href === `#${activeSection}` && "is-active text-primary",
+              )}
             >
               {item.name}
             </a>
           ))}
           <div className="flex items-center gap-4">
-            <a
+            <AstralButton
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="animated-gradient-border flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-primary-glow text-sm font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+              className="flex items-center gap-1.5 px-4 py-2 text-sm"
               aria-label="GitHub Profile"
             >
               <Github className="w-5 h-5" />
               <span className="text-sm font-medium">@k4spi4n</span>
-            </a>
-            <a
+            </AstralButton>
+            <AstralButton
               href={cvUrl}
               onClick={handleDownload}
-              className="animated-gradient-border flex items-center gap-1.5 px-4 py-2 rounded-full text-primary text-primary-glow text-sm font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2 text-sm"
             >
               <Download className="w-5 h-5" />
               Tải xuống CV
-            </a>
+            </AstralButton>
           </div>
         </div>
 
@@ -139,24 +139,24 @@ export const Navbar = () => {
               </a>
             ))}
             <div className="flex flex-col items-center gap-6 mt-6">
-              <a
+              <AstralButton
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="animated-gradient-border flex items-center gap-2 px-6 py-3 rounded-full text-primary text-primary-glow text-lg font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+                className="flex items-center gap-2 px-6 py-3 text-lg"
                 aria-label="GitHub Profile"
               >
                 <Github className="w-7 h-7" />
                 <span className="text-base font-medium">@k4spi4n</span>
-              </a>
-              <a
+              </AstralButton>
+              <AstralButton
                 href={cvUrl}
                 onClick={handleDownload}
-                className="animated-gradient-border flex items-center gap-2 px-6 py-3 rounded-full text-primary text-primary-glow text-lg font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
+                className="flex items-center gap-2 px-6 py-3 text-lg"
               >
                 <Download className="w-6 h-6" />
                 Tải xuống CV
-              </a>
+              </AstralButton>
             </div>
           </div>
         </div>

@@ -2,22 +2,25 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { Github } from "./BrandIcons";
 import "./Timeline.css";
 import { projects } from "../data/projects";
+import { Reveal } from "./motion/Reveal";
+import { SectionTitle } from "./motion/SectionTitle";
+import { AstralButton } from "./motion/AstralButton";
 
 export const ProjectsSection = () => {
   return (
     <section id="projects" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          {" "}
-          Những Dự Án
-          <span className="text-primary text-primary-glow"> Nổi Bật </span>
-        </h2>
+        <SectionTitle lead="Những Dự Án" accent="Nổi Bật" className="mb-6" />
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <Reveal
+          as="p"
+          delay={0.3}
+          className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto"
+        >
           Dưới đây là những dự án tiêu biểu tôi đã trực tiếp tham gia phát
           triển. Mỗi sản phẩm đều được đầu tư vào kiến trúc, hiệu năng và trải
           nghiệm người dùng nhằm đảm bảo chất lượng triển khai thực tế.
-        </p>
+        </Reveal>
 
         <div className="timeline">
           {projects.map((project, index) => (
@@ -28,6 +31,7 @@ export const ProjectsSection = () => {
               <div className="timeline-year text-primary text-primary-glow font-bold">
                 {project.year}
               </div>
+              <Reveal>
               <div className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover">
                 <div className="h-48 overflow-hidden">
                   {project.image.endsWith(".mp4") ? (
@@ -100,18 +104,19 @@ export const ProjectsSection = () => {
                   </div>
                 </div>
               </div>
+              </Reveal>
             </div>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <a
-            className="animated-gradient-border w-fit flex items-center mx-auto gap-2 px-6 py-2 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+          <AstralButton
+            className="w-fit flex items-center mx-auto gap-2 px-6 py-2"
             target="_blank"
             href="https://github.com/k4spi4n"
           >
             Xem thêm dự án trên GitHub <ArrowRight size={16} />
-          </a>
+          </AstralButton>
         </div>
       </div>
     </section>

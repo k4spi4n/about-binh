@@ -11,9 +11,11 @@ import {
   Twitter,
   Github,
 } from "./BrandIcons";
-import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { Reveal } from "./motion/Reveal";
+import { SectionTitle } from "./motion/SectionTitle";
+import { AstralButton } from "./motion/AstralButton";
 
 export const ContactSection = () => {
   const { toast } = useToast();
@@ -35,19 +37,20 @@ export const ContactSection = () => {
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Sẵn Sàng{" "}
-          <span className="text-primary text-primary-glow"> Hợp Tác</span>
-        </h2>
+        <SectionTitle lead="Sẵn Sàng" accent="Hợp Tác" className="mb-6" />
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <Reveal
+          as="p"
+          delay={0.3}
+          className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto"
+        >
           Cảm ơn bạn đã dành thời gian theo dõi hồ sơ của tôi. Nếu bạn đang tìm
           kiếm cộng sự cho dự án công nghệ hoặc có cơ hội hợp tác phù hợp, tôi
           luôn sẵn sàng trao đổi.
-        </p>
+        </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
+          <Reveal className="space-y-8" delay={0.15}>
             <h3 className="text-2xl font-semibold mb-6"> Thông tin liên hệ</h3>
 
             <div className="space-y-6 justify-center">
@@ -119,9 +122,10 @@ export const ContactSection = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <div
+          <Reveal
+            delay={0.3}
             className="bg-card p-8 rounded-lg shadow-xs"
             onSubmit={handleSubmit}
           >
@@ -184,18 +188,17 @@ export const ContactSection = () => {
                 />
               </div>
 
-              <button
+              <AstralButton
+                as="button"
                 type="submit"
                 disabled={isSubmitting}
-                className={cn(
-                  "animated-gradient-border w-full flex items-center justify-center gap-2 px-6 py-2 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent",
-                )}
+                className="w-full gap-2 px-6 py-2"
               >
                 {isSubmitting ? "Đang gửi..." : "Gửi tin nhắn"}
                 <Send size={16} />
-              </button>
+              </AstralButton>
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

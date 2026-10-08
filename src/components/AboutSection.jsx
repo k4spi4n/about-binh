@@ -1,13 +1,31 @@
 import { Code, Gamepad2, PencilRuler } from "lucide-react";
 import { useState } from "react";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { useLoading } from "../contexts/LoadingContext";
 import { CVDownloadModal } from "./CVDownloadModal";
+import { Reveal } from "./motion/Reveal";
+import { SectionTitle } from "./motion/SectionTitle";
+import { AstralButton } from "./motion/AstralButton";
 
 const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026-VI.pdf`;
 
+const focusAreas = [
+  {
+    icon: Code,
+    title: "Phát triển Web",
+    text: "Xây dựng website và ứng dụng web hiện đại, chú trọng hiệu năng, tính ổn định và khả năng mở rộng.",
+  },
+  {
+    icon: PencilRuler,
+    title: "Thiết kế UI/UX",
+    text: "Thiết kế giao diện trực quan và tổ chức luồng trải nghiệm người dùng liền mạch, dễ tiếp cận.",
+  },
+  {
+    icon: Gamepad2,
+    title: "Phát triển Game",
+    text: "Phát triển gameplay, cơ chế vận hành và nội dung tương tác, chuyển hóa ý tưởng thành trải nghiệm có chiều sâu.",
+  },
+];
+
 export const AboutSection = () => {
-  const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
 
   const handleDownload = (e) => {
@@ -17,23 +35,11 @@ export const AboutSection = () => {
 
   return (
     <section id="about" className="py-24 px-4 relative">
-      <div ref={ref} className="container mx-auto max-w-5xl">
-        <h2
-          className={`text-3xl md:text-4xl font-bold mb-12 text-center ${
-            isIntersecting ? "animate-scroll-fade-in" : "opacity-0"
-          }`}
-        >
-          Giới Thiệu
-          <span className="text-primary text-primary-glow"> Bản Thân</span>
-        </h2>
+      <div className="container mx-auto max-w-5xl">
+        <SectionTitle lead="Giới Thiệu" accent="Bản Thân" className="mb-12" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div
-            className={`space-y-6 ${
-              isIntersecting ? "animate-scroll-fade-in" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.2s" }}
-          >
+          <Reveal className="space-y-6" delay={0.15}>
             <h3 className="text-2xl font-semibold">
               Định Hướng Full-stack & AI Engineer
             </h3>
@@ -54,81 +60,38 @@ export const AboutSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a
+              <AstralButton
                 href="#contact"
-                className="animated-gradient-border px-6 py-2 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent"
+                className="px-6 py-2"
               >
                 Thông tin liên hệ
-              </a>
-              <a
+              </AstralButton>
+              <AstralButton
                 href={cvUrl}
                 onClick={handleDownload}
-                className="animated-gradient-border px-6 py-2 rounded-full text-primary text-primary-glow font-semibold transition-all duration-300 hover:text-primary-foreground hover:bg-gradient-to-r hover:from-primary hover:to-fuchsia-500 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] hover:border-transparent cursor-pointer"
+                className="px-6 py-2"
               >
                 Tải xuống CV
-              </a>
+              </AstralButton>
             </div>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 gap-6">
-            <div
-              className={`gradient-border p-6 card-hover ${
-                isIntersecting ? "animate-scroll-fade-in" : "opacity-0"
-              }`}
-              style={{ animationDelay: "0.4s" }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Code className="h-6 w-6 text-primary" />
+            {focusAreas.map(({ icon: Icon, title, text }, i) => (
+              <Reveal key={title} delay={0.25 + i * 0.15}>
+                <div className="gradient-border p-6 card-hover">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-full bg-primary/10">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="text-left">
+                      <h4 className="font-semibold text-lg">{title}</h4>
+                      <p className="text-muted-foreground">{text}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg"> Phát triển Web</h4>
-                  <p className="text-muted-foreground">
-                    Xây dựng website và ứng dụng web hiện đại, chú trọng hiệu
-                    năng, tính ổn định và khả năng mở rộng.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div
-              className={`gradient-border p-6 card-hover ${
-                isIntersecting ? "animate-scroll-fade-in" : "opacity-0"
-              }`}
-              style={{ animationDelay: "0.6s" }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <PencilRuler className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Thiết kế UI/UX</h4>
-                  <p className="text-muted-foreground">
-                    Thiết kế giao diện trực quan và tổ chức luồng trải nghiệm
-                    người dùng liền mạch, dễ tiếp cận.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div
-              className={`gradient-border p-6 card-hover ${
-                isIntersecting ? "animate-scroll-fade-in" : "opacity-0"
-              }`}
-              style={{ animationDelay: "0.8s" }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Gamepad2 className="h-6 w-6 text-primary" />
-                </div>
-
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Phát triển Game</h4>
-                  <p className="text-muted-foreground">
-                    Phát triển gameplay, cơ chế vận hành và nội dung tương tác,
-                    chuyển hóa ý tưởng thành trải nghiệm có chiều sâu.
-                  </p>
-                </div>
-              </div>
-            </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>

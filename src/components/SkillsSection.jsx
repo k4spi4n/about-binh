@@ -4,6 +4,8 @@ import { X, Eye, FileText } from "lucide-react";
 import { useLoading } from "../contexts/LoadingContext";
 import { SkillRadar } from "./SkillRadar";
 import { skills } from "../data/skills";
+import { Reveal } from "./motion/Reveal";
+import { SectionTitle } from "./motion/SectionTitle";
 
 export const SkillsSection = () => {
   const [selectedPdf, setSelectedPdf] = useState(null);
@@ -45,9 +47,7 @@ export const SkillsSection = () => {
   return (
     <section id="skills" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Hồ Sơ <span className="text-primary text-primary-glow"> Kỹ Năng</span>
-        </h2>
+        <SectionTitle lead="Hồ Sơ" accent="Kỹ Năng" className="mb-12" />
 
         {/* Education Section */}
         <div className="mb-16">
@@ -56,8 +56,8 @@ export const SkillsSection = () => {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {educationSkills.map((skill, key) => (
+              <Reveal key={key} delay={(key % 3) * 0.12}>
               <div
-                key={key}
                 onClick={() => handleSkillClick(skill)}
                 className={cn(
                   "bg-card p-6 rounded-lg shadow-xs card-hover relative group overflow-hidden transition-all duration-300",
@@ -92,6 +92,7 @@ export const SkillsSection = () => {
                   </div>
                 )}
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -101,7 +102,9 @@ export const SkillsSection = () => {
           <h3 className="text-2xl font-semibold mb-8 text-center md:text-left flex items-center justify-center md:justify-start gap-3">
             Tech Stack
           </h3>
-          <SkillRadar skills={technicalSkills} />
+          <Reveal>
+            <SkillRadar skills={technicalSkills} />
+          </Reveal>
         </div>
       </div>
 
