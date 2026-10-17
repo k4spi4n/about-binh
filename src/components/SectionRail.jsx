@@ -8,13 +8,19 @@ const ids = navItems.map((item) => item.href.slice(1));
  * Desktop-only vertical rail on the right edge: a probe glides down the track
  * with scroll progress and carries a capsule naming the current section,
  * next to a little signal trace. Ticks along the track jump to each section.
+ * It only shows while the visitor is actively scrolling (see useQuietChrome).
  */
 export const SectionRail = () => {
   const active = useActiveSection(ids);
   const activeItem = navItems.find((item) => item.href === `#${active}`);
 
   return (
-    <aside className="rail hidden lg:block" aria-label="Điều hướng nhanh">
+    // On the hero there's nothing to track yet, so the rail stays tucked away
+    // (hovering the right edge still brings it back).
+    <aside
+      className={cn("rail hidden lg:block", active === "hero" && "is-home")}
+      aria-label="Điều hướng nhanh"
+    >
       <div className="rail-track">
         {navItems.map((item, i) => (
           <a

@@ -12,9 +12,11 @@ import { ScrollProgressBar } from "../components/ScrollProgressBar";
 import { Atmosphere } from "../components/Atmosphere";
 import { SectionRail } from "../components/SectionRail";
 import { installAfterimageLinks } from "../lib/afterimage";
+import { useQuietChrome } from "../hooks/useQuietChrome";
 
 export const Home = () => {
   useEffect(() => installAfterimageLinks(), []);
+  useQuietChrome();
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">

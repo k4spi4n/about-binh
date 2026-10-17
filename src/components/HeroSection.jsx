@@ -151,7 +151,7 @@ export const HeroSection = () => {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 rise-in"
         style={{ "--rise-delay": "2s" }}
       >
-        <div className="flex flex-col items-center animate-bounce">
+        <div className="scroll-hint flex flex-col items-center animate-bounce">
           <span className="text-sm text-muted-foreground mb-2">
             {" "}
             Cuộn xuống để khám phá thêm{" "}

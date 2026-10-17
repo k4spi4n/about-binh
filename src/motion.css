@@ -1005,6 +1005,71 @@
   }
 }
 
+/* ── Quiet chrome ──────────────────────────────────────────────────
+   Navigation indicators speak up only while the visitor is moving through
+   the page (html[data-idle], set by useQuietChrome) and step back when they
+   stop to read. Each piece of information is shown once:
+   · the right rail is the detailed tracker: visible only while scrolling
+     and away from the hero, or when its edge is hovered;
+   · the top hairline is the quiet one: it stays as a faint line, and its
+     comet head only appears on small screens, where there is no rail. */
+
+.rail {
+  transition:
+    opacity 0.6s var(--ease-settle),
+    translate 0.6s var(--ease-settle);
+}
+
+/* The rail itself is a 1px line, far too thin to find by hover; this
+   invisible strip out to the window edge is what :hover catches. */
+.rail::before {
+  content: "";
+  position: absolute;
+  inset: -2rem -1.75rem -2rem -3rem;
+}
+
+:root[data-idle="true"] .rail:not(:hover),
+.rail.is-home:not(:hover) {
+  opacity: 0;
+  translate: 14px 0;
+}
+
+/* Hidden rail: no point animating what nobody can see */
+:root[data-idle="true"] .rail:not(:hover) *,
+.rail.is-home:not(:hover) * {
+  animation-play-state: paused;
+}
+
+.hairline-fill,
+.hairline-head {
+  transition: opacity 0.8s var(--ease-settle);
+}
+
+:root[data-idle="true"] .hairline-fill {
+  opacity: 0.35;
+}
+
+:root[data-idle="true"] .hairline-head {
+  opacity: 0;
+}
+
+@media (width >= 1024px) {
+  .hairline-head {
+    display: none;
+  }
+}
+
+/* The "scroll down" hint has done its job once the visitor scrolls */
+.scroll-hint {
+  transition: opacity 0.6s var(--ease-settle);
+}
+
+:root[data-scrolled="true"] .scroll-hint {
+  opacity: 0;
+  animation-play-state: paused;
+  pointer-events: none;
+}
+
 /* ── Reduced motion: everything rests in place ────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
