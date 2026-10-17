@@ -4,5 +4,6 @@ export const navItems = [
   { name: "Thông tin cá nhân", short: "Bản thân", href: "#about" },
   { name: "Kỹ năng", short: "Kỹ năng", href: "#skills" },
   { name: "Dự án", short: "Dự án", href: "#projects" },
+  { name: "Thành tích", short: "Thành tích", href: "#achievements" },
   { name: "Liên hệ", short: "Liên hệ", href: "#contact" },
 ];
