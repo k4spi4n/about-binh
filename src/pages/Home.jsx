@@ -33,8 +33,8 @@ export const Home = () => {
         <HeroSection />
         <AboutSection />
         <SkillsSection />
-        <ProjectsSection />
         <AchievementsSection />
+        <ProjectsSection />
         <ContactSection />
       </main>
 

@@ -3,7 +3,7 @@ export const navItems = [
   { name: "Trang chủ", short: "Khởi đầu", href: "#hero" },
   { name: "Thông tin cá nhân", short: "Bản thân", href: "#about" },
   { name: "Kỹ năng", short: "Kỹ năng", href: "#skills" },
-  { name: "Dự án", short: "Dự án", href: "#projects" },
   { name: "Thành tích", short: "Thành tích", href: "#achievements" },
+  { name: "Dự án", short: "Dự án", href: "#projects" },
   { name: "Liên hệ", short: "Liên hệ", href: "#contact" },
 ];

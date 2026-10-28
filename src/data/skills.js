@@ -21,23 +21,6 @@ export const skills = [
     category: "Học vấn",
   },
 
-  {
-    name: "Chứng chỉ AI của Samsung Innovation Campus (SIC)",
-    institution:
-      "Hoàn thành chương trình đào tạo chuyên sâu về Trí tuệ nhân tạo do Samsung Electronics Việt Nam xác nhận",
-    year: "(2025)",
-    category: "Học vấn",
-    file: "cert_SAMSUNG_AI.pdf",
-  },
-
-  {
-    name: "Chứng chỉ Deep Learning của NVIDIA DLI",
-    institution:
-      "Hoàn thành khóa đào tạo về Neural Networks, Data Augmentation và tối ưu hóa mô hình từ NVIDIA Deep Learning Institute",
-    year: "(2025)",
-    category: "Học vấn",
-    file: "cert_NVIDIA-DLI_DL.pdf",
-  },
 
   {
     name: "Học sinh khối chuyên Ngữ",

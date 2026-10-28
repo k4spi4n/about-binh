@@ -1,111 +1,101 @@
-import { Trophy } from "lucide-react";
-import { cscv2026 } from "../data/achievements";
+import { useCallback, useState } from "react";
+import { cn } from "@/lib/utils";
+import { Eye, FileText, Trophy, ExternalLink } from "lucide-react";
+import { useLoading } from "../contexts/LoadingContext";
+import { achievements } from "../data/achievements";
 import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
+import { PdfViewerModal } from "./PdfViewerModal";
 
-const imageUrl = `${import.meta.env.BASE_URL}${cscv2026.image}`;
+const publicUrl = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 export const AchievementsSection = () => {
+  const [selected, setSelected] = useState(null);
+  const { triggerLoading } = useLoading();
+
+  const handleClick = (item) => {
+    triggerLoading(() => {
+      setSelected(item);
+    });
+  };
+
+  // Stable so the modal's Escape listener isn't re-bound on every render
+  const closeModal = useCallback(() => setSelected(null), []);
+
   return (
     <section id="achievements" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <SectionTitle lead="Thành Tích" accent="Thi Đấu" className="mb-6" />
+      <div className="container mx-auto max-w-6xl">
+        <SectionTitle lead="Thành Tích &" accent="Chứng Chỉ" className="mb-12" />
 
-        <Reveal
-          as="p"
-          delay={0.3}
-          className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto"
-        >
-          CSCV 2026 là cuộc thi an ninh mạng theo thể thức Capture The Flag,
-          nơi các đội giải các thử thách về khai thác lỗ hổng, dịch ngược, mật
-          mã và điều tra số trong thời gian giới hạn.
-        </Reveal>
-
-        <div className="space-y-8">
-          <Reveal delay={0.15}>
-            <a
-              href={imageUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block bg-card rounded-lg overflow-hidden shadow-xs card-hover"
-            >
-              <img
-                src={imageUrl}
-                alt="Bảng xếp hạng vòng chung kết CSCV 2026, đội CMC.CBS xếp hạng 10"
-                loading="lazy"
-                width="1917"
-                height="777"
-                className="w-full h-auto"
-              />
-            </a>
-            <p className="text-xs text-muted-foreground text-center mt-3">
-              Bảng xếp hạng chung kết bảng B — CMC.CBS xếp hạng 10
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.25}>
-            <div className="gradient-border p-6 text-left grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-              <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 rounded-full bg-primary/10 shrink-0">
-                    <Trophy className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">{cscv2026.title}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {cscv2026.team}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {achievements.map((item, key) => (
+            <Reveal key={item.file} delay={(key % 3) * 0.12} className="h-full">
+              <div
+                onClick={() => handleClick(item)}
+                className={cn(
+                  "bg-card p-6 rounded-lg shadow-xs card-hover relative group overflow-hidden cursor-pointer h-full",
+                  item.award && "ring-1 ring-primary/40",
+                )}
+              >
+                <div className="transition-transform duration-300 h-full flex flex-col justify-between group-hover:-translate-y-4">
+                  <div className="text-left mb-4">
+                    <h3 className="font-semibold text-lg flex items-center gap-2">
+                      {item.award && (
+                        <Trophy className="w-4 h-4 text-primary shrink-0" />
+                      )}
+                      {item.name}
+                      {!item.award && (
+                        <FileText className="w-4 h-4 text-primary shrink-0" />
+                      )}
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      {item.institution} {item.year}
                     </p>
                   </div>
-                </div>
 
-                <dl className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-2 gap-4">
-                  {cscv2026.stats.map((stat, i) => (
-                    <div key={stat.label}>
-                      <dt className="sr-only">{stat.label}</dt>
-                      <dd
-                        className={
-                          i === 0
-                            ? "text-2xl font-bold text-primary text-primary-glow"
-                            : "text-2xl font-bold"
-                        }
-                      >
-                        {stat.value}
-                      </dd>
-                      <dd className="text-sm text-muted-foreground">
-                        {stat.label}
-                      </dd>
+                  {(item.highlights || item.link) && (
+                    <div className="flex flex-wrap items-center gap-2 text-left">
+                      {item.highlights?.map((h) => (
+                        <span
+                          key={h}
+                          className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground"
+                        >
+                          {h}
+                        </span>
+                      ))}
+                      {item.link && (
+                        <a
+                          href={publicUrl(item.link.href)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                        >
+                          {item.link.label}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
                     </div>
-                  ))}
-                </dl>
-              </div>
+                  )}
+                </div>
 
-              <div className="md:border-l md:border-border md:pl-10 flex flex-col justify-center">
-                <ul className="space-y-2 mb-6">
-                  {cscv2026.milestones.map((m) => (
-                    <li key={m.date} className="flex gap-3 text-sm">
-                      <span className="text-primary font-medium shrink-0">
-                        {m.date}
-                      </span>
-                      <span className="text-muted-foreground">{m.text}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="flex flex-wrap gap-2">
-                  {cscv2026.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div className="absolute bottom-0 left-0 w-full p-2 bg-primary flex items-center justify-center gap-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <Eye className="w-4 h-4 text-primary-foreground" />
+                  <span className="text-primary-foreground text-xs font-bold uppercase tracking-wider">
+                    Xem {item.fileLabel.toLowerCase()}
+                  </span>
                 </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          ))}
         </div>
       </div>
+
+      <PdfViewerModal
+        title={selected ? `${selected.fileLabel}: ${selected.name}` : undefined}
+        url={selected ? publicUrl(selected.file) : undefined}
+        onClose={closeModal}
+      />
     </section>
   );
 };

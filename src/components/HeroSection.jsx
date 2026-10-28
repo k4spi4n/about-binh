@@ -13,7 +13,7 @@ export const HeroSection = () => {
   const baseUrl = import.meta.env.BASE_URL.endsWith("/")
     ? import.meta.env.BASE_URL.slice(0, -1)
     : import.meta.env.BASE_URL;
-  const avatarUrl = `${baseUrl}/documents/avatar.png`;
+  const avatarUrl = `${baseUrl}/documents/avatar.webp`;
 
   // As the hero scrolls away it recedes: lifts, shrinks slightly and goes
   // out of focus, so the next section feels like a new scene arriving.
@@ -118,7 +118,7 @@ export const HeroSection = () => {
           </p>
 
           <p
-            className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto rise-in"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto rise-in"
             style={{ "--rise-delay": "1.3s" }}
           >
             Sinh viên Kỹ thuật Phần mềm tại Đại học CMC, theo đuổi lộ trình
@@ -151,7 +151,7 @@ export const HeroSection = () => {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 rise-in"
         style={{ "--rise-delay": "2s" }}
       >
-        <div className="scroll-hint flex flex-col items-center animate-bounce">
+        <div className="scroll-hint flex flex-col items-center motion-safe:animate-bounce">
           <span className="text-sm text-muted-foreground mb-2">
             {" "}
             Cuộn xuống để khám phá thêm{" "}
