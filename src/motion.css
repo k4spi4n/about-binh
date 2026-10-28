@@ -18,7 +18,7 @@
 }
 
 /* While the veil is up nothing underneath should be scrollable. The lock sits
-   on <html> because SkillsSection writes an inline overflow on <body>, which
+   on <html> because PdfViewerModal writes an inline overflow on <body>, which
    would override any stylesheet rule there. The gutter is reserved so the
    page doesn't shift sideways when the scrollbar returns. */
 :root {
@@ -613,16 +613,25 @@
   animation: atmo-drift-a 38s ease-in-out infinite alternate;
 }
 
-.atmo-fog--b {
+/* The far fog turns from fuchsia to cyan as you scroll. Two fixed-colour
+   layers crossfade rather than one layer changing hue: opacity is composited,
+   while a new background colour would repaint (and re-blur) a 70vmax layer
+   on every scroll frame. */
+.atmo-fog--b,
+.atmo-fog--c {
   right: -30vmax;
   bottom: -25vmax;
-  background: radial-gradient(
-    circle,
-    hsl(calc(292 - var(--scroll-p) * 105) 84% 61%),
-    transparent 65%
-  );
-  opacity: calc(0.12 + var(--scroll-p) * 0.14);
   animation: atmo-drift-b 46s ease-in-out infinite alternate;
+}
+
+.atmo-fog--b {
+  background: radial-gradient(circle, hsl(292 84% 61%), transparent 65%);
+  opacity: calc((0.12 + var(--scroll-p) * 0.14) * (1 - var(--scroll-p)));
+}
+
+.atmo-fog--c {
+  background: radial-gradient(circle, hsl(187 84% 61%), transparent 65%);
+  opacity: calc((0.12 + var(--scroll-p) * 0.14) * var(--scroll-p));
 }
 
 /* A low glow on the horizon that brightens as you reach the end */
@@ -1070,6 +1079,172 @@
   pointer-events: none;
 }
 
+/* ── Mobile menu ───────────────────────────────────────────────────── */
+
+/* Links condense in one after another as the overlay opens */
+.menu-item {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(6px);
+  transition:
+    opacity 0.5s var(--ease-settle),
+    transform 0.6s var(--ease-settle),
+    filter 0.5s var(--ease-settle);
+}
+
+.menu-open .menu-item {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition-delay: calc(0.06s + var(--i) * 0.05s);
+}
+
+/* ── Toasts ────────────────────────────────────────────────────────── */
+
+.toast[data-state="open"] {
+  animation: toast-in 0.6s var(--ease-settle) both;
+}
+
+.toast[data-state="closed"],
+.toast[data-swipe="end"] {
+  animation: toast-out 0.3s var(--ease-glide) both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+    filter: blur(6px);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(var(--radix-toast-swipe-end-x, 24px));
+  }
+}
+
+/* ── Loading screen ────────────────────────────────────────────────── */
+
+.loading-grid {
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.35) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
+  mask-image: linear-gradient(180deg, #fff, transparent);
+}
+
+/* ── Meteor shower ─────────────────────────────────────────────────
+   Each meteor is a tapered streak anchored at its head (the left end),
+   rotated toward a shared radiant and flown along its own axis. Four
+   animations share --dur and --delay so they stay in lockstep:
+   · meteor-fall  the flight itself: quick entry, easing out as it burns up;
+   · meteor-fade  bright through most of the flight, gone at the end;
+   · meteor-tail  the streak stretches out on entry and shortens as it dies;
+   · meteor-flare the head swells into a last flash before vanishing.
+   Only transform and opacity move, so every frame stays on the compositor.
+   StarBackground respawns a meteor elsewhere when meteor-fall ends. */
+
+.meteor {
+  position: absolute;
+  width: var(--len);
+  height: var(--thick);
+  rotate: var(--angle);
+  transform-origin: 0 50%;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation:
+    meteor-fall var(--dur) var(--delay) cubic-bezier(0.3, 0.4, 0.2, 1) both,
+    meteor-fade var(--dur) var(--delay) linear both;
+}
+
+/* Tail: white-hot behind the head, cooling into the meteor's hue */
+.meteor::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 50%;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  background: linear-gradient(
+    90deg,
+    hsl(0 0% 100% / 0.95),
+    hsl(var(--hue) 95% 85% / 0.7) 10%,
+    hsl(var(--hue) 85% 66% / 0.28) 45%,
+    transparent
+  );
+  animation: meteor-tail var(--dur) var(--delay) cubic-bezier(0.3, 0.4, 0.2, 1)
+    both;
+}
+
+/* Head: a small white core with a coloured glow */
+.meteor::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 50%;
+  width: calc(var(--thick) * 2.4);
+  height: calc(var(--thick) * 2.4);
+  translate: -50% -50%;
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow:
+    0 0 6px 1px hsl(var(--hue) 100% 88% / 0.9),
+    0 0 18px 5px hsl(var(--hue) 90% 66% / 0.4);
+  animation: meteor-flare var(--dur) var(--delay) linear both;
+}
+
+@keyframes meteor-fall {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(var(--dist) * -1));
+  }
+}
+
+@keyframes meteor-fade {
+  0% {
+    opacity: 0;
+  }
+  10%,
+  62% {
+    opacity: var(--peak);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes meteor-tail {
+  0% {
+    transform: scaleX(0.08);
+  }
+  40% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0.45);
+  }
+}
+
+@keyframes meteor-flare {
+  0% {
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1);
+  }
+  78% {
+    transform: scale(1.7);
+  }
+  100% {
+    transform: scale(0.3);
+  }
+}
+
 /* ── Reduced motion: everything rests in place ────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1106,6 +1281,7 @@
   .astral-btn:hover .astral-stars,
   .astral-btn:hover .astral-spark,
   .atmo-fog,
+  .star,
   .rail-dot,
   .rail-wave path,
   .rail-capsule-text {
@@ -1115,5 +1291,23 @@
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none;
+  }
+
+  /* Meteors are pure decoration in motion; at rest there is nothing to show */
+  .meteor {
+    display: none;
+  }
+
+  .loading-screen *,
+  .toast {
+    animation: none !important;
+  }
+
+  .menu-item,
+  .menu-open .menu-item {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }

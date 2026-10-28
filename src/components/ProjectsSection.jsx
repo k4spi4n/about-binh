@@ -1,4 +1,6 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Github } from "./BrandIcons";
 import "./Timeline.css";
 import { projects } from "../data/projects";
@@ -6,7 +8,47 @@ import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
 import { AstralButton } from "./motion/AstralButton";
 
+// Loops only while on screen, so off-screen clips don't keep decoding, and
+// stays on its first frame for visitors who prefer reduced motion.
+const AutoplayVideo = (props) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return undefined;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return undefined;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video ref={ref} loop muted playsInline preload="metadata" {...props} />
+  );
+};
+
 export const ProjectsSection = () => {
+  // A beam of light runs down the timeline as you read it, landing on each
+  // project about when its card arrives.
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 75%", "end 75%"],
+  });
+  const beam = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
     <section id="projects" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
@@ -22,7 +64,12 @@ export const ProjectsSection = () => {
           nghiệm người dùng nhằm đảm bảo chất lượng triển khai thực tế.
         </Reveal>
 
-        <div className="timeline">
+        <div className="timeline" ref={timelineRef}>
+          <motion.div
+            className="timeline-beam"
+            style={{ scaleY: beam }}
+            aria-hidden="true"
+          />
           {projects.map((project, index) => (
             <div
               key={project.id}
@@ -35,12 +82,8 @@ export const ProjectsSection = () => {
               <div className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover">
                 <div className="h-48 overflow-hidden">
                   {project.image.endsWith(".mp4") ? (
-                    <video
+                    <AutoplayVideo
                       src={`${import.meta.env.BASE_URL}${project.image}`}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   ) : (

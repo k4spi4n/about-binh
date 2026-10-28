@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X, Download } from "lucide-react";
 import { Github } from "./BrandIcons";
 import { useEffect, useState, useRef } from "react";
+import { createPortal } from "react-dom";
 import { CVDownloadModal } from "./CVDownloadModal";
 import { navItems } from "../data/navigation";
 import { useActiveSection } from "../hooks/useActiveSection";
@@ -11,7 +12,6 @@ const sectionIds = navItems.map((item) => item.href.slice(1));
 
 const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026-VI.pdf`;
 const githubUrl = "https://github.com/k4spi4n";
-
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,19 +47,22 @@ export const Navbar = () => {
       lastYPos.current = currentYPos;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
+    // The bar slides away with a transform rather than animating `top`. Its
+    // transform and backdrop-filter would trap any `fixed` child inside the
+    // bar, so the menu overlay and the CV modal are portalled to <body>.
     <nav
       className={cn(
-        "fixed w-full z-40 transition-all duration-300",
+        "fixed top-0 w-full z-40 transition-[translate,padding,background-color,box-shadow] duration-500 ease-[var(--ease-settle)]",
         isScrolled
           ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"
           : "py-5",
-        shouldShowNav ? "top-0" : "-top-24",
+        !shouldShowNav && !isMenuOpen && "-translate-y-full",
       )}
     >
       <div className="container flex items-center justify-between">
@@ -118,50 +121,68 @@ export const Navbar = () => {
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        <div
-          className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
-            "transition-all duration-300 xl:hidden",
-            isMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none",
-          )}
-        >
-          <div className="flex flex-col space-y-8 text-xl items-center">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
+        {createPortal(
+          <div
+            className={cn(
+              // Below the bar (z-40) so the close button stays on top, above
+              // the side rail (z-35).
+              "fixed inset-0 bg-background/95 backdrop-blur-md z-[38] flex flex-col items-center justify-center",
+              "transition-opacity duration-500 ease-[var(--ease-settle)] xl:hidden",
+              isMenuOpen
+                ? "menu-open opacity-100 pointer-events-auto"
+                : "opacity-0 pointer-events-none",
+            )}
+            aria-hidden={!isMenuOpen}
+          >
+            <div className="flex flex-col space-y-8 text-xl items-center">
+              {navItems.map((item, key) => (
+                <a
+                  key={key}
+                  href={item.href}
+                  className={cn(
+                    "menu-item hover:text-primary",
+                    item.href === `#${activeSection}`
+                      ? "text-primary"
+                      : "text-foreground/80",
+                  )}
+                  style={{ "--i": key }}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ))}
+              <div
+                className="menu-item flex flex-col items-center gap-6 mt-6"
+                style={{ "--i": navItems.length }}
               >
-                {item.name}
-              </a>
-            ))}
-            <div className="flex flex-col items-center gap-6 mt-6">
-              <AstralButton
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 text-lg"
-                aria-label="GitHub Profile"
-              >
-                <Github className="w-7 h-7" />
-                <span className="text-base font-medium">@k4spi4n</span>
-              </AstralButton>
-              <AstralButton
-                href={cvUrl}
-                onClick={handleDownload}
-                className="flex items-center gap-2 px-6 py-3 text-lg"
-              >
-                <Download className="w-6 h-6" />
-                Tải xuống CV
-              </AstralButton>
+                <AstralButton
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-3 text-lg"
+                  aria-label="GitHub Profile"
+                >
+                  <Github className="w-7 h-7" />
+                  <span className="text-base font-medium">@k4spi4n</span>
+                </AstralButton>
+                <AstralButton
+                  href={cvUrl}
+                  onClick={handleDownload}
+                  className="flex items-center gap-2 px-6 py-3 text-lg"
+                >
+                  <Download className="w-6 h-6" />
+                  Tải xuống CV
+                </AstralButton>
+              </div>
             </div>
-          </div>
-        </div>
+          </div>,
+          document.body,
+        )}
       </div>
-      <CVDownloadModal isOpen={isCVModalOpen} onClose={() => setIsCVModalOpen(false)} />
+      <CVDownloadModal
+        isOpen={isCVModalOpen}
+        onClose={() => setIsCVModalOpen(false)}
+      />
     </nav>
   );
 };

@@ -17,6 +17,18 @@ import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
 import { AstralButton } from "./motion/AstralButton";
 
+const socials = [
+  { icon: Github, href: "https://github.com/k4spi4n", label: "GitHub" },
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/binh.thai.60194/",
+    label: "Facebook",
+  },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Twitch, href: "#", label: "Twitch" },
+];
+
 export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -98,28 +110,18 @@ export const ContactSection = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4"> Kết nối với tôi </h4>
               <div className="flex space-x-4 justify-center">
-                <a
-                  href="https://github.com/k4spi4n"
-                  target="_blank"
-                  className="hover:text-primary transition-colors"
-                >
-                  <Github />
-                </a>
-                <a
-                  href="https://www.facebook.com/binh.thai.60194/"
-                  target="_blank"
-                >
-                  <Facebook />
-                </a>
-                <a href="#" target="_blank">
-                  <Twitter />
-                </a>
-                <a href="#" target="_blank">
-                  <Instagram />
-                </a>
-                <a href="#" target="_blank">
-                  <Twitch />
-                </a>
+                {socials.map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="text-foreground/80 hover:text-primary hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 transition-[color,translate] duration-300"
+                  >
+                    <Icon />
+                  </a>
+                ))}
               </div>
             </div>
           </Reveal>
@@ -148,7 +150,7 @@ export const ContactSection = () => {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border bg-background transition-[border-color,box-shadow] duration-300 focus:outline-hidden focus:border-primary/60 focus:ring-2 focus:ring-primary/40"
                   placeholder=""
                 />
               </div>
@@ -166,7 +168,7 @@ export const ContactSection = () => {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border bg-background transition-[border-color,box-shadow] duration-300 focus:outline-hidden focus:border-primary/60 focus:ring-2 focus:ring-primary/40"
                   placeholder=""
                 />
               </div>
@@ -183,7 +185,7 @@ export const ContactSection = () => {
                   id="message"
                   name="message"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
+                  className="w-full px-4 py-3 rounded-md border bg-background transition-[border-color,box-shadow] duration-300 focus:outline-hidden focus:border-primary/60 focus:ring-2 focus:ring-primary/40 resize-none"
                   placeholder="Xin chào, ..."
                 />
               </div>

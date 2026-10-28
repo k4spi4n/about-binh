@@ -1,4 +1,5 @@
 import { X, FileText, Download } from "lucide-react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLoading } from "../contexts/LoadingContext";
 import PropTypes from "prop-types";
@@ -10,7 +11,9 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
     onClose();
     const filename = lang === "vi" ? "CV-2026-VI.pdf" : "CV-2026-EN.pdf";
     const downloadName =
-      lang === "vi" ? "Thai Binh - CV (Vietnamese).pdf" : "Thai Binh - CV (English).pdf";
+      lang === "vi"
+        ? "Thai Binh - CV (Vietnamese).pdf"
+        : "Thai Binh - CV (English).pdf";
     const cvUrl = `${import.meta.env.BASE_URL}documents/${filename}`;
 
     triggerLoading(() => {
@@ -23,7 +26,9 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
     });
   };
 
-  return (
+  // Portalled to <body>: the navbar that opens it has a transform and a
+  // backdrop-filter, either of which would confine a `fixed` child to the bar.
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -75,7 +80,9 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
                     <FileText size={20} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">Tiếng Việt</h4>
+                    <h4 className="font-semibold text-foreground">
+                      Tiếng Việt
+                    </h4>
                     <p className="text-xs text-muted-foreground mt-0.5">
                       Bản tiếng Việt đầy đủ
                     </p>
@@ -112,7 +119,8 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };
 

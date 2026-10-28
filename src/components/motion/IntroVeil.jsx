@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Total length of the opening sequence; must cover the longest animation in
-// the .veil rules in index.css.
+// the .veil rules in motion.css.
 const VEIL_MS = 2300;
 
 const rings = [

@@ -45,12 +45,12 @@ export const LoadingScreen = ({ onComplete, duration = 1000 }) => {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#030014] transition-opacity duration-700",
+        "loading-screen fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#030014] transition-opacity duration-700",
         isExiting ? "opacity-0 pointer-events-none" : "opacity-100",
       )}
     >
       {/* Background Grid Effect */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
+      <div className="loading-grid absolute inset-0 opacity-20"></div>
 
       <div className="relative w-64 h-64 flex items-center justify-center scale-75 md:scale-100">
         {/* Outer Orbit */}

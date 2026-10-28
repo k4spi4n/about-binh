@@ -10,24 +10,8 @@
 
   --color-card: hsl(var(--card));
 
-  --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
-  --animate-fade-in: fade-in 0.7s ease-out forwards;
-  --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
-  --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
-  --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
-  --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
-  --animate-meteor: meteor 5s linear infinite;
 
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
   @keyframes pulse-subtle {
     0%,
     100% {
@@ -35,48 +19,6 @@
     }
     50% {
       opacity: 0.8;
-    }
-  }
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes meteor {
-    0% {
-      transform: rotate(215deg) translateX(0);
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(215deg) translateX(-500px);
-      opacity: 0;
-    }
-  }
-  @keyframes orbit-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes orbit-counter-spin {
-    from {
-      transform: rotate(360deg);
-    }
-    to {
-      transform: rotate(0deg);
     }
   }
 }
@@ -146,35 +88,26 @@
     0 0 30px rgba(167, 139, 250, 0.2);
 }
 
+/* Cards lift toward the viewer and pick up a faint violet glow. A lift
+   instead of a scale keeps text crisp, and the shadow eases with the
+   transform rather than snapping in. Owns `transition`, so don't pair it
+   with a transition-* utility on the same element. */
 @utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
-}
+  transition:
+    transform 0.45s var(--ease-settle),
+    box-shadow 0.45s var(--ease-settle);
 
-@property --border-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 14px 32px -16px hsl(var(--primary) / 0.45),
+      0 0 0 1px hsl(var(--primary) / 0.12);
+  }
 
-@utility animated-gradient-border {
-  border: 1px solid transparent;
-  background-image:
-    linear-gradient(hsl(var(--background)), hsl(var(--background))),
-    conic-gradient(
-      from var(--border-angle),
-      hsl(var(--primary)),
-      #d946ef,
-      #8b5cf6,
-      hsl(var(--primary))
-    );
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  animation: rotate-border 3s linear infinite;
-}
-
-@keyframes rotate-border {
-  to {
-    --border-angle: 360deg;
+  @media (prefers-reduced-motion: reduce) {
+    &:hover {
+      transform: none;
+    }
   }
 }
 
@@ -183,13 +116,6 @@
   background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
   background-clip: padding-box;
   border: 1px solid transparent;
-}
-
-@utility cosmic-button {
-  @apply px-6 py-2 rounded-full font-medium text-primary-foreground 
-         bg-gradient-to-r from-primary to-fuchsia-500 
-         transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)]
-         hover:scale-105 active:scale-95;
 }
 
 @layer components {
@@ -467,40 +393,6 @@
 @utility star {
   @apply absolute rounded-full bg-white;
   box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
-}
-
-@utility meteor {
-  @apply absolute;
-  position: relative;
-  /* Removed overflow: hidden and border-radius: 50% from here */
-  box-shadow: 0 0 -10px 10px rgba(255, 255, 255, 0.3); /* Glow for the head */
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white; /* Solid white for the head */
-    border-radius: 100%; /* Apply border-radius here for the head */
-    z-index: 2;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 5px 0 2px 25px;
-    border-color: transparent transparent transparent rgba(255, 255, 255, 0.3);
-    transform-origin: left center;
-    transform: translateY(-50%) rotate(0deg);
-    z-index: 1;
-  }
 }
 
 #root {
