@@ -1,12 +1,9 @@
 import { X, FileText, Download } from "lucide-react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLoading } from "../contexts/LoadingContext";
 import PropTypes from "prop-types";
 
 export const CVDownloadModal = ({ isOpen, onClose }) => {
-  const { triggerLoading } = useLoading();
-
   const handleDownload = (lang) => {
     onClose();
     const filename = lang === "vi" ? "CV-2026-VI.pdf" : "CV-2026-EN.pdf";
@@ -16,14 +13,12 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
         : "Thai Binh - CV (English).pdf";
     const cvUrl = `${import.meta.env.BASE_URL}documents/${filename}`;
 
-    triggerLoading(() => {
-      const link = document.createElement("a");
-      link.href = cvUrl;
-      link.download = downloadName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+    const link = document.createElement("a");
+    link.href = cvUrl;
+    link.download = downloadName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   // Portalled to <body>: the navbar that opens it has a transform and a

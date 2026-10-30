@@ -14,7 +14,7 @@ export const projects = [
     id: 2,
     title: "DynaTour",
     description:
-      "Giải pháp tour 3D bất động sản từ video điện thoại. Hệ thống tự động biến video quay không gian thành các tour 3D tương tác sống động, giúp khách hàng xem nhà từ xa chân thực, giảm số lần dẫn xem hụt và tăng tốc độ chốt giao dịch.",
+      "Giải pháp tour 3D bất động sản từ video điện thoại. Hệ thống tự động biến video quay không gian thành các tour 3D tương tác sống động, giúp khách hàng xem nhà từ xa chân thực, giảm số lần dẫn xem hụt và tăng tốc độ chốt giao dịch. Đạt Top 10 NEU Startup Olympiad 2026.",
     year: "2026",
     image: "projects/project6.webp",
     tags: ["React", "Three.js", "Computer Vision", "3D Reconstruction"],

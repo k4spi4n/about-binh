@@ -112,12 +112,12 @@ export const SkillRadar = ({ skills }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8 }}
-      className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 my-12 w-full min-h-[500px]"
+      className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 my-12 w-full min-h-[31.25rem]"
     >
       {/* Radar Chart Area */}
       <motion.div
         layout
-        className="relative w-[340px] h-[340px] md:w-[460px] md:h-[460px] flex-shrink-0 z-10"
+        className="relative w-[21.25rem] h-[21.25rem] md:w-[28.75rem] md:h-[28.75rem] flex-shrink-0 z-10"
       >
         <svg
           viewBox={`0 0 ${size} ${size}`}
@@ -382,7 +382,7 @@ export const SkillRadar = ({ skills }) => {
       </motion.div>
 
       {/* Details Panel */}
-      <div className="w-full max-w-md lg:min-h-[380px]">
+      <div className="w-full max-w-md lg:min-h-[23.75rem]">
         <AnimatePresence mode="wait">
           {activeData ? (
             <motion.div

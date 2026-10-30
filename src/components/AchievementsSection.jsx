@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Eye, FileText, Trophy, ExternalLink } from "lucide-react";
-import { useLoading } from "../contexts/LoadingContext";
 import { achievements } from "../data/achievements";
 import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
@@ -9,16 +8,15 @@ import { PdfViewerModal } from "./PdfViewerModal";
 
 const publicUrl = (path) => `${import.meta.env.BASE_URL}${path}`;
 
+// Feeds the cursor position to the card's spotlight (.achv-card::after)
+const trackPointer = (e) => {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+};
+
 export const AchievementsSection = () => {
   const [selected, setSelected] = useState(null);
-  const { triggerLoading } = useLoading();
-
-  const handleClick = (item) => {
-    triggerLoading(() => {
-      setSelected(item);
-    });
-  };
-
   // Stable so the modal's Escape listener isn't re-bound on every render
   const closeModal = useCallback(() => setSelected(null), []);
 
@@ -29,27 +27,38 @@ export const AchievementsSection = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {achievements.map((item, key) => (
-            <Reveal key={item.file} delay={(key % 3) * 0.12} className="h-full">
+            <Reveal key={item.name} delay={(key % 3) * 0.12} className="h-full">
               <div
-                onClick={() => handleClick(item)}
+                onClick={() =>
+                  item.url
+                    ? window.open(item.url, "_blank", "noopener,noreferrer")
+                    : setSelected(item)
+                }
+                onPointerMove={trackPointer}
                 className={cn(
-                  "bg-card p-6 rounded-lg shadow-xs card-hover relative group overflow-hidden cursor-pointer h-full",
-                  item.award && "ring-1 ring-primary/40",
+                  "achv-card p-6 rounded-xl card-hover relative group overflow-hidden cursor-pointer h-full",
+                  item.award && "achv-card--award",
                 )}
               >
                 <div className="transition-transform duration-300 h-full flex flex-col justify-between group-hover:-translate-y-4">
                   <div className="text-left mb-4">
-                    <h3 className="font-semibold text-lg flex items-center gap-2">
-                      {item.award && (
-                        <Trophy className="w-4 h-4 text-primary shrink-0" />
-                      )}
+                    <div className="flex items-start justify-between mb-4">
+                      <span className="achv-icon">
+                        {item.award ? (
+                          <Trophy className="w-5 h-5" />
+                        ) : (
+                          <FileText className="w-5 h-5" />
+                        )}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full border border-primary/25 bg-primary/10 text-xs font-mono text-primary">
+                        {item.year}
+                      </span>
+                    </div>
+                    <h3 className="font-semibold text-lg leading-snug mb-1">
                       {item.name}
-                      {!item.award && (
-                        <FileText className="w-4 h-4 text-primary shrink-0" />
-                      )}
                     </h3>
-                    <p className="text-muted-foreground text-sm">
-                      {item.institution} {item.year}
+                    <p className="text-foreground/60 text-sm">
+                      {item.institution}
                     </p>
                   </div>
 
@@ -58,7 +67,7 @@ export const AchievementsSection = () => {
                       {item.highlights?.map((h) => (
                         <span
                           key={h}
-                          className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground"
+                          className="px-2 py-1 text-xs font-medium rounded-full border border-primary/20 bg-primary/5 text-foreground/80"
                         >
                           {h}
                         </span>

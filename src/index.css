@@ -43,8 +43,11 @@
     @apply border-border;
   }
 
+  /* Everything is sized in rem, so this scales the whole site to the
+     density it had at 85% browser zoom */
   html {
     @apply scroll-smooth;
+    font-size: 85%;
   }
 
   body {
@@ -60,19 +63,19 @@
   padding-inline: 2rem;
 
   @media (width >= 640px) {
-    max-width: 640px;
+    max-width: 40rem;
   }
   @media (width >= 768px) {
-    max-width: 768px;
+    max-width: 48rem;
   }
   @media (width >= 1024px) {
-    max-width: 1024px;
+    max-width: 64rem;
   }
   @media (width >= 1280px) {
-    max-width: 1280px;
+    max-width: 80rem;
   }
   @media (width >= 1400px) {
-    max-width: 1400px;
+    max-width: 87.5rem;
   }
 }
 

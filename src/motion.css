@@ -1125,17 +1125,6 @@
   }
 }
 
-/* ── Loading screen ────────────────────────────────────────────────── */
-
-.loading-grid {
-  background-image:
-    linear-gradient(hsl(var(--primary) / 0.35) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--primary) / 0.35) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: center;
-  mask-image: linear-gradient(180deg, #fff, transparent);
-}
-
 /* ── Meteor shower ─────────────────────────────────────────────────
    Each meteor is a tapered streak anchored at its head (the left end),
    rotated toward a shared radiant and flown along its own axis. Four
@@ -1245,6 +1234,117 @@
   }
 }
 
+/* ── Achievement cards ─────────────────────────────────────────────
+   A hairline aurora border (the avatar's violet → fuchsia → cyan) that
+   circles the card, plus a soft light that follows the cursor. Award
+   cards keep a dim border at rest; every card lights it fully on hover.
+   --mx/--my are set by AchievementsSection on pointer move. */
+@property --achv-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.achv-card {
+  --mx: 50%;
+  --my: 0%;
+  isolation: isolate;
+  background: linear-gradient(
+    160deg,
+    hsl(var(--card)),
+    hsl(var(--background) / 0.9)
+  );
+  border: 1px solid hsl(var(--border) / 0.6);
+}
+
+.achv-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--achv-angle),
+    hsl(var(--primary) / 0.1),
+    hsl(var(--primary)) 25%,
+    #d946ef 40%,
+    #22d3ee 55%,
+    hsl(var(--primary) / 0.1) 75%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-settle);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.achv-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    22rem circle at var(--mx) var(--my),
+    hsl(var(--primary) / 0.16),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-settle);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* The spin only runs while the border is visible */
+.achv-card--award::before {
+  opacity: 0.5;
+  animation: achv-spin 8s linear infinite;
+}
+
+.achv-card:hover::before {
+  opacity: 1;
+  animation: achv-spin 4s linear infinite;
+}
+
+.achv-card:hover::after {
+  opacity: 1;
+}
+
+.achv-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  color: hsl(var(--primary));
+  background: hsl(var(--primary) / 0.12);
+  border: 1px solid hsl(var(--primary) / 0.25);
+  transition:
+    transform 0.45s var(--ease-settle),
+    box-shadow 0.45s var(--ease-settle);
+}
+
+.achv-card--award .achv-icon {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(135deg, hsl(var(--primary)), #d946ef);
+}
+
+.achv-card:hover .achv-icon {
+  transform: rotate(-8deg) scale(1.08);
+  box-shadow: 0 0 22px hsl(var(--primary) / 0.55);
+}
+
+@keyframes achv-spin {
+  to {
+    --achv-angle: 360deg;
+  }
+}
+
 /* ── Reduced motion: everything rests in place ────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1298,9 +1398,13 @@
     display: none;
   }
 
-  .loading-screen *,
-  .toast {
+  .toast,
+  .achv-card::before {
     animation: none !important;
+  }
+
+  .achv-card:hover .achv-icon {
+    transform: none;
   }
 
   .menu-item,
