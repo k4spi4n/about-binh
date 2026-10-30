@@ -17,6 +17,8 @@ import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
 import { AstralButton } from "./motion/AstralButton";
 
+const EMAIL = "thaibinhakashi2@gmail.com";
+
 const socials = [
   { icon: Github, href: "https://github.com/k4spi4n", label: "GitHub" },
   {
@@ -33,18 +35,40 @@ export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  // FormSubmit relays the form to this inbox, so the static site needs no
+  // backend. The first message ever sent triggers an activation email to
+  // EMAIL; nothing is delivered until that link is clicked.
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const form = e.currentTarget;
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      const data = await res.json();
+      if (!res.ok || String(data.success) !== "true") {
+        throw new Error(data.message);
+      }
       toast({
         title: "Đã gửi tin nhắn",
         description: "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.",
       });
+      form.reset();
+    } catch {
+      toast({
+        title: "Chưa gửi được tin nhắn",
+        description: `Vui lòng thử lại, hoặc email trực tiếp tới ${EMAIL}.`,
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
@@ -73,10 +97,10 @@ export const ContactSection = () => {
                 <div>
                   <h4 className="font-medium"> Email</h4>
                   <a
-                    href="mailto:hello@gmail.com"
+                    href={`mailto:${EMAIL}`}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    thaibinhakashi2@gmail.com
+                    {EMAIL}
                   </a>
                 </div>
               </div>
@@ -87,7 +111,7 @@ export const ContactSection = () => {
                 <div>
                   <h4 className="font-medium"> Số điện thoại</h4>
                   <a
-                    href="tel:+11234567890"
+                    href="tel:+84904098225"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     0904098225
@@ -129,14 +153,13 @@ export const ContactSection = () => {
           <Reveal
             delay={0.3}
             className="bg-card p-8 rounded-lg shadow-xs"
-            onSubmit={handleSubmit}
           >
             <h3 className="text-2xl font-semibold mb-6">
               {" "}
               Gửi lời nhắn cho tôi{" "}
             </h3>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="name"
