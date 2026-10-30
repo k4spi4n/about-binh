@@ -9,24 +9,31 @@ cv:
     - network: GitHub
       username: k4spi4n
   sections:
-    summary:
+    Giới thiệu:
       - Sinh viên K3 khoa Kỹ thuật phần mềm của trường Đại học CMC với học bổng toàn phần. Đam mê xây dựng các ứng dụng web tương tác, phát triển game và ứng dụng AI. Có kinh nghiệm thực tế với React, Flutter, Supabase, Next.js, .NET và Computer Vision.
-    education:
+    Học vấn:
       - institution: Đại Học CMC
         area: Kỹ Thuật Phần Mềm
         degree: Cử nhân
         start_date: 2024-09
         end_date: 2027-06
         highlights:
-          - "GPA: 3.5/4.0 (Tính đến học kỳ Hè 2026)"
-          - Học bổng toàn phần
+          - "GPA: 3.5/4.0 (Tính đến học kỳ Hè 2026) · Học bổng toàn phần"
           - Thành viên đội tuyển Olympic Tin Học và nhóm Nghiên cứu Khoa học
       - institution: THPT Chuyên Nguyễn Trãi - Hải Dương
         area: Khối chuyên Ngữ
         degree: Tốt nghiệp THPT
         start_date: 2021-09
         end_date: 2024-06
-    projects:
+    Dự án:
+      - name: PMA - Nền tảng LMS B2B cho đào tạo doanh nghiệp
+        date: 2026
+        link: https://b2bpmp.io.vn/
+        highlights:
+          - Hệ thống quản lý đào tạo tùy biến đang vận hành thực tế cho các lớp đào tạo doanh nghiệp, lịch học tự động né ngày lễ.
+          - Checklist trợ giảng 5 giai đoạn, điểm danh, kho tài liệu theo lớp, ngân hàng câu hỏi và bài kiểm tra có chấm điểm.
+          - Tích hợp Google Calendar, Gmail và Drive; phân quyền 5 vai trò; CI/CD tự động triển khai bằng Docker.
+          - "Công nghệ: Next.js, PostgreSQL, Docker CI/CD, Google APIs"
       - name: DynaTour - Giải pháp tour 3D bất động sản từ video điện thoại
         date: 2026
         link: https://dynatour.io.vn/
@@ -54,13 +61,10 @@ cv:
           - Tự động hóa quy trình tạo đề thi, bài tập và cá nhân hóa trải nghiệm học tập cho học sinh.
           - Hỗ trợ giáo viên quản lý lớp học, theo dõi tiến độ và đưa ra quyết định giảng dạy dựa trên dữ liệu.
           - "Công nghệ: Angular, .NET, MongoDB, AI"
-      - name: ML AIMBOT VALORANT
-        date: 2023 - 2024
-        highlights:
-          - Nghiên cứu kỹ thuật thị giác máy tính thời gian thực kết hợp mô phỏng thiết bị ngoại vi và tối ưu mô hình.
-          - Nâng cao độ chính xác nhận diện mục tiêu và tốc độ phản hồi trong môi trường biến động cao.
-          - "Công nghệ: OpenCV, NumPy, Computer Vision, Python"
-    skills:
+    Giải thưởng:
+      - bullet: "**Top 10 NEU Startup Olympiad 2026** - Dự án DynaTour, Đại học Kinh tế Quốc dân (2026)"
+      - bullet: "**Giải Khuyến khích bảng B, CSCV 2026** - Cuộc thi Sinh viên An ninh mạng 2026 (CTF jeopardy); đội CMC.CBS hạng 10 chung kết với 2.080 điểm (2026)"
+    Kỹ năng:
       - label: Ngôn ngữ lập trình
         details: Python, JavaScript, TypeScript, Dart, Java, C++, C#, HTML/CSS
       - label: Frameworks & Libraries
@@ -72,7 +76,10 @@ cv:
       - label: Ngoại ngữ
         details: Tiếng Anh (IELTS 8.0), Tiếng Việt (Bản xứ)
       - label: Chứng chỉ
-        details: Chứng chỉ AI Samsung Innovation Campus (SIC)
+        details: Chứng chỉ AI Samsung Innovation Campus (SIC), NVIDIA DLI Deep Learning
+
+locale:
+  language: vietnamese
 
 design:
   theme: engineeringresumes
@@ -83,8 +90,8 @@ design:
       show_icons: true
   page:
     size: a4
-    top_margin: 0.45in
-    bottom_margin: 0.45in
+    top_margin: 0.35in
+    bottom_margin: 0.35in
     left_margin: 0.45in
     right_margin: 0.45in
   colors:

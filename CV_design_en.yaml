@@ -18,8 +18,7 @@ cv:
         start_date: 2024-09
         end_date: 2027-06
         highlights:
-          - "GPA: 3.5/4.0 (As of Summer 2026)"
-          - Full scholarship recipient
+          - "GPA: 3.5/4.0 (As of Summer 2026) · Full scholarship recipient"
           - Member of the Olympic IT team and the Scientific Research team
       - institution: Nguyen Trai High School for the Gifted - Hai Duong
         area: Foreign Language Major
@@ -27,6 +26,14 @@ cv:
         start_date: 2021-09
         end_date: 2024-06
     projects:
+      - name: PMA - B2B LMS Platform for Corporate Training
+        date: 2026
+        link: https://b2bpmp.io.vn/
+        highlights:
+          - Built a custom training management system running in production for corporate classes, with auto-scheduling that skips public holidays.
+          - Delivered a 5-stage teaching-assistant checklist, attendance, per-class document library, question bank, and graded quizzes.
+          - Integrated Google Calendar, Gmail, and Drive; 5-role access control; Docker-based CI/CD auto-deployment.
+          - "Technologies: Next.js, PostgreSQL, Docker CI/CD, Google APIs"
       - name: DynaTour - Real Estate 3D Tour Solution from Mobile Video
         date: 2026
         link: https://dynatour.io.vn/
@@ -54,12 +61,9 @@ cv:
           - Automated exam and assignment generation, personalizing the learning experience for students using AI.
           - Provided teacher dashboards for class management, progress tracking, and data-driven teaching decisions.
           - "Technologies: Angular, .NET, MongoDB, AI"
-      - name: ML AIMBOT VALORANT
-        date: 2023 - 2024
-        highlights:
-          - Researched real-time computer vision techniques combined with peripheral emulation and model optimization.
-          - Enhanced target recognition accuracy and reaction times in high-volatility game environments.
-          - "Technologies: OpenCV, NumPy, Computer Vision, Python"
+    awards:
+      - bullet: "**Top 10, NEU Startup Olympiad 2026** - DynaTour project, National Economics University (2026)"
+      - bullet: "**Consolation Prize (Division B), CSCV 2026** - Vietnam Student Cybersecurity Contest, jeopardy CTF; team CMC.CBS placed #10 in the finals with 2,080 points (2026)"
     skills:
       - label: Programming Languages
         details: Python, JavaScript, TypeScript, Dart, Java, C++, C#, HTML/CSS
@@ -72,7 +76,7 @@ cv:
       - label: Languages
         details: English (IELTS 8.0), Vietnamese (Native)
       - label: Certifications
-        details: Samsung Innovation Campus (SIC) AI Certification
+        details: Samsung Innovation Campus (SIC) AI Certification, NVIDIA DLI Deep Learning
 
 design:
   theme: engineeringresumes
@@ -83,8 +87,8 @@ design:
       show_icons: true
   page:
     size: a4
-    top_margin: 0.45in
-    bottom_margin: 0.45in
+    top_margin: 0.35in
+    bottom_margin: 0.35in
     left_margin: 0.45in
     right_margin: 0.45in
   colors:
