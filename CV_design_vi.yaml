@@ -4,7 +4,6 @@ cv:
   email: thaibinhakashi2@gmail.com
   phone: "+84 904 098 225"
   website: https://k4spi4n.github.io/about-binh/
-  photo: public/documents/cv_face.png
   social_networks:
     - network: GitHub
       username: k4spi4n
@@ -84,8 +83,6 @@ locale:
 design:
   theme: engineeringresumes
   header:
-    photo_width: 2.8cm
-    photo_position: right
     connections:
       show_icons: true
   page:
