@@ -18,6 +18,9 @@ import { SectionTitle } from "./motion/SectionTitle";
 import { AstralButton } from "./motion/AstralButton";
 
 const EMAIL = "thaibinhakashi2@gmail.com";
+// Web3Forms access key for EMAIL. It only lets a form send to that inbox,
+// so it is meant to live in client code.
+const WEB3FORMS_KEY = "049000bd-1ad5-4de3-bc07-57cd71071883";
 
 const socials = [
   { icon: Github, href: "https://github.com/k4spi4n", label: "GitHub" },
@@ -35,25 +38,28 @@ export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // FormSubmit relays the form to this inbox, so the static site needs no
-  // backend. The first message ever sent triggers an activation email to
-  // EMAIL; nothing is delivered until that link is clicked.
+  // Web3Forms relays the form to the inbox the key was issued for, so the
+  // static site needs no backend. The visitor's email becomes the reply-to.
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     setIsSubmitting(true);
 
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: "Portfolio: tin nhắn mới",
+          ...Object.fromEntries(new FormData(form)),
+        }),
       });
       const data = await res.json();
-      if (!res.ok || String(data.success) !== "true") {
+      if (!res.ok || !data.success) {
         throw new Error(data.message);
       }
       toast({
