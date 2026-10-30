@@ -15,7 +15,7 @@ export const skills = [
   },
 
   {
-    name: "IELTS 8.0",
+    name: "IELTS 7.5",
     institution: "Năng lực giao tiếp và làm việc hiệu quả bằng tiếng Anh",
     year: "",
     category: "Học vấn",
