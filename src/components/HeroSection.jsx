@@ -50,30 +50,11 @@ export const HeroSection = () => {
         className="container max-w-4xl mx-auto text-center z-10"
         style={sceneStyle}
       >
-        <div className="relative w-48 h-48 mx-auto mb-10 flex items-center justify-center rounded-full profile-picture-container bloom-in">
-          {/* Ambient bloom */}
+        <div className="relative w-48 h-48 mx-auto mb-10 flex items-center justify-center rounded-full bloom-in">
+          {/* Eclipse: purple haze, the rim's outer glow, the rim itself */}
           <span className="avatar-bloom" aria-hidden="true" />
-          {/* Rotating aurora ring + its blurred halo */}
           <span className="avatar-aurora-glow" aria-hidden="true" />
           <span className="avatar-aurora" aria-hidden="true" />
-          {/* Slow dashed HUD ring */}
-          <span className="avatar-dashes" aria-hidden="true" />
-
-          {/* Orbits — far half, drawn behind the avatar */}
-          <span className="orbit-clip orbit-clip--a is-back" aria-hidden="true">
-            <span className="orbit orbit--a">
-              <span className="orbit-spin">
-                <span className="orbit-dot" />
-              </span>
-            </span>
-          </span>
-          <span className="orbit-clip orbit-clip--b is-back" aria-hidden="true">
-            <span className="orbit orbit--b">
-              <span className="orbit-spin">
-                <span className="orbit-dot" />
-              </span>
-            </span>
-          </span>
 
           <img
             src={avatarUrl}
@@ -81,22 +62,8 @@ export const HeroSection = () => {
             className="w-[90%] h-[90%] rounded-full object-cover shadow-lg relative z-20"
           />
 
-          {/* Same orbits again, clipped to the near half so particles
-              sweep in front of the avatar */}
-          <span className="orbit-clip orbit-clip--a is-front" aria-hidden="true">
-            <span className="orbit orbit--a">
-              <span className="orbit-spin">
-                <span className="orbit-dot" />
-              </span>
-            </span>
-          </span>
-          <span className="orbit-clip orbit-clip--b is-front" aria-hidden="true">
-            <span className="orbit orbit--b">
-              <span className="orbit-spin">
-                <span className="orbit-dot" />
-              </span>
-            </span>
-          </span>
+          {/* Flare where the light breaks over the rim */}
+          <span className="avatar-glint" aria-hidden="true" />
         </div>
 
         <div className="space-y-6">

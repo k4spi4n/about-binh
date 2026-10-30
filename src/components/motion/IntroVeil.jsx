@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 // Total length of the opening sequence; must cover the longest animation in
 // the .veil rules in motion.css.
-const VEIL_MS = 2300;
+const VEIL_MS = 2500;
 
 const rings = [
   { r: 58, color: "hsl(var(--primary))", delay: 0 },
@@ -15,10 +15,13 @@ const SPARKLE =
   "M0,-9 C0.9,-2.4 2.4,-0.9 9,0 C2.4,0.9 0.9,2.4 0,9 C-0.9,2.4 -2.4,0.9 -9,0 C-2.4,-0.9 -0.9,-2.4 0,-9Z";
 
 /**
- * Opening sequence: three orbits draw themselves around a glowing core, then
- * a widening circular window opens from the centre to reveal the page while
- * the orbits drift outward and dissolve. Whether it plays is decided once in
- * main.jsx (html[data-intro]), so the hero can time itself against it.
+ * Opening sequence, shot like a title card: in widescreen, three orbits draw
+ * themselves around a glowing core while an anamorphic flare stretches
+ * across it. The core flashes, a circular window opens from the centre with
+ * a split-colour rim, the orbits drift outward and dissolve, and the
+ * letterbox bars pull away. Behind it the starfield arrives out of warp
+ * (lib/starfield.js). Whether it plays is decided once in main.jsx
+ * (html[data-intro]), so the hero can time itself against it.
  */
 export const IntroVeil = () => {
   const [visible, setVisible] = useState(
@@ -66,6 +69,8 @@ export const IntroVeil = () => {
           </svg>
         ))}
       </div>
+      <i className="veil-flare" />
+      <i className="veil-bars" />
     </div>
   );
 };

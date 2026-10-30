@@ -9,18 +9,6 @@
   --color-primary-foreground: hsl(var(--primary-foreground));
 
   --color-card: hsl(var(--card));
-
-  --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
-
-  @keyframes pulse-subtle {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
-  }
 }
 
 @layer base {
@@ -122,48 +110,58 @@
 }
 
 @layer components {
-  /* ── Cosmic avatar halo ─────────────────────────────────────────────
-     An aurora ring (violet → fuchsia → cyan) hugging the avatar, a slow
-     dashed HUD ring, and two tilted 3D orbits whose particles pass behind
-     and in front of the photo. */
-  .profile-picture-container {
-    perspective: 900px;
-  }
+  /* ── Avatar eclipse ────────────────────────────────────────────────
+     The avatar sits like a moon in front of a light: a hairline rim that
+     burns brightest as a crescent on the upper left, light bleeding out
+     from it, purple haze around, and a pink flare low on the right where
+     the light breaks over the edge. Mostly still: only the haze breathes
+     and the flare twinkles. */
 
-  /* Soft ambient light spilling from behind the avatar */
+  /* Purple haze, heaviest below and left of the avatar */
   .avatar-bloom {
-    content: "";
     position: absolute;
-    inset: -35%;
-    border-radius: 9999px;
-    background: radial-gradient(
-      circle at 50% 50%,
-      hsl(var(--primary) / 0.28) 0%,
-      hsl(292 84% 61% / 0.14) 38%,
-      transparent 68%
-    );
-    filter: blur(6px);
+    inset: -55%;
     z-index: 0;
-    animation: halo-breathe 6s ease-in-out infinite;
+    background:
+      radial-gradient(
+        38% 26% at 32% 74%,
+        hsl(285 85% 45% / 0.45),
+        transparent 70%
+      ),
+      radial-gradient(
+        30% 24% at 74% 68%,
+        hsl(305 80% 50% / 0.32),
+        transparent 70%
+      ),
+      radial-gradient(
+        40% 32% at 30% 34%,
+        hsl(265 80% 50% / 0.28),
+        transparent 70%
+      ),
+      radial-gradient(closest-side, hsl(270 80% 45% / 0.22), transparent);
+    filter: blur(14px);
+    animation: halo-breathe 8s ease-in-out infinite;
   }
 
-  /* The rotating aurora ring itself */
+  /* The rim and its glow share one light map: brightest at the upper left
+     (290deg), dimmest on the right, warming to pink where the flare sits
+     (135deg, see .avatar-glint) */
   .avatar-aurora,
   .avatar-aurora-glow {
     position: absolute;
-    inset: -5%;
     border-radius: 9999px;
     background: conic-gradient(
-      from 0deg,
-      transparent 0deg,
-      hsl(var(--primary)) 55deg,
-      #d946ef 130deg,
-      #22d3ee 210deg,
-      hsl(var(--primary) / 0.5) 265deg,
-      transparent 320deg
+      from 180deg,
+      hsl(270 80% 60% / 0.2),
+      hsl(275 85% 66% / 0.6) 50deg,
+      hsl(290 100% 90%) 110deg,
+      hsl(280 90% 74% / 0.8) 160deg,
+      hsl(270 80% 60% / 0.25) 220deg,
+      hsl(270 80% 60% / 0.12) 285deg,
+      hsl(335 90% 70% / 0.6) 315deg,
+      hsl(270 80% 60% / 0.2)
     );
     z-index: 5;
-    animation: halo-spin 9s linear infinite;
   }
 
   /* The mask stops are feathered by ~1px on both sides instead of jumping
@@ -171,6 +169,7 @@
      ring a stair-stepped edge, since nothing is left for the compositor to
      blend; the ramp is what anti-aliases the circle. */
   .avatar-aurora {
+    inset: 3%;
     -webkit-mask: radial-gradient(
       closest-side,
       transparent calc(100% - 3.5px),
@@ -187,148 +186,49 @@
     );
   }
 
-  /* Blurred copy of the ring, counter-rotating for a shimmering bloom */
+  /* Light bleeding outward from the rim */
   .avatar-aurora-glow {
     inset: -8%;
     -webkit-mask: radial-gradient(
       closest-side,
-      transparent calc(100% - 15px),
-      #000 calc(100% - 13px),
-      #000 calc(100% - 1px),
+      transparent calc(100% - 20px),
+      #000 calc(100% - 16px),
       transparent 100%
     );
     mask: radial-gradient(
       closest-side,
-      transparent calc(100% - 15px),
-      #000 calc(100% - 13px),
-      #000 calc(100% - 1px),
+      transparent calc(100% - 20px),
+      #000 calc(100% - 16px),
       transparent 100%
     );
-    filter: blur(10px);
-    opacity: 0.6;
-    animation-duration: 16s;
-    animation-direction: reverse;
+    filter: blur(8px);
   }
 
-  /* Thin dashed technical ring, barely moving */
-  .avatar-dashes {
+  /* Sits on the rim at 135deg: 50% + 47% * sin/cos(135deg) */
+  .avatar-glint {
     position: absolute;
-    inset: -17%;
-    border-radius: 9999px;
-    border: 1px dashed hsl(var(--primary) / 0.3);
-    z-index: 5;
-    animation: halo-spin 45s linear infinite reverse;
-  }
-
-  /* ── Orbits ──────────────────────────────────────────────────────── */
-  .orbit-clip {
-    position: absolute;
-    inset: 0;
-    perspective: 900px;
+    left: 83.2%;
+    top: 83.2%;
+    width: 64px;
+    height: 64px;
+    translate: -50% -50%;
+    z-index: 25;
     pointer-events: none;
-  }
-
-  .orbit-clip.is-back {
-    z-index: 10;
-  }
-
-  /* The avatar is a transparent cut-out, so the back copy has to be
-     clipped to the far half too — otherwise its particle shows through
-     the empty pixels and every dot appears twice. */
-  .orbit-clip--a.is-back {
-    clip-path: polygon(
-      -140.2% 111.8%,
-      240.2% -11.8%,
-      240.2% -400%,
-      -140.2% -400%
-    );
-  }
-
-  .orbit-clip--b.is-back {
-    clip-path: polygon(-119.6% -56%, 219.6% 156%, 219.6% -400%, -119.6% -400%);
-  }
-
-  /* Each orbit is rendered twice. The front copy runs identical
-     animations but is clipped to the half-plane matching its own tilt
-     axis, so a particle on the near side of the ring is painted over the
-     avatar and the far side stays behind it. The polygons below are the
-     half-plane under a line through the centre at the orbit's Z angle
-     (-18deg for a, 32deg for b). */
-  .orbit-clip.is-front {
-    z-index: 30;
-  }
-
-  .orbit-clip--a.is-front {
-    clip-path: polygon(
-      -140.2% 111.8%,
-      240.2% -11.8%,
-      240.2% 400%,
-      -140.2% 400%
-    );
-  }
-
-  .orbit-clip--b.is-front {
-    clip-path: polygon(-119.6% -56%, 219.6% 156%, 219.6% 400%, -119.6% 400%);
-  }
-
-  .orbit {
-    position: absolute;
-    inset: -14%;
-    border-radius: 9999px;
-    border: 1px solid hsl(var(--primary) / 0.22);
-    transform-style: preserve-3d;
-  }
-
-  .orbit--a {
-    transform: rotateZ(-18deg) rotateX(73deg);
-  }
-
-  .orbit--b {
-    inset: -24%;
-    border-color: hsl(292 84% 61% / 0.18);
-    transform: rotateZ(32deg) rotateX(78deg);
-  }
-
-  .orbit-spin {
-    position: absolute;
-    inset: 0;
-    transform-style: preserve-3d;
-    animation: halo-spin 11s linear infinite;
-  }
-
-  .orbit--b .orbit-spin {
-    animation-duration: 17s;
-    animation-direction: reverse;
-  }
-
-  .orbit-dot {
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    margin-left: -5px;
-    border-radius: 9999px;
-    background: hsl(var(--primary));
-    box-shadow:
-      0 0 10px 2px hsl(var(--primary) / 0.9),
-      0 0 22px 6px hsl(var(--primary) / 0.35);
-    /* Unwinds the parent spin + tilt so the particle stays a round dot
-       instead of being squashed into a streak. Must mirror the duration
-       and direction of the matching .orbit-spin. */
-    animation: halo-unwind-a 11s linear infinite;
-  }
-
-  .orbit--b .orbit-dot {
-    width: 7px;
-    height: 7px;
-    margin-left: -3.5px;
-    top: -3.5px;
-    background: #22d3ee;
-    box-shadow:
-      0 0 10px 2px rgb(34 211 238 / 0.9),
-      0 0 20px 6px rgb(34 211 238 / 0.3);
-    animation: halo-unwind-b 17s linear infinite reverse;
+    /* Adds light like a real flare, so it can't stain the white photo */
+    mix-blend-mode: screen;
+    background:
+      radial-gradient(
+        closest-side,
+        #fff,
+        hsl(345 100% 78% / 0.85) 14%,
+        hsl(335 95% 60% / 0.25) 42%,
+        transparent
+      ),
+      linear-gradient(90deg, transparent, hsl(345 100% 82% / 0.8), transparent)
+        center / 100% 2px no-repeat,
+      linear-gradient(transparent, hsl(345 100% 85% / 0.55), transparent)
+        center / 1.5px 46% no-repeat;
+    animation: halo-glint 4s ease-in-out infinite;
   }
 
   /* Radar dish sweep */
@@ -342,21 +242,10 @@
     }
   }
 
-  @keyframes halo-unwind-a {
-    from {
-      transform: rotate(0deg) rotateX(-73deg);
-    }
-    to {
-      transform: rotate(-360deg) rotateX(-73deg);
-    }
-  }
-
-  @keyframes halo-unwind-b {
-    from {
-      transform: rotate(0deg) rotateX(-78deg);
-    }
-    to {
-      transform: rotate(-360deg) rotateX(-78deg);
+  @keyframes halo-glint {
+    50% {
+      scale: 0.8;
+      opacity: 0.75;
     }
   }
 
@@ -374,28 +263,11 @@
 
   @media (prefers-reduced-motion: reduce) {
     .avatar-bloom,
-    .avatar-aurora,
-    .avatar-aurora-glow,
-    .avatar-dashes,
-    .orbit-spin,
-    .orbit-dot,
+    .avatar-glint,
     .radar-sweep {
       animation: none;
     }
-
-    .orbit-dot {
-      transform: rotateX(-73deg);
-    }
-
-    .orbit--b .orbit-dot {
-      transform: rotateX(-78deg);
-    }
   }
-}
-
-@utility star {
-  @apply absolute rounded-full bg-white;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
 }
 
 #root {
