@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 const createBrandIcon = (displayName, paths) => {
   const Component = ({ size = 24, className = "", ...props }) => (
@@ -19,6 +19,10 @@ const createBrandIcon = (displayName, paths) => {
     </svg>
   );
   Component.displayName = displayName;
+  Component.propTypes = {
+    size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    className: PropTypes.string,
+  };
   return Component;
 };
 

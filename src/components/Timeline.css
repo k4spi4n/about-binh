@@ -151,7 +151,10 @@
   right: calc(100% + var(--year-gap));
 }
 
-.timeline-item > .group {
+/* Compact cards that hug the center line, with a gradient rim. Descendant,
+   not child: each card sits inside its Reveal wrapper. */
+.timeline-item .group {
+  max-width: 26rem;
   border-radius: 1rem;
   border: 2px solid transparent;
   background:
@@ -167,11 +170,6 @@
 
 .timeline-item .p-4 {
   border-top: 1px solid hsl(var(--border));
-}
-
-/* Compact cards that hug the center line */
-.timeline-item .group {
-  max-width: 26rem;
 }
 
 .left .group {
