@@ -45,7 +45,7 @@
   position: relative;
   width: 50%;
   margin-bottom: 2.25rem;
-  padding: 0 2.5rem;
+  padding: 0 2rem;
 }
 
 .left {
@@ -165,8 +165,17 @@
       border-box;
 }
 
-.timeline-item .p-6 {
+.timeline-item .p-4 {
   border-top: 1px solid hsl(var(--border));
+}
+
+/* Compact cards that hug the center line */
+.timeline-item .group {
+  max-width: 26rem;
+}
+
+.left .group {
+  margin-left: auto;
 }
 
 @media screen and (max-width: 900px) {
@@ -188,6 +197,10 @@
     left: 0;
     padding: 0 0 1.5rem 2.85rem;
     margin-bottom: 1.2rem;
+  }
+
+  .left .group {
+    margin-left: 0;
   }
 
   .timeline-item::before {

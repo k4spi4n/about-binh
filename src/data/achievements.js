@@ -14,7 +14,7 @@ export const achievements = [
   {
     name: "Giải Khuyến khích bảng B — CSCV 2026",
     institution:
-      "Cuộc thi “Sinh viên An ninh mạng 2026” (CTF jeopardy) · Đội CMC.CBS, Đại học CMC",
+      "Cuộc thi “Sinh viên An ninh mạng 2026” (CTF jeopardy) · Đội trưởng đội CMC.CBS, Đại học CMC",
     year: "2026",
     highlights: ["#10 chung kết", "2.080 điểm", "10 thử thách"],
     file: "achievements/cscv2026-giay-khen.pdf",
