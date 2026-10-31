@@ -541,9 +541,9 @@
   border: 1px solid hsl(var(--border));
   background: hsl(var(--background));
   transition:
-    border-color 0.4s,
-    background-color 0.4s,
-    scale 0.4s var(--ease-settle);
+    border-color 0.2s,
+    background-color 0.2s,
+    scale 0.2s var(--ease-settle);
 }
 
 .rail-tick:hover,
@@ -565,8 +565,8 @@
   opacity: 0;
   pointer-events: none;
   transition:
-    opacity 0.3s,
-    translate 0.4s var(--ease-settle);
+    opacity 0.15s,
+    translate 0.2s var(--ease-settle);
 }
 
 .rail-tick:hover .rail-tick-label {
@@ -574,13 +574,16 @@
   translate: 0 -50%;
 }
 
-/* The probe rides down the track with scroll progress */
+/* The probe rides down the track (--rail-p, set by SectionRail). It spans the
+   track so a % translate is track-relative: compositor-only, no lag. */
 .rail-probe {
   position: absolute;
   left: 0;
-  top: calc(var(--scroll-p) * 100%);
+  top: 0;
+  height: 100%;
+  translate: 0 calc(var(--rail-p, 0) * 100%);
+  will-change: translate;
   pointer-events: none;
-  transition: top 0.25s linear;
 }
 
 .rail-dot {
@@ -618,7 +621,7 @@
 
 .rail-capsule-text {
   display: inline-block;
-  animation: rail-swap 0.6s var(--ease-settle) both;
+  animation: rail-swap 0.25s var(--ease-settle) both;
 }
 
 .rail-wave {
@@ -1119,10 +1122,11 @@
    · the top hairline is the quiet one: it stays as a faint line, and its
      comet head only appears on small screens, where there is no rail. */
 
+/* Pops in fast when scrolling starts, eases out a little slower */
 .rail {
   transition:
-    opacity 0.6s var(--ease-settle),
-    translate 0.6s var(--ease-settle);
+    opacity 0.15s var(--ease-settle),
+    translate 0.15s var(--ease-settle);
 }
 
 /* The rail itself is a 1px line, far too thin to find by hover; this
@@ -1137,6 +1141,7 @@
 .rail.is-home:not(:hover) {
   opacity: 0;
   translate: 14px 0;
+  transition-duration: 0.35s;
 }
 
 /* Hidden rail: no point animating what nobody can see */

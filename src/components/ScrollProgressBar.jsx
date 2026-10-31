@@ -19,7 +19,7 @@ export const ScrollProgressBar = () => {
         Math.max(0, scrollTop / scrollableHeight),
       );
 
-      // Shared with the atmosphere fog and the side rail probe.
+      // Shared with the atmosphere fog.
       document.documentElement.style.setProperty(
         "--scroll-p",
         nextProgress.toFixed(4),

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { navItems } from "../data/navigation";
 import { useActiveSection } from "../hooks/useActiveSection";
@@ -13,11 +14,52 @@ const ids = navItems.map((item) => item.href.slice(1));
 export const SectionRail = () => {
   const active = useActiveSection(ids);
   const activeItem = navItems.find((item) => item.href === `#${active}`);
+  const railRef = useRef(null);
+
+  // Ticks are evenly spaced but sections aren't, so raw page progress drifts
+  // off them. Instead the probe moves piecewise: it sits exactly on tick i
+  // when section i's top reaches the top of the viewport (where jumps land).
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const stops = ids.map((id, i) => {
+        const el = i && document.getElementById(id);
+        return el ? Math.min(el.getBoundingClientRect().top + y, max) : 0;
+      });
+
+      let i = 0;
+      while (i < stops.length - 2 && y >= stops[i + 1]) i++;
+      const span = stops[i + 1] - stops[i];
+      const f = span > 0 ? Math.min(1, Math.max(0, (y - stops[i]) / span)) : 1;
+      railRef.current?.style.setProperty(
+        "--rail-p",
+        ((i + f) / (stops.length - 1)).toFixed(4),
+      );
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
 
   return (
     // On the hero there's nothing to track yet, so the rail stays tucked away
     // (hovering the right edge still brings it back).
     <aside
+      ref={railRef}
       className={cn("rail hidden lg:block", active === "hero" && "is-home")}
       aria-label="Điều hướng nhanh"
     >
