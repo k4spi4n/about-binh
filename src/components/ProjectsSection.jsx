@@ -144,6 +144,11 @@ export const ProjectsSection = () => {
                     </h3>
                     <p className="text-primary text-sm font-medium mb-2">
                       Vai trò: {project.role}
+                      {!project.githubUrl && (
+                        <span className="text-muted-foreground font-normal">
+                          {" "}· mã nguồn riêng
+                        </span>
+                      )}
                     </p>
                     <p className="text-muted-foreground text-sm">
                       {project.description}

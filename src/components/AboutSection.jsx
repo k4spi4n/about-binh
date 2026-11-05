@@ -1,4 +1,4 @@
-import { Code, Gamepad2, PencilRuler } from "lucide-react";
+import { BrainCircuit, Code, Gamepad2 } from "lucide-react";
 import { useState } from "react";
 import { CVDownloadModal } from "./CVDownloadModal";
 import { Reveal } from "./motion/Reveal";
@@ -10,18 +10,18 @@ const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026-VI.pdf`;
 const focusAreas = [
   {
     icon: Code,
-    title: "Phát triển Web",
-    text: "Xây dựng website và ứng dụng web hiện đại, chú trọng hiệu năng, tính ổn định và khả năng mở rộng.",
+    title: "Phát triển Full-stack",
+    text: "Xây dựng ứng dụng web và mobile từ giao diện đến backend, cơ sở dữ liệu và CI/CD, với sản phẩm đang vận hành thực tế cho doanh nghiệp.",
   },
   {
-    icon: PencilRuler,
-    title: "Thiết kế UI/UX",
-    text: "Thiết kế giao diện trực quan và tổ chức luồng trải nghiệm người dùng liền mạch, dễ tiếp cận.",
+    icon: BrainCircuit,
+    title: "Tích hợp AI",
+    text: "Đưa LLM vào sản phẩm: tóm tắt hồ sơ y tế, AI Coach chạy bộ, sinh đề thi tự động, cùng hệ thống điều phối LLM thông minh đa nhà cung cấp.",
   },
   {
     icon: Gamepad2,
     title: "Phát triển Game",
-    text: "Phát triển gameplay, cơ chế vận hành và nội dung tương tác, chuyển hóa ý tưởng thành trải nghiệm có chiều sâu.",
+    text: "Phát hành game hành động trên itch.io bằng Unity, cùng các bản thử nghiệm với Unreal Engine.",
   },
 ];
 
@@ -45,18 +45,16 @@ export const AboutSection = () => {
             </h3>
 
             <p className="text-muted-foreground">
-              Trọng tâm phát triển của tôi là Full-stack Engineering và AI
-              Engineering, hướng đến thiết kế các hệ thống có kiến trúc rõ ràng,
-              khả năng mở rộng bền vững và năng lực vận hành ổn định ở môi
-              trường thực tế.
+              Sinh viên Kỹ thuật Phần mềm tại Đại học CMC (học bổng toàn phần,
+              GPA 3.5/4.0, dự kiến tốt nghiệp 06/2027), thành viên đội tuyển
+              Olympic Tin học và nhóm Nghiên cứu khoa học. IELTS 7.5.
             </p>
 
             <p className="text-muted-foreground">
-              Tôi làm việc theo tư duy sản phẩm: phân tích bài toán đến gốc,
-              triển khai giải pháp có thể đo lường và liên tục tối ưu trải
-              nghiệm người dùng. Song song đó, tôi phát triển thêm năng lực Game
-              Development để nâng chiều sâu về thiết kế tương tác và hệ thống
-              thời gian thực.
+              Tôi đã đưa một LMS vào vận hành thực tế cho 5+ doanh nghiệp, đạt
+              Top 10 NEU Startup Olympiad 2026 với DynaTour và giải Khuyến khích
+              CSCV 2026. Trọng tâm hiện tại: Full-stack và tích hợp AI vào sản
+              phẩm.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">

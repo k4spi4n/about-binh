@@ -7,7 +7,15 @@ export const Footer = () => {
       {" "}
       <p className="text-sm text-muted-foreground">
         {" "}
-        &copy; {new Date().getFullYear()} Thai Binh
+        &copy; {new Date().getFullYear()}{" "}
+        <a
+          href="https://github.com/k4spi4n"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary transition-colors"
+        >
+          Thai Binh (k4spi4n)
+        </a>
       </p>
       <AstralButton icon
         href="#hero"
