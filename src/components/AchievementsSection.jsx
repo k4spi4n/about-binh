@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Eye, FileText, Trophy, ExternalLink } from "lucide-react";
+import { ArrowRight, Eye, FileText, Trophy, ExternalLink } from "lucide-react";
 import { achievements } from "../data/achievements";
 import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
@@ -86,13 +86,14 @@ export const AchievementsSection = () => {
                       )}
                     </div>
                   )}
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary text-left">
+                  <span className="mt-4 self-start inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/30 text-xs font-bold uppercase tracking-wider text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary group-hover:shadow-[0_0_18px_hsl(var(--primary)/0.45)]">
                     {item.url ? (
                       <ExternalLink className="w-3.5 h-3.5" />
                     ) : (
                       <Eye className="w-3.5 h-3.5" />
                     )}
                     Xem {item.fileLabel.toLowerCase()}
+                    <ArrowRight className="h-3.5 w-0 -ml-1 opacity-0 transition-all duration-300 group-hover:w-3.5 group-hover:ml-0 group-hover:opacity-100" />
                   </span>
                 </div>
               </div>
