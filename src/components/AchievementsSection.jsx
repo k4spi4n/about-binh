@@ -40,7 +40,7 @@ export const AchievementsSection = () => {
                   item.award && "achv-card--award",
                 )}
               >
-                <div className="transition-transform duration-300 h-full flex flex-col justify-between group-hover:-translate-y-4">
+                <div className="transition-transform duration-300 h-full flex flex-col justify-between">
                   <div className="text-left mb-4">
                     <div className="flex items-start justify-between mb-4">
                       <span className="achv-icon">
@@ -86,11 +86,12 @@ export const AchievementsSection = () => {
                       )}
                     </div>
                   )}
-                </div>
-
-                <div className="absolute bottom-0 left-0 w-full p-2 bg-primary flex items-center justify-center gap-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <Eye className="w-4 h-4 text-primary-foreground" />
-                  <span className="text-primary-foreground text-xs font-bold uppercase tracking-wider">
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary text-left">
+                    {item.url ? (
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    ) : (
+                      <Eye className="w-3.5 h-3.5" />
+                    )}
                     Xem {item.fileLabel.toLowerCase()}
                   </span>
                 </div>

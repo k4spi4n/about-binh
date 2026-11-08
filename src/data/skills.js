@@ -8,9 +8,9 @@ export const skills = [
   },
 
   {
-    name: "GPA: 3.61 (tính đến học kỳ Thu năm học 2025-2026)",
+    name: "GPA: 3.5 (tính đến học kỳ Hè 2026)",
     institution: "Đại Học CMC",
-    year: "(2025)",
+    year: "(2026)",
     category: "Học vấn",
   },
 

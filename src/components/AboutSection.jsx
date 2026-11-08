@@ -46,8 +46,8 @@ export const AboutSection = () => {
 
             <p className="text-muted-foreground">
               Sinh viên Kỹ thuật Phần mềm tại Đại học CMC (học bổng toàn phần,
-              GPA 3.5/4.0, dự kiến tốt nghiệp 06/2027), thành viên đội tuyển
-              Olympic Tin học và nhóm Nghiên cứu khoa học. IELTS 7.5.
+              GPA 3.5/4.0, dự kiến tốt nghiệp 06/2027), đạt giải Khuyến khích
+              Sinh viên Nghiên cứu khoa học cấp trường 2026. IELTS 7.5.
             </p>
 
             <p className="text-muted-foreground">
