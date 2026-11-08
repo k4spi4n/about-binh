@@ -57,8 +57,8 @@ cv:
           - "Backend developer (.NET, MongoDB): auto-generated exams and assignments, personalized learning paths, teacher dashboards."
           - "Technologies: Angular, .NET, MongoDB, AI"
     awards:
+      - bullet: "**Consolation Prize (Division B), CSCV 2026** - Vietnam Student Cybersecurity Contest, jeopardy CTF; team captain of CMC.CBS, #10 of 47 finalist teams (selected from 334 domestic and international teams) with 2,080 points (2026)"
       - bullet: "**Top 10, NEU Startup Olympiad 2026** - DynaTour project, National Economics University (2026)"
-      - bullet: "**Consolation Prize (Division B), CSCV 2026** - Vietnam Student Cybersecurity Contest, jeopardy CTF; team CMC.CBS placed #10 in the finals with 2,080 points (2026)"
       - bullet: "**Consolation Prize, CMC University Undergraduate Research Conference 2025-2026** (2026)"
     skills:
       - label: Programming Languages

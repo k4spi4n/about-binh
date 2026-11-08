@@ -3,26 +3,26 @@
 // that external page in a new tab instead of the PDF viewer.
 export const achievements = [
   {
-    name: "Top 10 NEU Startup Olympiad 2026",
-    institution:
-      "Dự án DynaTour — tour 3D bất động sản từ video điện thoại · Đại học Kinh tế Quốc dân",
-    year: "2026",
-    url: "https://www.facebook.com/share/p/19iPfzjrJd/",
-    fileLabel: "Bài đăng",
-    award: true,
-  },
-  {
     name: "Giải Khuyến khích bảng B — CSCV 2026",
     institution:
       "Cuộc thi “Sinh viên An ninh mạng 2026” (CTF jeopardy) · Đội trưởng đội CMC.CBS, Đại học CMC",
     year: "2026",
-    highlights: ["#10 chung kết", "2.080 điểm", "10 thử thách"],
+    highlights: ["#10/47 đội chung khảo", "334 đội dự thi", "2.080 điểm"],
     file: "achievements/cscv2026-giay-khen.pdf",
     fileLabel: "Giấy khen",
     link: {
       label: "Bảng xếp hạng",
       href: "achievements/cscv2026-scoreboard.webp",
     },
+    award: true,
+  },
+  {
+    name: "Top 10 NEU Startup Olympiad 2026",
+    institution:
+      "Dự án DynaTour — tour 3D bất động sản từ video điện thoại · Đại học Kinh tế Quốc dân",
+    year: "2026",
+    url: "https://www.facebook.com/share/p/19iPfzjrJd/",
+    fileLabel: "Bài đăng",
     award: true,
   },
   {
