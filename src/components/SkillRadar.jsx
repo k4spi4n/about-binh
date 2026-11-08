@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
+import { useLang } from "../i18n/useLang";
 
 // Move categories outside so it's constant and doesn't trigger hook deps warnings
 const categories = [
@@ -39,6 +40,7 @@ const withAlpha = (hex, alpha) =>
     .padStart(2, "0");
 
 export const SkillRadar = ({ skills }) => {
+  const { t } = useLang();
   const [activeCategory, setActiveCategory] = useState(null);
 
   // Group and calculate averages
@@ -297,7 +299,7 @@ export const SkillRadar = ({ skills }) => {
                 role="button"
                 tabIndex={0}
                 aria-pressed={isActive}
-                aria-label={`Xem chi tiết ${d.category}`}
+                aria-label={t("skills.detail", { name: t(`cat.${d.category}`) })}
                 className="cursor-pointer group focus:outline-none"
                 whileHover={{ scale: 1.06 }}
                 style={{ transformOrigin: `${center}px ${center}px` }}
@@ -373,7 +375,7 @@ export const SkillRadar = ({ skills }) => {
                   )}
                   style={isActive ? { fill: d.color } : undefined}
                 >
-                  {d.category}
+                  {t(`cat.${d.category}`)}
                 </text>
               </motion.g>
             );
@@ -414,17 +416,17 @@ export const SkillRadar = ({ skills }) => {
                       textShadow: `0 0 18px ${withAlpha(activeData.color, 0.5)}`,
                     }}
                   >
-                    {activeData.category}
+                    {t(`cat.${activeData.category}`)}
                   </h3>
                   <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/55 mt-1">
-                    {activeData.skills.length} kỹ năng
+                    {t("skills.count", { n: activeData.skills.length })}
                   </p>
                 </div>
                 <button
                   onClick={() => setActiveCategory(null)}
                   className="text-[10px] uppercase tracking-[0.15em] text-foreground/55 hover:text-foreground transition-colors"
                 >
-                  Đóng
+                  {t("close")}
                 </button>
               </div>
 
@@ -489,7 +491,7 @@ export const SkillRadar = ({ skills }) => {
               className="bg-card/30 backdrop-blur-sm border rounded-xl p-6 shadow-sm"
             >
               <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/55 mb-5 text-left">
-                Chọn một danh mục để xem chi tiết
+                {t("skills.pick")}
               </p>
               <div className="space-y-3">
                 {radarData.map((d) => (
@@ -507,10 +509,10 @@ export const SkillRadar = ({ skills }) => {
                             boxShadow: `0 0 8px ${d.color}`,
                           }}
                         />
-                        {d.category}
+                        {t(`cat.${d.category}`)}
                       </span>
                       <span className="text-[10px] uppercase tracking-widest text-foreground/40">
-                        {d.skills.length} kỹ năng
+                        {t("skills.count", { n: d.skills.length })}
                       </span>
                     </div>
                     <div className="h-1 rounded-full bg-foreground/8 overflow-hidden ml-[18px]">

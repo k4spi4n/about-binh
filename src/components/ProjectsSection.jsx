@@ -7,6 +7,7 @@ import { projects } from "../data/projects";
 import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
 import { AstralButton } from "./motion/AstralButton";
+import { useLang } from "../i18n/useLang";
 
 // Loops only while on screen, so off-screen clips don't keep decoding, and
 // stays on its first frame for visitors who prefer reduced motion.
@@ -36,6 +37,7 @@ const AutoplayVideo = (props) => {
 };
 
 export const ProjectsSection = () => {
+  const { t, l } = useLang();
   // A beam of light runs down the timeline as you read it, landing on each
   // project about when its card arrives.
   const timelineRef = useRef(null);
@@ -52,16 +54,14 @@ export const ProjectsSection = () => {
   return (
     <section id="projects" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-6xl">
-        <SectionTitle lead="Những Dự Án" accent="Nổi Bật" className="mb-6" />
+        <SectionTitle lead={t("projects.lead")} accent={t("projects.accent")} className="mb-6" />
 
         <Reveal
           as="p"
           delay={0.3}
           className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto"
         >
-          Dưới đây là những dự án tiêu biểu tôi đã trực tiếp tham gia phát
-          triển. Mỗi sản phẩm đều được đầu tư vào kiến trúc, hiệu năng và trải
-          nghiệm người dùng nhằm đảm bảo chất lượng triển khai thực tế.
+          {t("projects.intro")}
         </Reveal>
 
         <div className="timeline" ref={timelineRef}>
@@ -89,7 +89,7 @@ export const ProjectsSection = () => {
                     ) : (
                       <img
                         src={`${import.meta.env.BASE_URL}${project.image}`}
-                        alt={project.title}
+                        alt={l(project.title)}
                         className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
                       />
                     )}
@@ -140,18 +140,18 @@ export const ProjectsSection = () => {
                     </div>
 
                     <h3 className="text-lg font-semibold mb-1">
-                      {project.title}
+                      {l(project.title)}
                     </h3>
                     <p className="text-primary text-sm font-medium mb-2">
-                      Vai trò: {project.role}
+                      {t("projects.role", { role: l(project.role) })}
                       {!project.githubUrl && (
                         <span className="text-muted-foreground font-normal">
-                          {" "}· mã nguồn riêng
+                          {" "}· {t("projects.private")}
                         </span>
                       )}
                     </p>
                     <p className="text-muted-foreground text-sm">
-                      {project.description}
+                      {l(project.description)}
                     </p>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export const ProjectsSection = () => {
             target="_blank"
             href="https://github.com/k4spi4n"
           >
-            Xem thêm dự án trên GitHub <ArrowRight size={16} />
+            {t("projects.more")} <ArrowRight size={16} />
           </AstralButton>
         </div>
       </div>

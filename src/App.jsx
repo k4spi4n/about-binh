@@ -3,11 +3,13 @@ import { MotionConfig } from "framer-motion";
 import { Home } from "./pages/Home";
 import { Toaster } from "@/components/ui/toaster";
 import { IntroVeil } from "./components/motion/IntroVeil";
+import { LangProvider } from "./i18n/LangProvider";
 
 function App() {
   // reducedMotion="user": every framer animation (radar, modals, hero scroll)
   // drops its transforms for visitors who ask for reduced motion.
   return (
+    <LangProvider>
     <MotionConfig reducedMotion="user">
       <IntroVeil />
       <Toaster />
@@ -18,6 +20,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </MotionConfig>
+    </LangProvider>
   );
 }
 

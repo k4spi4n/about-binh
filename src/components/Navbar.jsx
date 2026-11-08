@@ -7,13 +7,16 @@ import { CVDownloadModal } from "./CVDownloadModal";
 import { navItems } from "../data/navigation";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { AstralButton } from "./motion/AstralButton";
+import { LangToggle } from "./LangToggle";
+import { useLang } from "../i18n/useLang";
 
 const sectionIds = navItems.map((item) => item.href.slice(1));
 
-const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026-VI.pdf`;
 const githubUrl = "https://github.com/k4spi4n";
 
 export const Navbar = () => {
+  const { lang, t, l } = useLang();
+  const cvUrl = `${import.meta.env.BASE_URL}documents/CV-2026-${lang.toUpperCase()}.pdf`;
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldShowNav, setShouldShowNav] = useState(true);
@@ -71,7 +74,8 @@ export const Navbar = () => {
           href="#hero"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground"> Hồ sơ </span> cá nhân
+            <span className="text-glow text-foreground"> {t("brand.a")} </span>{" "}
+            {t("brand.b")}
           </span>
         </a>
 
@@ -86,10 +90,11 @@ export const Navbar = () => {
                 item.href === `#${activeSection}` && "is-active text-primary",
               )}
             >
-              {item.name}
+              {l(item.name)}
             </a>
           ))}
           <div className="flex items-center gap-4">
+            <LangToggle />
             <AstralButton
               href={githubUrl}
               target="_blank"
@@ -106,20 +111,23 @@ export const Navbar = () => {
               className="flex items-center gap-1.5 px-4 py-2 text-sm"
             >
               <Download className="w-5 h-5" />
-              Tải xuống CV
+              {t("cv.download")}
             </AstralButton>
           </div>
         </div>
 
         {/* mobile nav */}
 
-        <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="xl:hidden p-2 text-foreground z-50"
-          aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="xl:hidden flex items-center gap-2 z-50">
+          <LangToggle />
+          <button
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="p-2 text-foreground"
+            aria-label={isMenuOpen ? t("menu.close") : t("menu.open")}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
         {createPortal(
           <div
@@ -148,7 +156,7 @@ export const Navbar = () => {
                   style={{ "--i": key }}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.name}
+                  {l(item.name)}
                 </a>
               ))}
               <div
@@ -171,7 +179,7 @@ export const Navbar = () => {
                   className="flex items-center gap-2 px-6 py-3 text-lg"
                 >
                   <Download className="w-6 h-6" />
-                  Tải xuống CV
+                  {t("cv.download")}
                 </AstralButton>
               </div>
             </div>

@@ -2,8 +2,10 @@ import { X, FileText, Download } from "lucide-react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
+import { useLang } from "../i18n/useLang";
 
 export const CVDownloadModal = ({ isOpen, onClose }) => {
+  const { t } = useLang();
   const handleDownload = (lang) => {
     onClose();
     const filename = lang === "vi" ? "CV-2026-VI.pdf" : "CV-2026-EN.pdf";
@@ -48,7 +50,7 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors duration-200"
-              aria-label="Close modal"
+              aria-label={t("close")}
             >
               <X size={20} />
             </button>
@@ -56,10 +58,10 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
             {/* Header */}
             <div className="mb-6 text-center">
               <h3 className="text-xl font-bold text-foreground">
-                Tải xuống CV / Download CV
+                {t("cvModal.title")}
               </h3>
               <p className="text-sm text-muted-foreground mt-2">
-                Vui lòng chọn phiên bản ngôn ngữ bạn muốn tải xuống:
+                {t("cvModal.pick")}
               </p>
             </div>
 
@@ -76,10 +78,10 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground">
-                      Tiếng Việt
+                      {t("cvModal.vi")}
                     </h4>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Bản tiếng Việt đầy đủ
+                      {t("cvModal.viSub")}
                     </p>
                   </div>
                 </div>
@@ -99,9 +101,9 @@ export const CVDownloadModal = ({ isOpen, onClose }) => {
                     <FileText size={20} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">English</h4>
+                    <h4 className="font-semibold text-foreground">{t("cvModal.en")}</h4>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Full English version
+                      {t("cvModal.enSub")}
                     </p>
                   </div>
                 </div>

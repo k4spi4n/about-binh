@@ -5,6 +5,7 @@ import { achievements } from "../data/achievements";
 import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
 import { PdfViewerModal } from "./PdfViewerModal";
+import { useLang } from "../i18n/useLang";
 
 const publicUrl = (path) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -16,6 +17,7 @@ const trackPointer = (e) => {
 };
 
 export const AchievementsSection = () => {
+  const { t, l } = useLang();
   const [selected, setSelected] = useState(null);
   // Stable so the modal's Escape listener isn't re-bound on every render
   const closeModal = useCallback(() => setSelected(null), []);
@@ -23,11 +25,11 @@ export const AchievementsSection = () => {
   return (
     <section id="achievements" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-6xl">
-        <SectionTitle lead="Thành Tích &" accent="Chứng Chỉ" className="mb-12" />
+        <SectionTitle lead={t("achv.lead")} accent={t("achv.accent")} className="mb-12" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {achievements.map((item, key) => (
-            <Reveal key={item.name} delay={(key % 3) * 0.12} className="h-full">
+            <Reveal key={item.file ?? item.url} delay={(key % 3) * 0.12} className="h-full">
               <div
                 onClick={() =>
                   item.url
@@ -55,16 +57,16 @@ export const AchievementsSection = () => {
                       </span>
                     </div>
                     <h3 className="font-semibold text-lg leading-snug mb-1">
-                      {item.name}
+                      {l(item.name)}
                     </h3>
                     <p className="text-foreground/60 text-sm">
-                      {item.institution}
+                      {l(item.institution)}
                     </p>
                   </div>
 
                   {(item.highlights || item.link) && (
                     <div className="flex flex-wrap items-center gap-2 text-left">
-                      {item.highlights?.map((h) => (
+                      {l(item.highlights)?.map((h) => (
                         <span
                           key={h}
                           className="px-2 py-1 text-xs font-medium rounded-full border border-primary/20 bg-primary/5 text-foreground/80"
@@ -80,7 +82,7 @@ export const AchievementsSection = () => {
                           onClick={(e) => e.stopPropagation()}
                           className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                         >
-                          {item.link.label}
+                          {l(item.link.label)}
                           <ExternalLink className="w-3 h-3" />
                         </a>
                       )}
@@ -92,7 +94,7 @@ export const AchievementsSection = () => {
                     ) : (
                       <Eye className="w-3.5 h-3.5" />
                     )}
-                    Xem {item.fileLabel.toLowerCase()}
+                    {t("view")} {l(item.fileLabel).toLowerCase()}
                     <ArrowRight className="h-3.5 w-0 -ml-1 opacity-0 transition-all duration-300 group-hover:w-3.5 group-hover:ml-0 group-hover:opacity-100" />
                   </span>
                 </div>
@@ -103,7 +105,7 @@ export const AchievementsSection = () => {
       </div>
 
       <PdfViewerModal
-        title={selected ? `${selected.fileLabel}: ${selected.name}` : undefined}
+        title={selected ? `${l(selected.fileLabel)}: ${l(selected.name)}` : undefined}
         url={selected ? publicUrl(selected.file) : undefined}
         onClose={closeModal}
       />

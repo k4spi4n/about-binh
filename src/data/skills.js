@@ -1,30 +1,45 @@
 export const skills = [
-  // Education
+  // Education: text fields are { vi, en }; `category` stays "Học vấn" as the
+  // key SkillsSection uses to split these from the radar skills.
   {
-    name: "Cử nhân Kỹ thuật Phần mềm (Học bổng toàn phần)",
-    institution: "Đại Học CMC",
+    name: {
+      vi: "Cử nhân Kỹ thuật Phần mềm (Học bổng toàn phần)",
+      en: "Bachelor of Software Engineering (Full scholarship)",
+    },
+    institution: { vi: "Đại Học CMC", en: "CMC University" },
     year: "(2024-2027)",
     category: "Học vấn",
   },
 
   {
-    name: "GPA: 3.5 (tính đến học kỳ Hè 2026)",
-    institution: "Đại Học CMC",
+    name: {
+      vi: "GPA: 3.5 (tính đến học kỳ Hè 2026)",
+      en: "GPA: 3.5 (as of Summer 2026)",
+    },
+    institution: { vi: "Đại Học CMC", en: "CMC University" },
     year: "(2026)",
     category: "Học vấn",
   },
 
   {
     name: "IELTS 7.5",
-    institution: "Năng lực giao tiếp và làm việc hiệu quả bằng tiếng Anh",
+    institution: {
+      vi: "Năng lực giao tiếp và làm việc hiệu quả bằng tiếng Anh",
+      en: "Able to communicate and work effectively in English",
+    },
     year: "",
     category: "Học vấn",
   },
 
-
   {
-    name: "Học sinh khối chuyên Ngữ",
-    institution: "THPT chuyên Nguyễn Trãi - Hải Dương",
+    name: {
+      vi: "Học sinh khối chuyên Ngữ",
+      en: "Foreign Language Major (gifted class)",
+    },
+    institution: {
+      vi: "THPT chuyên Nguyễn Trãi - Hải Dương",
+      en: "Nguyen Trai High School for the Gifted - Hai Duong",
+    },
     year: "(2021-2024)",
     category: "Học vấn",
   },

@@ -14,6 +14,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { Reveal } from "./motion/Reveal";
+import { useLang } from "../i18n/useLang";
 import { SectionTitle } from "./motion/SectionTitle";
 import { AstralButton } from "./motion/AstralButton";
 
@@ -35,6 +36,7 @@ const socials = [
 ];
 
 export const ContactSection = () => {
+  const { t } = useLang();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -63,14 +65,14 @@ export const ContactSection = () => {
         throw new Error(data.message);
       }
       toast({
-        title: "Đã gửi tin nhắn",
-        description: "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.",
+        title: t("contact.okTitle"),
+        description: t("contact.okText"),
       });
       form.reset();
     } catch {
       toast({
-        title: "Chưa gửi được tin nhắn",
-        description: `Vui lòng thử lại, hoặc email trực tiếp tới ${EMAIL}.`,
+        title: t("contact.failTitle"),
+        description: t("contact.failText", { email: EMAIL }),
       });
     } finally {
       setIsSubmitting(false);
@@ -79,21 +81,19 @@ export const ContactSection = () => {
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
-        <SectionTitle lead="Sẵn Sàng" accent="Hợp Tác" className="mb-6" />
+        <SectionTitle lead={t("contact.lead")} accent={t("contact.accent")} className="mb-6" />
 
         <Reveal
           as="p"
           delay={0.3}
           className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto"
         >
-          Cảm ơn bạn đã dành thời gian theo dõi hồ sơ của tôi. Nếu bạn đang tìm
-          kiếm cộng sự cho dự án công nghệ hoặc có cơ hội hợp tác phù hợp, tôi
-          luôn sẵn sàng trao đổi.
+          {t("contact.intro")}
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <Reveal className="space-y-8" delay={0.15}>
-            <h3 className="text-2xl font-semibold mb-6"> Thông tin liên hệ</h3>
+            <h3 className="text-2xl font-semibold mb-6">{t("contact.info")}</h3>
 
             <div className="space-y-6 justify-center">
               <div className="flex items-start space-x-4">
@@ -101,7 +101,7 @@ export const ContactSection = () => {
                   <Mail className="h-6 w-6 text-primary" />{" "}
                 </div>
                 <div>
-                  <h4 className="font-medium"> Email</h4>
+                  <h4 className="font-medium">{t("contact.emailLabel")}</h4>
                   <a
                     href={`mailto:${EMAIL}`}
                     className="text-muted-foreground hover:text-primary transition-colors"
@@ -115,7 +115,7 @@ export const ContactSection = () => {
                   <Phone className="h-6 w-6 text-primary" />{" "}
                 </div>
                 <div>
-                  <h4 className="font-medium"> Số điện thoại</h4>
+                  <h4 className="font-medium">{t("contact.phone")}</h4>
                   <a
                     href="tel:+84904098225"
                     className="text-muted-foreground hover:text-primary transition-colors"
@@ -129,16 +129,16 @@ export const ContactSection = () => {
                   <MapPin className="h-6 w-6 text-primary" />{" "}
                 </div>
                 <div>
-                  <h4 className="font-medium"> Địa chỉ</h4>
+                  <h4 className="font-medium">{t("contact.address")}</h4>
                   <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Hà Đông, Hà Nội, Việt Nam
+                    {t("contact.addressValue")}
                   </a>
                 </div>
               </div>
             </div>
 
             <div className="pt-8">
-              <h4 className="font-medium mb-4"> Kết nối với tôi </h4>
+              <h4 className="font-medium mb-4">{t("contact.social")}</h4>
               <div className="flex space-x-4 justify-center">
                 {socials.map(({ icon: Icon, href, label }) => (
                   <a
@@ -161,8 +161,7 @@ export const ContactSection = () => {
             className="bg-card p-8 rounded-lg shadow-xs"
           >
             <h3 className="text-2xl font-semibold mb-6">
-              {" "}
-              Gửi lời nhắn cho tôi{" "}
+              {t("contact.formTitle")}
             </h3>
 
             <form className="space-y-6" onSubmit={handleSubmit}>
@@ -172,7 +171,7 @@ export const ContactSection = () => {
                   className="block text-sm font-medium mb-2"
                 >
                   {" "}
-                  Tên của bạn
+                  {t("contact.name")}
                 </label>
                 <input
                   type="text"
@@ -190,7 +189,7 @@ export const ContactSection = () => {
                   className="block text-sm font-medium mb-2"
                 >
                   {" "}
-                  Email của bạn
+                  {t("contact.email")}
                 </label>
                 <input
                   type="email"
@@ -207,15 +206,14 @@ export const ContactSection = () => {
                   htmlFor="message"
                   className="block text-sm font-medium mb-2"
                 >
-                  {" "}
-                  Lời nhắn
+                  {t("contact.message")}
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
                   className="w-full px-4 py-3 rounded-md border bg-background transition-[border-color,box-shadow] duration-300 focus:outline-hidden focus:border-primary/60 focus:ring-2 focus:ring-primary/40 resize-none"
-                  placeholder="Xin chào, ..."
+                  placeholder={t("contact.placeholder")}
                 />
               </div>
 
@@ -225,7 +223,7 @@ export const ContactSection = () => {
                 disabled={isSubmitting}
                 className="w-full gap-2 px-6 py-2"
               >
-                {isSubmitting ? "Đang gửi..." : "Gửi tin nhắn"}
+                {isSubmitting ? t("contact.sending") : t("contact.send")}
                 <Send size={16} />
               </AstralButton>
             </form>

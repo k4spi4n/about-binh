@@ -9,7 +9,7 @@ cv:
       username: k4spi4n
   sections:
     summary:
-      - "K3 Software Engineering student at CMC University (full scholarship). Full-stack developer who ships AI-integrated products: lead developer of a production LMS used by 5+ companies and lead engineer of DynaTour (Top 10, NEU Startup Olympiad 2026). Works with Next.js, FastAPI, Supabase/PostgreSQL, Docker and Flutter, and integrates LLMs and 3D reconstruction pipelines."
+      - "K3 Software Engineering student at CMC University (full scholarship). Full-stack developer who ships AI-integrated products: lead developer of a production LMS for a training company and its corporate clients and lead engineer of DynaTour (Top 10, NEU Startup Olympiad 2026). Works with Next.js, FastAPI, Supabase/PostgreSQL, Docker and Flutter, and integrates LLMs and 3D reconstruction pipelines."
     education:
       - institution: CMC University
         area: Software Engineering
@@ -28,7 +28,7 @@ cv:
         date: 2026
         link: https://b2bpmp.io.vn/
         highlights:
-          - Lead developer (full-stack & DevOps) of a production LMS for 5+ companies, 10 classes and 20-30 instructors and staff; turned requirements gathered with the BA into features.
+          - Lead developer (full-stack & DevOps) of a production LMS for a training company and its corporate clients, with 10+ training classes and 30+ instructors and staff; turned requirements gathered with the BA into features.
           - Auto-scheduling that skips holidays, 5-stage TA checklist, attendance, document library, question bank, graded quizzes, 5-role access control; Google Calendar/Gmail/Drive integration; Docker CI/CD.
           - "Technologies: Next.js, PostgreSQL, Docker CI/CD, Google APIs"
       - name: DynaTour - Real Estate 3D Tour Solution from Mobile Video

@@ -9,7 +9,7 @@ cv:
       username: k4spi4n
   sections:
     Giới thiệu:
-      - "Sinh viên K3 Kỹ thuật phần mềm tại Đại học CMC (học bổng toàn phần). Lập trình viên full-stack làm sản phẩm tích hợp AI: lập trình viên chính của hệ thống LMS đang vận hành cho 5+ doanh nghiệp và kỹ sư chính của DynaTour (Top 10 NEU Startup Olympiad 2026). Làm việc với Next.js, FastAPI, Supabase/PostgreSQL, Docker, Flutter; tích hợp LLM và pipeline dựng 3D."
+      - "Sinh viên K3 Kỹ thuật phần mềm tại Đại học CMC (học bổng toàn phần). Lập trình viên full-stack làm sản phẩm tích hợp AI: lập trình viên chính của hệ thống LMS đang vận hành cho một doanh nghiệp đào tạo và các khách hàng doanh nghiệp của họ và kỹ sư chính của DynaTour (Top 10 NEU Startup Olympiad 2026). Làm việc với Next.js, FastAPI, Supabase/PostgreSQL, Docker, Flutter; tích hợp LLM và pipeline dựng 3D."
     Học vấn:
       - institution: Đại Học CMC
         area: Kỹ Thuật Phần Mềm
@@ -28,7 +28,7 @@ cv:
         date: 2026
         link: https://b2bpmp.io.vn/
         highlights:
-          - Lập trình viên chính (full-stack & DevOps) hệ thống LMS vận hành thực tế cho 5+ doanh nghiệp, 10 lớp, 20-30 giảng viên và nhân sự; cùng BA chuyển yêu cầu thành tính năng.
+          - Lập trình viên chính (full-stack & DevOps) hệ thống LMS vận hành thực tế cho một doanh nghiệp đào tạo và các khách hàng doanh nghiệp của họ, với hơn 10 lớp đào tạo và hơn 30 giảng viên, nhân sự; cùng BA chuyển yêu cầu thành tính năng.
           - Lịch học tự động né ngày lễ, checklist trợ giảng 5 giai đoạn, điểm danh, kho tài liệu, ngân hàng câu hỏi, bài kiểm tra chấm điểm, phân quyền 5 vai trò; tích hợp Google Calendar/Gmail/Drive; CI/CD Docker.
           - "Công nghệ: Next.js, PostgreSQL, Docker CI/CD, Google APIs"
       - name: DynaTour - Giải pháp tour 3D bất động sản từ video điện thoại

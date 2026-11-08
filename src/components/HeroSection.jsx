@@ -8,8 +8,10 @@ import {
 } from "framer-motion";
 import { DripText } from "./motion/DripText";
 import { AstralButton } from "./motion/AstralButton";
+import { useLang } from "../i18n/useLang";
 
 export const HeroSection = () => {
+  const { t } = useLang();
   const baseUrl = import.meta.env.BASE_URL.endsWith("/")
     ? import.meta.env.BASE_URL.slice(0, -1)
     : import.meta.env.BASE_URL;
@@ -68,10 +70,10 @@ export const HeroSection = () => {
 
         <div className="space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <DripText text="Xin chào, tôi là" />{" "}
+            <DripText text={t("hero.greeting")} />{" "}
             <DripText
-              text="Thái Bình"
-              startIndex={15}
+              text={t("hero.name")}
+              startIndex={Array.from(t("hero.greeting")).length}
               stagger={70}
               className="text-primary text-primary-glow"
             />
@@ -88,10 +90,7 @@ export const HeroSection = () => {
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto rise-in"
             style={{ "--rise-delay": "1.3s" }}
           >
-            Sinh viên Kỹ thuật Phần mềm tại Đại học CMC, theo đuổi lộ trình
-            Full-stack và AI Engineering với định hướng xây dựng sản phẩm có
-            kiến trúc vững chắc, hiệu năng cao và tác động thực tiễn cho người
-            dùng.
+            {t("hero.bio")}
           </p>
 
           <div
@@ -102,13 +101,13 @@ export const HeroSection = () => {
               href="#skills"
               className="px-8 py-3"
             >
-              Xem hồ sơ kỹ năng
+              {t("hero.skills")}
             </AstralButton>
             <AstralButton
               href="#projects"
               className="px-8 py-3"
             >
-              Xem dự án nổi bật
+              {t("hero.projects")}
             </AstralButton>
           </div>
         </div>
@@ -121,7 +120,7 @@ export const HeroSection = () => {
         <div className="scroll-hint flex flex-col items-center motion-safe:animate-bounce">
           <span className="text-sm text-muted-foreground mb-2">
             {" "}
-            Cuộn xuống để khám phá thêm{" "}
+            {t("hero.scroll")}{" "}
           </span>
           <ArrowDown className="h-5 w-5 text-primary" />
         </div>

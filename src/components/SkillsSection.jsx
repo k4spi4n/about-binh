@@ -2,8 +2,10 @@ import { SkillRadar } from "./SkillRadar";
 import { skills } from "../data/skills";
 import { Reveal } from "./motion/Reveal";
 import { SectionTitle } from "./motion/SectionTitle";
+import { useLang } from "../i18n/useLang";
 
 export const SkillsSection = () => {
+  const { t, l } = useLang();
   const educationSkills = skills.filter(
     (skill) => skill.category === "Học vấn",
   );
@@ -14,7 +16,7 @@ export const SkillsSection = () => {
   return (
     <section id="skills" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-6xl">
-        <SectionTitle lead="Hồ Sơ" accent="Kỹ Năng" className="mb-12" />
+        <SectionTitle lead={t("skills.lead")} accent={t("skills.accent")} className="mb-12" />
 
         {/* Technical Skills - Radar Chart */}
         <div className="mb-16">
@@ -29,16 +31,16 @@ export const SkillsSection = () => {
         {/* Education Section */}
         <div>
           <h3 className="text-2xl font-semibold mb-8 text-center md:text-left flex items-center justify-center md:justify-start gap-3">
-            Học Vấn
+            {t("skills.education")}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {educationSkills.map((skill, key) => (
               <Reveal key={key} delay={(key % 3) * 0.12} className="h-full">
               <div className="bg-card p-6 rounded-lg shadow-xs card-hover relative overflow-hidden h-full">
                 <div className="text-left">
-                  <h3 className="font-semibold text-lg">{skill.name}</h3>
+                  <h3 className="font-semibold text-lg">{l(skill.name)}</h3>
                   <p className="text-muted-foreground text-sm">
-                    {skill.institution} {skill.year}
+                    {l(skill.institution)} {skill.year}
                   </p>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { navItems } from "../data/navigation";
 import { useActiveSection } from "../hooks/useActiveSection";
+import { useLang } from "../i18n/useLang";
 
 const ids = navItems.map((item) => item.href.slice(1));
 
@@ -12,6 +13,7 @@ const ids = navItems.map((item) => item.href.slice(1));
  * It only shows while the visitor is actively scrolling (see useQuietChrome).
  */
 export const SectionRail = () => {
+  const { t, l } = useLang();
   const active = useActiveSection(ids);
   const activeItem = navItems.find((item) => item.href === `#${active}`);
   const railRef = useRef(null);
@@ -61,7 +63,7 @@ export const SectionRail = () => {
     <aside
       ref={railRef}
       className={cn("rail hidden lg:block", active === "hero" && "is-home")}
-      aria-label="Điều hướng nhanh"
+      aria-label={t("rail.label")}
     >
       <div className="rail-track">
         {navItems.map((item, i) => (
@@ -73,9 +75,9 @@ export const SectionRail = () => {
               item.href === `#${active}` && "is-active",
             )}
             style={{ "--at": i / (navItems.length - 1) }}
-            aria-label={item.name}
+            aria-label={l(item.name)}
           >
-            <span className="rail-tick-label">{item.short}</span>
+            <span className="rail-tick-label">{l(item.short)}</span>
           </a>
         ))}
 
@@ -84,7 +86,7 @@ export const SectionRail = () => {
           <div className="rail-capsule">
             {/* Keyed so the label replays its swap-in on every change */}
             <span key={active} className="rail-capsule-text">
-              {activeItem?.short}
+              {activeItem && l(activeItem.short)}
             </span>
             <svg className="rail-wave" viewBox="0 0 40 12" fill="none">
               <path d="M0 6 Q 2.5 1 5 6 T 10 6 T 15 6 T 20 6 T 25 6 T 30 6 T 35 6 T 40 6" />

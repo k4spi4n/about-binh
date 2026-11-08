@@ -3,11 +3,13 @@ import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useLang } from "../i18n/useLang";
 
 // Rendered into <body> so no transformed or filtered ancestor can become the
 // containing block of its fixed overlay. Open while `url` is set; it keeps
 // the last document on screen while it animates out.
 export const PdfViewerModal = ({ title, url, onClose }) => {
+  const { t } = useLang();
   const open = Boolean(url);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export const PdfViewerModal = ({ title, url, onClose }) => {
               <button
                 onClick={onClose}
                 className="p-2 rounded-full hover:bg-secondary transition-colors"
-                aria-label="Đóng"
+                aria-label={t("close")}
               >
                 <X className="w-5 h-5" />
               </button>
