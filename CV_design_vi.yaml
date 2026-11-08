@@ -13,13 +13,13 @@ cv:
     Học vấn:
       - institution: Đại Học CMC
         area: Kỹ Thuật Phần Mềm
-        degree: Cử nhân
+        degree: Cử nhân ngành
         start_date: 2024-09
         end_date: 2027-06
         highlights:
           - "GPA: 3.5/4.0 (Tính đến học kỳ Hè 2026) · Học bổng toàn phần"
       - institution: THPT Chuyên Nguyễn Trãi - Hải Dương
-        area: Khối chuyên Ngữ
+        area: khối chuyên Ngữ
         degree: Tốt nghiệp THPT
         start_date: 2021-09
         end_date: 2024-06
@@ -76,6 +76,8 @@ cv:
 
 locale:
   language: vietnamese
+  phrases:
+    degree_with_area: DEGREE AREA
 
 design:
   theme: engineeringresumes
