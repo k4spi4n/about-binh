@@ -26,6 +26,15 @@ export const achievements = [
     award: true,
   },
   {
+    name: "Giải Khuyến khích — Sinh viên Nghiên cứu khoa học cấp trường",
+    institution:
+      "Cuộc thi Sinh viên nghiên cứu khoa học năm học 2025–2026 · Đại học CMC (kèm giấy chứng nhận tham gia)",
+    year: "2026",
+    file: "achievements/cmc-nckh-2026.pdf",
+    fileLabel: "Giấy khen",
+    award: true,
+  },
+  {
     name: "Chứng chỉ AI của Samsung Innovation Campus (SIC)",
     institution:
       "Hoàn thành chương trình đào tạo chuyên sâu về Trí tuệ nhân tạo do Samsung Electronics Việt Nam xác nhận",
@@ -40,14 +49,5 @@ export const achievements = [
     year: "2025",
     file: "skills/cert_NVIDIA-DLI_DL.pdf",
     fileLabel: "Chứng chỉ",
-  },
-  {
-    name: "Giải Khuyến khích — Sinh viên Nghiên cứu khoa học cấp trường",
-    institution:
-      "Cuộc thi Sinh viên nghiên cứu khoa học năm học 2025–2026 · Đại học CMC (kèm giấy chứng nhận tham gia)",
-    year: "2026",
-    file: "achievements/cmc-nckh-2026.pdf",
-    fileLabel: "Giấy khen",
-    award: true,
   },
 ];
