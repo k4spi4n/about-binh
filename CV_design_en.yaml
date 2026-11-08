@@ -9,7 +9,7 @@ cv:
       username: k4spi4n
   sections:
     summary:
-      - K3 Software Engineering student at CMC University with a full scholarship. Passionate about building interactive web applications, game development, and AI integration. Experienced in React, Flutter, Supabase, Next.js, .NET, and Computer Vision.
+      - "K3 Software Engineering student at CMC University (full scholarship). Full-stack developer who ships AI-integrated products: lead developer of a production LMS used by 5+ companies and lead engineer of DynaTour (Top 10, NEU Startup Olympiad 2026). Works with Next.js, FastAPI, Supabase/PostgreSQL, Docker and Flutter, and integrates LLMs and 3D reconstruction pipelines."
     education:
       - institution: CMC University
         area: Software Engineering

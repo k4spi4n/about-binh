@@ -45,16 +45,17 @@ export const AboutSection = () => {
             </h3>
 
             <p className="text-muted-foreground">
-              Sinh viên Kỹ thuật Phần mềm tại Đại học CMC (học bổng toàn phần,
-              GPA 3.5/4.0), đạt giải Khuyến khích
-              Sinh viên Nghiên cứu khoa học cấp trường 2026. IELTS 7.5.
+              Sinh viên K3 Kỹ thuật Phần mềm tại Đại học CMC (học bổng toàn
+              phần, GPA 3.5/4.0, IELTS 7.5). Tôi làm sản phẩm từ giao diện đến
+              backend, hạ tầng và tích hợp AI.
             </p>
 
             <p className="text-muted-foreground">
-              Tôi đã đưa một LMS vào vận hành thực tế cho 5+ doanh nghiệp, đạt
-              Top 10 NEU Startup Olympiad 2026 với DynaTour và giải Khuyến khích
-              CSCV 2026. Trọng tâm hiện tại: Full-stack và tích hợp AI vào sản
-              phẩm.
+              Tôi là lập trình viên chính của một hệ thống LMS đang vận hành
+              cho 5+ doanh nghiệp, kỹ sư chính của DynaTour (Top 10 NEU Startup
+              Olympiad 2026) và đội trưởng đội CMC.CBS (hạng 10/47 đội chung
+              khảo CSCV 2026). Hiện tôi tập trung vào Full-stack và đưa AI vào
+              sản phẩm thật.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">

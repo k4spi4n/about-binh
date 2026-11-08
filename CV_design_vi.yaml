@@ -9,7 +9,7 @@ cv:
       username: k4spi4n
   sections:
     Giới thiệu:
-      - Sinh viên K3 khoa Kỹ thuật phần mềm của trường Đại học CMC với học bổng toàn phần. Đam mê xây dựng các ứng dụng web tương tác, phát triển game và ứng dụng AI. Có kinh nghiệm thực tế với React, Flutter, Supabase, Next.js, .NET và Computer Vision.
+      - "Sinh viên K3 Kỹ thuật phần mềm tại Đại học CMC (học bổng toàn phần). Lập trình viên full-stack làm sản phẩm tích hợp AI: lập trình viên chính của hệ thống LMS đang vận hành cho 5+ doanh nghiệp và kỹ sư chính của DynaTour (Top 10 NEU Startup Olympiad 2026). Làm việc với Next.js, FastAPI, Supabase/PostgreSQL, Docker, Flutter; tích hợp LLM và pipeline dựng 3D."
     Học vấn:
       - institution: Đại Học CMC
         area: Kỹ Thuật Phần Mềm
