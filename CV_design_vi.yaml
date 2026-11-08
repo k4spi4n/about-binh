@@ -18,7 +18,6 @@ cv:
         end_date: 2027-06
         highlights:
           - "GPA: 3.5/4.0 (Tính đến học kỳ Hè 2026) · Học bổng toàn phần"
-          - Thành viên đội tuyển Olympic Tin Học và nhóm Nghiên cứu Khoa học
       - institution: THPT Chuyên Nguyễn Trãi - Hải Dương
         area: Khối chuyên Ngữ
         degree: Tốt nghiệp THPT
@@ -29,45 +28,43 @@ cv:
         date: 2026
         link: https://b2bpmp.io.vn/
         highlights:
-          - Hệ thống quản lý đào tạo tùy biến đang vận hành thực tế cho các lớp đào tạo doanh nghiệp, lịch học tự động né ngày lễ.
-          - Checklist trợ giảng 5 giai đoạn, điểm danh, kho tài liệu theo lớp, ngân hàng câu hỏi và bài kiểm tra có chấm điểm.
-          - Tích hợp Google Calendar, Gmail và Drive; phân quyền 5 vai trò; CI/CD tự động triển khai bằng Docker.
+          - Lập trình viên chính (full-stack & DevOps) hệ thống LMS vận hành thực tế cho 5+ doanh nghiệp, 10 lớp, 20-30 giảng viên và nhân sự; cùng BA chuyển yêu cầu thành tính năng.
+          - Lịch học tự động né ngày lễ, checklist trợ giảng 5 giai đoạn, điểm danh, kho tài liệu, ngân hàng câu hỏi, bài kiểm tra chấm điểm, phân quyền 5 vai trò; tích hợp Google Calendar/Gmail/Drive; CI/CD Docker.
           - "Công nghệ: Next.js, PostgreSQL, Docker CI/CD, Google APIs"
       - name: DynaTour - Giải pháp tour 3D bất động sản từ video điện thoại
         date: 2026
         link: https://dynatour.io.vn/
         highlights:
-          - Tự động biến video quay không gian từ điện thoại thành các tour 3D tương tác sống động cho căn hộ, bất động sản.
-          - Hỗ trợ khách hàng trải nghiệm không gian từ xa chân thực, tối ưu hóa tỷ lệ chuyển đổi và tăng tốc độ chốt giao dịch.
-          - "Công nghệ: React, WebGL / Three.js, Computer Vision, 3D Reconstruction"
+          - Kỹ sư chính trong nhóm 4 sinh viên. Top 10 NEU Startup Olympiad 2026.
+          - Xây dựng API FastAPI trên Cloud Run, Supabase Postgres (RLS, RPC trừ điểm idempotent) và pipeline GPU serverless dựng 3D Gaussian Splatting, lọc video bằng CPU trước khi cấp GPU để tiết kiệm chi phí.
+          - "Công nghệ: FastAPI, Supabase, 3D Gaussian Splatting, Serverless GPU"
       - name: Runny AI - Trợ lý chạy bộ thông minh tích hợp AI Coach
         date: 2025 - 2026
         link: https://github.com/k4spi4n/runny-ai
         highlights:
-          - Phát triển ứng dụng trợ lý chạy bộ cá nhân kết hợp dữ liệu tập luyện, HLV ảo AI Coach và cộng đồng.
-          - Tự động đồng bộ Strava API, trực quan hóa Pace/Heart Rate và quản lý hao mòn giày (Shoe Tracker).
-          - "Công nghệ: Flutter, Supabase (Database, Auth, Edge Functions), AI Coach"
+          - Phụ trách database và backend/AI trong nhóm 4 sinh viên cho app Flutter trợ lý chạy bộ (biểu đồ Pace/Heart Rate, Shoe Tracker, AI Coach).
+          - Đồng bộ Strava API; điều phối LLM trên Edge Functions giữa 4 nhà cung cấp (gồm model tự host), có circuit breaker và retry.
+          - "Công nghệ: Flutter, Supabase, LLM Routing, Strava API"
       - name: Hệ thống Quản lý Bệnh viện Thông minh (Smart Hospital Management System)
         date: 2025
         link: https://github.com/k4spi4n/cmec-hms-web-app
         highlights:
-          - Phát triển hệ thống thông tin và quản lý bệnh viện toàn diện, số hóa quy trình vận hành.
-          - Tích hợp AI để hỗ trợ tóm tắt hồ sơ y tế, chẩn đoán bệnh án và hỗ trợ quyết định lâm sàng.
-          - "Công nghệ: PostgreSQL, Supabase, Next.js, FastAPI, AI"
+          - Tự phát triển full-stack và AI backend; AI tóm tắt hồ sơ y tế, gợi ý chẩn đoán và trợ lý chat ngay trong hồ sơ bệnh án.
+          - "Công nghệ: Next.js, FastAPI, Supabase (PostgreSQL), LLM"
       - name: Website hỗ trợ cá nhân hoá học tập dựa trên AI
         date: 2025
         highlights:
-          - Tự động hóa quy trình tạo đề thi, bài tập và cá nhân hóa trải nghiệm học tập cho học sinh.
-          - Hỗ trợ giáo viên quản lý lớp học, theo dõi tiến độ và đưa ra quyết định giảng dạy dựa trên dữ liệu.
+          - "Backend developer (.NET, MongoDB): tự động sinh đề thi, bài tập, cá nhân hóa lộ trình học, dashboard cho giáo viên."
           - "Công nghệ: Angular, .NET, MongoDB, AI"
     Giải thưởng:
       - bullet: "**Top 10 NEU Startup Olympiad 2026** - Dự án DynaTour, Đại học Kinh tế Quốc dân (2026)"
       - bullet: "**Giải Khuyến khích bảng B, CSCV 2026** - Cuộc thi Sinh viên An ninh mạng 2026 (CTF jeopardy); đội CMC.CBS hạng 10 chung kết với 2.080 điểm (2026)"
+      - bullet: "**Giải Khuyến khích Sinh viên Nghiên cứu khoa học cấp trường 2025-2026** - Đại học CMC (2026)"
     Kỹ năng:
       - label: Ngôn ngữ lập trình
         details: Python, JavaScript, TypeScript, Dart, Java, C++, C#, HTML/CSS
       - label: Frameworks & Libraries
-        details: React, Flutter, Next.js, Django, Node.js, .NET, Tailwind CSS, OpenCV, NumPy, Three.js
+        details: React, Flutter, Next.js, FastAPI, Django, Node.js, .NET, Tailwind CSS, PyTorch, OpenCV, NumPy
       - label: Cơ sở dữ liệu & BaaS
         details: PostgreSQL, Supabase, MongoDB, SQL Server
       - label: Công cụ

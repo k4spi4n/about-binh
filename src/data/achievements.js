@@ -41,4 +41,13 @@ export const achievements = [
     file: "skills/cert_NVIDIA-DLI_DL.pdf",
     fileLabel: "Chứng chỉ",
   },
+  {
+    name: "Giải Khuyến khích — Sinh viên Nghiên cứu khoa học cấp trường",
+    institution:
+      "Cuộc thi Sinh viên nghiên cứu khoa học năm học 2025–2026 · Đại học CMC (kèm giấy chứng nhận tham gia)",
+    year: "2026",
+    file: "achievements/cmc-nckh-2026.pdf",
+    fileLabel: "Giấy khen",
+    award: true,
+  },
 ];

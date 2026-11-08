@@ -18,7 +18,6 @@ cv:
         end_date: 2027-06
         highlights:
           - "GPA: 3.5/4.0 (As of Summer 2026) · Full scholarship recipient"
-          - Member of the Olympic IT team and the Scientific Research team
       - institution: Nguyen Trai High School for the Gifted - Hai Duong
         area: Foreign Language Major
         degree: High School Graduate
@@ -29,45 +28,43 @@ cv:
         date: 2026
         link: https://b2bpmp.io.vn/
         highlights:
-          - Built a custom training management system running in production for corporate classes, with auto-scheduling that skips public holidays.
-          - Delivered a 5-stage teaching-assistant checklist, attendance, per-class document library, question bank, and graded quizzes.
-          - Integrated Google Calendar, Gmail, and Drive; 5-role access control; Docker-based CI/CD auto-deployment.
+          - Lead developer (full-stack & DevOps) of a production LMS for 5+ companies, 10 classes and 20-30 instructors and staff; turned requirements gathered with the BA into features.
+          - Auto-scheduling that skips holidays, 5-stage TA checklist, attendance, document library, question bank, graded quizzes, 5-role access control; Google Calendar/Gmail/Drive integration; Docker CI/CD.
           - "Technologies: Next.js, PostgreSQL, Docker CI/CD, Google APIs"
       - name: DynaTour - Real Estate 3D Tour Solution from Mobile Video
         date: 2026
         link: https://dynatour.io.vn/
         highlights:
-          - Automatically converts walkthrough videos from mobile phones into interactive and vivid 3D tours for real estate.
-          - Facilitates remote space viewing, optimizing conversion rates and accelerating deal closure.
-          - "Technologies: React, WebGL / Three.js, Computer Vision, 3D Reconstruction"
+          - Lead engineer in a team of 4. Top 10, NEU Startup Olympiad 2026.
+          - Built the FastAPI backend on Cloud Run, Supabase Postgres (RLS, idempotent point-deduction RPC) and a serverless GPU 3D Gaussian Splatting pipeline with a CPU video-filter step to cut GPU cost.
+          - "Technologies: FastAPI, Supabase, 3D Gaussian Splatting, Serverless GPU"
       - name: Runny AI - Intelligent Running Assistant with AI Coach
         date: 2025 - 2026
         link: https://github.com/k4spi4n/runny-ai
         highlights:
-          - Developed a personal running assistant combining training data tracking, AI Coach consultation, and community.
-          - Implemented Strava API synchronization, Pace/Heart Rate visualization, and shoe wear monitoring (Shoe Tracker).
-          - "Technologies: Flutter, Supabase (Database, Auth, Edge Functions), AI Coach"
+          - Database and backend/AI owner in a team of 4 for a Flutter running assistant (Pace/Heart Rate charts, Shoe Tracker, AI Coach).
+          - Strava API sync; LLM orchestration on Edge Functions across 4 providers (incl. a self-hosted model) with circuit breaker and retry.
+          - "Technologies: Flutter, Supabase, LLM Routing, Strava API"
       - name: Smart Hospital Management System
         date: 2025
         link: https://github.com/k4spi4n/cmec-hms-web-app
         highlights:
-          - Developed a comprehensive full-stack hospital information system to digitize operational workflows.
-          - Integrated AI to support medical record summarization, automated diagnosis suggestions, and clinical decisions.
-          - "Technologies: PostgreSQL, Supabase, Next.js, FastAPI, AI"
+          - Solo full-stack and AI-backend developer; AI medical-record summarization, diagnosis suggestions and an in-record chat assistant.
+          - "Technologies: Next.js, FastAPI, Supabase (PostgreSQL), LLM"
       - name: AI-Based Personalized Learning Web App
         date: 2025
         highlights:
-          - Automated exam and assignment generation, personalizing the learning experience for students using AI.
-          - Provided teacher dashboards for class management, progress tracking, and data-driven teaching decisions.
+          - "Backend developer (.NET, MongoDB): auto-generated exams and assignments, personalized learning paths, teacher dashboards."
           - "Technologies: Angular, .NET, MongoDB, AI"
     awards:
       - bullet: "**Top 10, NEU Startup Olympiad 2026** - DynaTour project, National Economics University (2026)"
       - bullet: "**Consolation Prize (Division B), CSCV 2026** - Vietnam Student Cybersecurity Contest, jeopardy CTF; team CMC.CBS placed #10 in the finals with 2,080 points (2026)"
+      - bullet: "**Consolation Prize, CMC University Undergraduate Research Conference 2025-2026** (2026)"
     skills:
       - label: Programming Languages
         details: Python, JavaScript, TypeScript, Dart, Java, C++, C#, HTML/CSS
       - label: Frameworks & Libraries
-        details: React, Flutter, Next.js, Django, Node.js, .NET, Tailwind CSS, OpenCV, NumPy, Three.js
+        details: React, Flutter, Next.js, FastAPI, Django, Node.js, .NET, Tailwind CSS, PyTorch, OpenCV, NumPy
       - label: Databases & BaaS
         details: PostgreSQL, Supabase, MongoDB, SQL Server
       - label: Tools & Platforms

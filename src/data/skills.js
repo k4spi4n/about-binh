@@ -29,13 +29,6 @@ export const skills = [
     category: "Học vấn",
   },
 
-  {
-    name: "Thành viên đội tuyển Olympic Tin học và nhóm Nghiên cứu khoa học",
-    institution: "Đại Học CMC",
-    year: "(2025)",
-    category: "Học vấn",
-  },
-
   // Ngôn ngữ lập trình
   { name: "Python", level: 5, category: "Ngôn ngữ lập trình" },
   { name: "JavaScript", level: 4, category: "Ngôn ngữ lập trình" },
