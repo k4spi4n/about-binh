@@ -18,6 +18,7 @@ cv:
         end_date: 2027-06
         highlights:
           - "GPA: 3.5/4.0 (As of Summer 2026) · Full scholarship recipient"
+          - "IELTS 7.5"
       - institution: Nguyen Trai High School for the Gifted - Hai Duong
         area: Foreign Language Major
         degree: High School Graduate
@@ -62,15 +63,13 @@ cv:
       - bullet: "**Consolation Prize, CMC University Undergraduate Research Conference 2025-2026** (2026)"
     skills:
       - label: Programming Languages
-        details: Python, JavaScript, TypeScript, Dart, Java, C++, C#, HTML/CSS
+        details: Python, JavaScript, TypeScript, Dart, Java, C++, C#
       - label: Frameworks & Libraries
         details: React, Flutter, Next.js, FastAPI, Django, Node.js, .NET, Tailwind CSS, PyTorch, OpenCV, NumPy
       - label: Databases & BaaS
-        details: PostgreSQL, Supabase, MongoDB, SQL Server
+        details: PostgreSQL, Supabase, MongoDB
       - label: Tools & Platforms
-        details: Git, GitHub, Docker, VS Code, Unity, Unreal Engine, Adobe Photoshop
-      - label: Languages
-        details: English (IELTS 7.5), Vietnamese (Native)
+        details: Git, Docker, Unity
       - label: Certifications
         details: Samsung Innovation Campus (SIC) AI Certification, NVIDIA DLI Deep Learning
 
