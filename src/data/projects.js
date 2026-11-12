@@ -1,7 +1,9 @@
-// `role`, `title` and `description` are { vi, en }.
+// `role`, `title`, `label` and `description` are { vi, en }. `label` is the
+// short name shown on the planet picker.
 export const projects = [
   {
     id: 1,
+    label: { vi: "PMA", en: "PMA" },
     role: {
       vi: "Lập trình viên chính · Full-stack & DevOps",
       en: "Lead developer · Full-stack & DevOps",
@@ -22,6 +24,7 @@ export const projects = [
   },
   {
     id: 2,
+    label: { vi: "DynaTour", en: "DynaTour" },
     role: {
       vi: "Kỹ sư chính · nhóm 4 sinh viên",
       en: "Lead engineer · team of 4 students",
@@ -39,6 +42,7 @@ export const projects = [
   },
   {
     id: 3,
+    label: { vi: "Runny AI", en: "Runny AI" },
     role: {
       vi: "Database & Backend/AI · nhóm 4 sinh viên",
       en: "Database & Backend/AI · team of 4 students",
@@ -56,6 +60,7 @@ export const projects = [
   },
   {
     id: 4,
+    label: { vi: "Quản lý Bệnh viện", en: "Hospital System" },
     role: {
       vi: "Phát triển độc lập · Full-stack & AI backend",
       en: "Solo developer · Full-stack & AI backend",
@@ -76,6 +81,7 @@ export const projects = [
   },
   {
     id: 5,
+    label: { vi: "Học tập AI", en: "AI Learning" },
     role: {
       vi: "Backend Developer · .NET & MongoDB",
       en: "Backend developer · .NET & MongoDB",
@@ -97,6 +103,7 @@ export const projects = [
   },
   {
     id: 6,
+    label: { vi: "Goblin Invasion", en: "Goblin Invasion" },
     role: {
       vi: "Phát triển độc lập (solo)",
       en: "Solo developer",

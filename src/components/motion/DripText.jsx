@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { cn } from "@/lib/utils";
+import { glyph } from "@/lib/cipher";
+
+// How long a glyph keeps flickering as code after it starts to appear (ms)
+const DECODE_MS = 480;
 
 // Small deterministic jitter so every glyph falls a slightly different
 // distance and tilt, without changing between renders.
@@ -11,7 +15,8 @@ const jitter = (seed) => {
 
 /**
  * Splits text into glyphs that condense out of a blur one by one, as if
- * dripping into place. Words stay unbreakable so wrapping still happens only
+ * dripping into place. Each arrives as a flickering cipher character and
+ * decodes into the real letter once it has landed. Words stay unbreakable so wrapping still happens only
  * between words.
  *
  * - `startIndex` continues the stagger from a previous DripText, so a heading
@@ -45,6 +50,47 @@ export const DripText = ({
     observer.observe(ref.current);
     return () => observer.disconnect();
   }, [whenVisible]);
+
+  // Decode: until its moment comes, each glyph shows a random stand-in. The
+  // stand-in lives in data-g and is painted by ::after (motion.css) over the
+  // real, transparent letter, so layout and React's text never change.
+  useEffect(() => {
+    const root = ref.current;
+    if (
+      !play ||
+      !root ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return undefined;
+    }
+    const chars = [...root.querySelectorAll(".drip-c")];
+    const lead = whenVisible
+      ? 0
+      : parseFloat(getComputedStyle(root).getPropertyValue("--intro-delay")) *
+          1000 || 0;
+    const t0 = performance.now() + lead + delay * 1000;
+    let id = 0;
+    const tick = () => {
+      const ms = performance.now() - t0;
+      let pending = false;
+      chars.forEach((c) => {
+        const at = Number(c.style.getPropertyValue("--i")) * stagger + DECODE_MS;
+        if (ms < at) {
+          c.dataset.g = glyph();
+          pending = true;
+        } else {
+          delete c.dataset.g;
+        }
+      });
+      if (!pending) clearInterval(id);
+    };
+    id = setInterval(tick, 50);
+    tick();
+    return () => {
+      clearInterval(id);
+      chars.forEach((c) => delete c.dataset.g);
+    };
+  }, [play, whenVisible, delay, stagger]);
 
   const words = text.normalize("NFC").split(/(\s+)/);
   let index = startIndex;

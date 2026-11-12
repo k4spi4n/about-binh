@@ -1,0 +1,542 @@
+/* ════════════════════════════════════════════════════════════════════
+   Projects: a solar system.
+   The section pins while you scroll; scroll progress walks through the
+   planets one by one (ProjectsSection), and picking a planet scrolls to
+   its stop. The sun is the source of the signal: a beam runs from it to
+   whichever planet is tuned in, and that project's transmission shows in
+   the panel beside it.
+   ════════════════════════════════════════════════════════════════════ */
+
+.signal-id i {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
+  box-shadow: 0 0 8px hsl(var(--primary));
+}
+
+/* ── Pinned stage ──────────────────────────────────────────────────── */
+
+/* Tall track: one screen to pin on, plus a stretch of scroll per planet */
+.solar-track {
+  position: relative;
+  height: calc(100vh + var(--stops) * 70vh);
+}
+
+.solar-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+  grid-template-rows: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.25rem 3rem;
+  /* Right padding keeps the card clear of the section rail */
+  padding: 5rem 2rem 1.5rem 0;
+}
+
+/* Section title, across the top of the pinned view */
+.solar-title {
+  grid-column: 1 / -1;
+}
+
+.solar-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+/* ── The system ────────────────────────────────────────────────────── */
+
+.solar {
+  position: relative;
+  width: min(100%, 100vh - 20rem);
+  aspect-ratio: 1;
+}
+
+/* The sun: where the signal comes from. It keeps emitting faint rings. */
+.solar-sun {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 40% 35%,
+    #fff,
+    hsl(250 90% 82%) 35%,
+    hsl(var(--primary)) 70%,
+    hsl(292 84% 45%)
+  );
+  box-shadow:
+    0 0 24px 4px hsl(var(--primary) / 0.7),
+    0 0 70px 18px hsl(var(--primary) / 0.25);
+}
+
+.solar-sun::before,
+.solar-sun::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid hsl(var(--primary) / 0.7);
+  animation: solar-emit 4s ease-out infinite;
+}
+
+.solar-sun::after {
+  animation-delay: -2s;
+}
+
+/* An orbit is a ring that turns; its planet rides the right-hand edge.
+   `rotate` holds the starting angle so `transform` is free to spin. */
+.solar-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--d);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  rotate: var(--phase);
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--foreground) / 0.1);
+  pointer-events: none;
+  animation: solar-turn var(--period) linear infinite;
+  transition: border-color 0.6s var(--ease-settle);
+}
+
+.solar-orbit[data-active] {
+  border-color: hsl(var(--hue) 85% 68% / 0.5);
+}
+
+/* Hovering the system holds it still, so a planet is easy to pick */
+.solar:hover .solar-orbit {
+  animation-play-state: paused;
+}
+
+/* The signal from the sun to the tuned-in planet */
+.solar-beam {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 10%,
+    hsl(var(--hue) 85% 68% / 0.9)
+  );
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.7s var(--ease-settle);
+}
+
+.solar-orbit[data-active] .solar-beam {
+  transform: scaleX(1);
+}
+
+.solar-planet {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: var(--size);
+  height: var(--size);
+  translate: -50% -50%;
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  cursor: pointer;
+  pointer-events: auto;
+  background: radial-gradient(
+    circle at 35% 30%,
+    hsl(var(--hue) 90% 86%),
+    hsl(var(--hue) 75% 58%) 45%,
+    hsl(var(--hue) 70% 22%)
+  );
+  box-shadow: 0 0 10px hsl(var(--hue) 85% 60% / 0.45);
+  transition:
+    scale 0.5s var(--ease-settle),
+    box-shadow 0.5s var(--ease-settle);
+}
+
+/* A generous invisible hit area around the small moving target */
+.solar-planet::before {
+  content: "";
+  position: absolute;
+  inset: -0.7rem;
+  border-radius: inherit;
+}
+
+/* Lock-on ring */
+.solar-planet::after {
+  content: "";
+  position: absolute;
+  inset: -0.45rem;
+  border-radius: inherit;
+  border: 1px solid hsl(var(--hue) 85% 72%);
+  opacity: 0;
+  scale: 1.6;
+  transition:
+    opacity 0.5s var(--ease-settle),
+    scale 0.5s var(--ease-settle);
+}
+
+.solar-planet:hover,
+.solar-planet:focus-visible {
+  scale: 1.25;
+  outline: none;
+}
+
+.solar-planet:focus-visible::after {
+  opacity: 1;
+  scale: 1;
+}
+
+.solar-orbit[data-active] .solar-planet {
+  scale: 1.45;
+  box-shadow:
+    0 0 14px 2px hsl(var(--hue) 85% 62% / 0.8),
+    0 0 40px 8px hsl(var(--hue) 85% 62% / 0.3);
+}
+
+.solar-orbit[data-active] .solar-planet::after {
+  opacity: 1;
+  scale: 1;
+}
+
+/* One ringed planet */
+.solar-planet i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 190%;
+  height: 46%;
+  translate: -50% -50%;
+  rotate: -24deg;
+  border-radius: 50%;
+  border: 1px solid hsl(var(--hue) 80% 78% / 0.8);
+  pointer-events: none;
+}
+
+/* ── Picker under the system ───────────────────────────────────────── */
+
+.solar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.solar-legend button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 9999px;
+  background: hsl(var(--card) / 0.6);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  transition:
+    color 0.3s,
+    border-color 0.3s;
+}
+
+.solar-legend button::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: hsl(var(--hue) 80% 62%);
+}
+
+.solar-legend button:hover,
+.solar-legend button[aria-pressed="true"] {
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--hue) 80% 62% / 0.8);
+}
+
+.solar-legend button[aria-pressed="true"] {
+  box-shadow: 0 0 12px hsl(var(--hue) 80% 62% / 0.35);
+}
+
+.solar-hint {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  color: hsl(var(--muted-foreground));
+}
+
+/* ── The transmission ──────────────────────────────────────────────── */
+
+.signal-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  min-height: 0;
+  text-align: left;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(hsl(var(--card) / 0.85), hsl(var(--card) / 0.85))
+      padding-box,
+    linear-gradient(
+        145deg,
+        hsl(var(--border)),
+        hsl(var(--hue) 80% 62% / 0.55),
+        hsl(var(--border))
+      )
+      border-box;
+  backdrop-filter: blur(6px);
+  /* Each newly tuned-in project comes into focus */
+  animation: signal-tune 0.7s var(--ease-settle) both;
+}
+
+/* Focus brackets, the same ones that frame the aperture in the intro */
+.signal-card::before,
+.signal-card::after {
+  content: "";
+  position: absolute;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 0 solid hsl(var(--hue) 80% 68%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.signal-card::before {
+  top: -0.45rem;
+  left: -0.45rem;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.signal-card::after {
+  right: -0.45rem;
+  bottom: -0.45rem;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.signal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.signal-id {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.signal-id i {
+  background: hsl(var(--hue) 80% 62%);
+  box-shadow: 0 0 8px hsl(var(--hue) 80% 62%);
+}
+
+.signal-id b {
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+.signal-year {
+  color: hsl(var(--hue) 80% 72%);
+}
+
+.signal-media {
+  position: relative;
+  flex: none;
+  aspect-ratio: 2.1 / 1;
+  max-height: 26vh;
+  overflow: hidden;
+  border-block: 1px solid hsl(var(--border));
+}
+
+.signal-media > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Scanlines that clear as the picture tunes in */
+.signal-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0.3) 0 1px,
+    transparent 1px 3px
+  );
+  pointer-events: none;
+  animation: signal-clear 1.4s 0.3s ease-out both;
+}
+
+/* Long descriptions scroll inside the card rather than off the stage */
+.signal-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem;
+  scrollbar-width: thin;
+}
+
+.signal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+
+.signal-tags span {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.25rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.signal-links {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed hsl(var(--border));
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.signal-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: hsl(var(--foreground) / 0.8);
+  transition: color 0.3s;
+}
+
+.signal-links a:hover {
+  color: hsl(var(--hue) 80% 72%);
+}
+
+.solar-panel {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+@keyframes solar-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes solar-emit {
+  from {
+    scale: 1;
+    opacity: 0.8;
+  }
+  to {
+    scale: 3.2;
+    opacity: 0;
+  }
+}
+
+@keyframes signal-tune {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(8px);
+  }
+}
+
+@keyframes signal-clear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Narrow screens: the system sits on top, the transmission fills the rest */
+@media screen and (max-width: 900px) {
+  .solar-stage {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 4.25rem 0 0.75rem;
+  }
+
+  .solar-side {
+    gap: 0.6rem;
+  }
+
+  .solar-title {
+    font-size: 1.5rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .solar {
+    width: min(78vw, 27vh);
+  }
+
+  .solar-hint {
+    display: none;
+  }
+
+  .solar-panel {
+    justify-content: flex-start;
+  }
+
+  .signal-media {
+    max-height: 16vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solar-orbit,
+  .solar-sun::before,
+  .solar-sun::after,
+  .signal-card,
+  .signal-media::after {
+    animation: none;
+  }
+
+  .signal-media::after {
+    opacity: 0;
+  }
+
+  .solar-beam,
+  .solar-planet,
+  .solar-planet::after {
+    transition: none;
+  }
+}

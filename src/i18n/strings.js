@@ -57,6 +57,11 @@ export const strings = {
     "projects.accent": "Nổi Bật",
     "projects.intro":
       "Dưới đây là những dự án tiêu biểu tôi đã trực tiếp tham gia phát triển. Mỗi sản phẩm đều được đầu tư vào kiến trúc, hiệu năng và trải nghiệm người dùng nhằm đảm bảo chất lượng triển khai thực tế.",
+    "projects.hint": "Cuộn để đi qua từng hành tinh · hoặc chọn một hành tinh",
+    "projects.pick": "Chọn dự án",
+    "projects.signal": "Tín hiệu",
+    "projects.demo": "Demo",
+    "projects.source": "Mã nguồn",
     "projects.role": "Vai trò: {role}",
     "projects.private": "mã nguồn riêng",
     "projects.more": "Xem thêm dự án trên GitHub",
@@ -147,6 +152,11 @@ export const strings = {
     "projects.accent": "Projects",
     "projects.intro":
       "Here are the projects I helped build hands-on. Each one invests in architecture, performance and user experience to make sure it holds up in real deployment.",
+    "projects.hint": "Scroll to travel planet to planet · or pick one",
+    "projects.pick": "Pick a project",
+    "projects.signal": "Signal",
+    "projects.demo": "Demo",
+    "projects.source": "Source",
     "projects.role": "Role: {role}",
     "projects.private": "private source",
     "projects.more": "See more projects on GitHub",

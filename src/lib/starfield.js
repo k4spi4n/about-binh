@@ -200,7 +200,7 @@ const sprite = (tint, spiked) => {
 };
 
 const makeStars = (w, h) =>
-  Array.from({ length: Math.round((w * h) / 6000) }, () => {
+  Array.from({ length: Math.round((w * h) / 10000) }, () => {
     const z = Math.random(); // depth: 0 far, 1 near
     const m = Math.random() ** 3; // brightness: mostly faint, a few bright
     const spiked = m > 0.9 && z > 0.4;
@@ -215,7 +215,7 @@ const makeStars = (w, h) =>
       spread: spiked ? 18 : 6.5,
       a: 0.35 + 0.65 * m,
       // Bright stars scintillate harder, like real ones near the horizon
-      amp: 0.12 + 0.4 * m,
+      amp: 0.08 + 0.25 * m,
       rate: 0.5 + Math.random() * 1.5,
       phase: Math.random() * TAU,
     };
@@ -226,10 +226,10 @@ export const startStarfield = (sky, near) => {
     "(prefers-reduced-motion: reduce)",
   ).matches;
   const ctx = near.getContext("2d");
-  // The veil starts opening at 1.3s (motion.css); arrive just ahead of it
+  // The iris starts opening at 1.45s (motion.css); arrive just ahead of it
   const warpFrom =
     document.documentElement.dataset.intro === "play"
-      ? performance.now() + 1000
+      ? performance.now() + 1250
       : -Infinity;
   let w = 0;
   let h = 0;
@@ -324,8 +324,8 @@ export const startStarfield = (sky, near) => {
   };
 
   const onMove = (e) => {
-    tx = (e.clientX - w / 2) / 40;
-    ty = (e.clientY - h / 2) / 40;
+    tx = (e.clientX - w / 2) / 90;
+    ty = (e.clientY - h / 2) / 90;
   };
 
   setup();

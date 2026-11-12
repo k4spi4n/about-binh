@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import {
   motion,
@@ -11,7 +11,16 @@ import { AstralButton } from "./motion/AstralButton";
 import { useLang } from "../i18n/useLang";
 
 export const HeroSection = () => {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+
+  // The intro delay only belongs to the first load; after a language switch
+  // the greeting should drip in right away instead of sitting blank.
+  const [seenLang, setSeenLang] = useState(lang);
+  const [switched, setSwitched] = useState(false);
+  if (seenLang !== lang) {
+    setSeenLang(lang);
+    setSwitched(true);
+  }
   const baseUrl = import.meta.env.BASE_URL.endsWith("/")
     ? import.meta.env.BASE_URL.slice(0, -1)
     : import.meta.env.BASE_URL;
@@ -69,9 +78,13 @@ export const HeroSection = () => {
         </div>
 
         <div className="space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <DripText text={t("hero.greeting")} />{" "}
+          <h1
+            className="text-4xl md:text-6xl font-bold tracking-tight"
+            style={switched ? { "--intro-delay": "0s" } : undefined}
+          >
+            <DripText key={`g-${lang}`} text={t("hero.greeting")} />{" "}
             <DripText
+              key={`n-${lang}`}
               text={t("hero.name")}
               startIndex={Array.from(t("hero.greeting")).length}
               stagger={70}

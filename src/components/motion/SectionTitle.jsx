@@ -11,8 +11,9 @@ export const SectionTitle = ({ lead, accent, className }) => (
       className,
     )}
   >
-    <DripText text={lead} whenVisible />{" "}
+    <DripText key={lead} text={lead} whenVisible />{" "}
     <DripText
+      key={accent}
       text={accent}
       startIndex={Array.from(lead).length}
       className="text-primary text-primary-glow"
