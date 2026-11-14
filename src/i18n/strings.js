@@ -36,7 +36,7 @@ export const strings = {
       "Đưa LLM vào sản phẩm: tóm tắt hồ sơ y tế, AI Coach chạy bộ, sinh đề thi tự động, cùng hệ thống điều phối LLM thông minh đa nhà cung cấp.",
     "about.focus3.title": "Phát triển Game",
     "about.focus3.text":
-      "Phát hành game hành động trên itch.io bằng Unity, cùng các bản thử nghiệm với Unreal Engine.",
+      "Phát hành Pair Time (Godot .NET, C#) và một game hành động bằng Unity trên itch.io, cùng các bản thử nghiệm với Unreal Engine.",
 
     "skills.lead": "Hồ Sơ",
     "skills.accent": "Kỹ Năng",
@@ -131,7 +131,7 @@ export const strings = {
       "Putting LLMs into products: medical-record summarization, a running AI Coach, automatic exam generation, and a multi-provider LLM routing system.",
     "about.focus3.title": "Game Development",
     "about.focus3.text":
-      "Released an action game on itch.io built with Unity, plus prototypes in Unreal Engine.",
+      "Released Pair Time (Godot .NET, C#) and an action game made in Unity on itch.io, plus prototypes in Unreal Engine.",
 
     "skills.lead": "Skills",
     "skills.accent": "Profile",

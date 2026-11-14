@@ -9,7 +9,7 @@ cv:
       username: k4spi4n
   sections:
     summary:
-      - "K3 Software Engineering student at CMC University (full scholarship). Full-stack developer who ships AI-integrated products: lead developer of a production LMS for a training company and its corporate clients and lead engineer of DynaTour (Top 10, NEU Startup Olympiad 2026). Works with Next.js, FastAPI, Supabase/PostgreSQL, Docker and Flutter, and integrates LLMs and 3D reconstruction pipelines."
+      - "Full-stack Developer & AI Engineer (CMC University, full scholarship, IELTS 7.5) with a hands-on, product-driven mindset and a solid systems foundation. Author of a B2B LMS running in production for real businesses, lead engineer of the 3D/AI project DynaTour (Top 10, NEU Startup Olympiad 2026) and captain of the team that placed Top 10 at the CSCV 2026 finals."
     education:
       - institution: CMC University
         area: Software Engineering
@@ -31,32 +31,32 @@ cv:
         highlights:
           - Lead developer (full-stack & DevOps) of a production LMS for a training company and its corporate clients, with 10+ training classes and 30+ instructors and staff; turned requirements gathered with the BA into features.
           - Auto-scheduling that skips holidays, 5-stage TA checklist, attendance, document library, question bank, graded quizzes, 5-role access control; Google Calendar/Gmail/Drive integration; Docker CI/CD.
-          - "Technologies: Next.js, PostgreSQL, Docker CI/CD, Google APIs"
+          - "Technologies: Next.js, PostgreSQL, Docker CI/CD, Google APIs · Link: [b2bpmp.io.vn](https://b2bpmp.io.vn/)"
       - name: DynaTour - Real Estate 3D Tour Solution from Mobile Video
         date: 2026
         link: https://dynatour.io.vn/
         highlights:
           - Lead engineer in a team of 4. Top 10, NEU Startup Olympiad 2026.
           - Built the FastAPI backend on Cloud Run, Supabase Postgres (RLS, idempotent point-deduction RPC) and a serverless GPU 3D Gaussian Splatting pipeline with a CPU video-filter step to cut GPU cost.
-          - "Technologies: FastAPI, Supabase, 3D Gaussian Splatting, Serverless GPU"
+          - "Technologies: FastAPI, Supabase, 3D Gaussian Splatting, Serverless GPU · Link: [dynatour.io.vn](https://dynatour.io.vn/)"
+      - name: Pair Time - Coding Companion Game (itch.io)
+        date: 2026
+        link: https://k4spi4n.itch.io/pair-time
+        highlights:
+          - "Built and released a cozy Windows simulation in Godot .NET and C#: the character reacts to hooks from coding agents (Claude Code, Codex, OpenCode) running in embedded ConPTY terminals, plus a transparent always-on-top overlay mode."
+          - "Technologies: Godot .NET, C#, ConPTY, Win32 · Link: [k4spi4n.itch.io/pair-time](https://k4spi4n.itch.io/pair-time)"
       - name: Runny AI - Intelligent Running Assistant with AI Coach
         date: 2025 - 2026
         link: https://github.com/k4spi4n/runny-ai
         highlights:
-          - Database and backend/AI owner in a team of 4 for a Flutter running assistant (Pace/Heart Rate charts, Shoe Tracker, AI Coach).
-          - Strava API sync; LLM orchestration on Edge Functions across 4 providers (incl. a self-hosted model) with circuit breaker and retry.
-          - "Technologies: Flutter, Supabase, LLM Routing, Strava API"
+          - "Database and backend/AI owner in a team of 4 for a Flutter running assistant: Strava API sync, LLM orchestration on Edge Functions across 4 providers (incl. a self-hosted model) with circuit breaker and retry."
+          - "Technologies: Flutter, Supabase, LLM Routing, Strava API · Link: [runny-ai.onrender.com](https://runny-ai.onrender.com/)"
       - name: Smart Hospital Management System
         date: 2025
         link: https://github.com/k4spi4n/cmec-hms-web-app
         highlights:
           - Solo full-stack and AI-backend developer; AI medical-record summarization, diagnosis suggestions and an in-record chat assistant.
           - "Technologies: Next.js, FastAPI, Supabase (PostgreSQL), LLM"
-      - name: AI-Based Personalized Learning Web App
-        date: 2025
-        highlights:
-          - "Backend developer (.NET, MongoDB): auto-generated exams and assignments, personalized learning paths, teacher dashboards."
-          - "Technologies: Angular, .NET, MongoDB, AI"
     awards:
       - bullet: "**Consolation Prize (Division B), CSCV 2026** - Vietnam Student Cybersecurity Contest, jeopardy CTF; team captain of CMC.CBS, #10 of 47 finalist teams (selected from 334 domestic and international teams) with 2,080 points (2026)"
       - bullet: "**Top 10, NEU Startup Olympiad 2026** - DynaTour project, National Economics University (2026)"
@@ -69,7 +69,7 @@ cv:
       - label: Databases & BaaS
         details: PostgreSQL, Supabase, MongoDB
       - label: Tools & Platforms
-        details: Git, Docker, Unity
+        details: Git, Docker, Unity, Godot
       - label: Certifications
         details: Samsung Innovation Campus (SIC) AI Certification, NVIDIA DLI Deep Learning
 

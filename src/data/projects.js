@@ -41,6 +41,27 @@ export const projects = [
     githubUrl: "",
   },
   {
+    id: 7,
+    label: { vi: "Pair Time", en: "Pair Time" },
+    role: {
+      vi: "Lập trình viên game · Godot .NET & C#",
+      en: "Game developer · Godot .NET & C#",
+    },
+    title: {
+      vi: "Pair Time — Bạn đồng hành cho người code",
+      en: "Pair Time — A coding companion game",
+    },
+    description: {
+      vi: "Game mô phỏng cozy cho Windows đã phát hành trên itch.io (bản 1.1): nhân vật Amane chung phòng với bạn trong lúc các coding agent chạy trong terminal nhúng ngay trong game (Claude Code, Codex, OpenCode qua ConPTY). Cô phản ứng theo hook của từng phiên, hiện trạng thái trên chiếc ghim tóc, và có chế độ overlay trong suốt luôn nằm trên cùng. Gồm hệ thống kinh tế xu/XP, cửa hàng, hơn 70 cảnh hội thoại, Pomodoro và Office mode. Không gọi mạng, không thu thập dữ liệu.",
+      en: "A cozy Windows simulation released on itch.io (v1.1): Amane shares a room with you while your coding agents run in terminals embedded in the game (Claude Code, Codex, OpenCode over ConPTY). She reacts to each session's hooks, shows its state on her hair pin, and has a transparent always-on-top overlay mode. It also has a coin/XP economy, a shop, 70+ written scenes, a Pomodoro timer and an Office mode. No network requests, no telemetry.",
+    },
+    year: "2026",
+    image: "projects/project8.png",
+    tags: ["Godot .NET", "C#", "ConPTY", "Game Development"],
+    demoUrl: "https://k4spi4n.itch.io/pair-time",
+    githubUrl: "",
+  },
+  {
     id: 3,
     label: { vi: "Runny AI", en: "Runny AI" },
     role: {

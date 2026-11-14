@@ -19,6 +19,7 @@ const PLANETS = [
   { hue: 35, size: 1.45, ringed: true },
   { hue: 150, size: 1 },
   { hue: 330, size: 1.25 },
+  { hue: 8, size: 1.1 },
 ];
 const planetOf = (i) => PLANETS[i % PLANETS.length];
 const pad = (n) => String(n).padStart(2, "0");

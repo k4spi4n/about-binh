@@ -9,7 +9,7 @@ cv:
       username: k4spi4n
   sections:
     Giới thiệu:
-      - "Sinh viên K3 Kỹ thuật phần mềm tại Đại học CMC (học bổng toàn phần). Lập trình viên full-stack làm sản phẩm tích hợp AI: lập trình viên chính của hệ thống LMS đang vận hành cho một doanh nghiệp đào tạo và các khách hàng doanh nghiệp của họ và kỹ sư chính của DynaTour (Top 10 NEU Startup Olympiad 2026). Làm việc với Next.js, FastAPI, Supabase/PostgreSQL, Docker, Flutter; tích hợp LLM và pipeline dựng 3D."
+      - "Lập trình viên Full-stack & AI Engineer (Đại học CMC, Học bổng toàn phần, IELTS 7.5) với tư duy phát triển sản phẩm thực chiến và nền tảng hệ thống vững chắc. Tác giả hệ thống LMS B2B đang vận hành doanh nghiệp thực tế, Kỹ sư trưởng dự án 3D/AI DynaTour (Top 10 NEU Startup Olympiad 2026) và Đội trưởng đội thi đạt Top 10 Chung khảo CSCV 2026."
     Học vấn:
       - institution: Đại Học CMC
         area: Kỹ Thuật Phần Mềm
@@ -31,32 +31,32 @@ cv:
         highlights:
           - Lập trình viên chính (full-stack & DevOps) hệ thống LMS vận hành thực tế cho một doanh nghiệp đào tạo và các khách hàng doanh nghiệp của họ, với hơn 10 lớp đào tạo và hơn 30 giảng viên, nhân sự; cùng BA chuyển yêu cầu thành tính năng.
           - Lịch học tự động né ngày lễ, checklist trợ giảng 5 giai đoạn, điểm danh, kho tài liệu, ngân hàng câu hỏi, bài kiểm tra chấm điểm, phân quyền 5 vai trò; tích hợp Google Calendar/Gmail/Drive; CI/CD Docker.
-          - "Công nghệ: Next.js, PostgreSQL, Docker CI/CD, Google APIs"
+          - "Công nghệ: Next.js, PostgreSQL, Docker CI/CD, Google APIs · Link: [b2bpmp.io.vn](https://b2bpmp.io.vn/)"
       - name: DynaTour - Giải pháp tour 3D bất động sản từ video điện thoại
         date: 2026
         link: https://dynatour.io.vn/
         highlights:
           - Kỹ sư chính trong nhóm 4 sinh viên. Top 10 NEU Startup Olympiad 2026.
           - Xây dựng API FastAPI trên Cloud Run, Supabase Postgres (RLS, RPC trừ điểm idempotent) và pipeline GPU serverless dựng 3D Gaussian Splatting, lọc video bằng CPU trước khi cấp GPU để tiết kiệm chi phí.
-          - "Công nghệ: FastAPI, Supabase, 3D Gaussian Splatting, Serverless GPU"
+          - "Công nghệ: FastAPI, Supabase, 3D Gaussian Splatting, Serverless GPU · Link: [dynatour.io.vn](https://dynatour.io.vn/)"
+      - name: Pair Time - Game bạn đồng hành cho người code (itch.io)
+        date: 2026
+        link: https://k4spi4n.itch.io/pair-time
+        highlights:
+          - "Phát triển và phát hành game mô phỏng cozy cho Windows bằng Godot .NET và C#: nhân vật phản ứng theo hook của các coding agent (Claude Code, Codex, OpenCode) chạy trong terminal nhúng qua ConPTY; chế độ overlay trong suốt luôn nằm trên cùng."
+          - "Công nghệ: Godot .NET, C#, ConPTY, Win32 · Link: [k4spi4n.itch.io/pair-time](https://k4spi4n.itch.io/pair-time)"
       - name: Runny AI - Trợ lý chạy bộ thông minh tích hợp AI Coach
         date: 2025 - 2026
         link: https://github.com/k4spi4n/runny-ai
         highlights:
-          - Phụ trách database và backend/AI trong nhóm 4 sinh viên cho app Flutter trợ lý chạy bộ (biểu đồ Pace/Heart Rate, Shoe Tracker, AI Coach).
-          - Đồng bộ Strava API; điều phối LLM trên Edge Functions giữa 4 nhà cung cấp (gồm model tự host), có circuit breaker và retry.
-          - "Công nghệ: Flutter, Supabase, LLM Routing, Strava API"
-      - name: Hệ thống Quản lý Bệnh viện Thông minh (Smart Hospital Management System)
+          - "Database và backend/AI trong nhóm 4 sinh viên cho app Flutter trợ lý chạy bộ: đồng bộ Strava API, điều phối LLM trên Edge Functions giữa 4 nhà cung cấp (gồm model tự host), có circuit breaker và retry."
+          - "Công nghệ: Flutter, Supabase, LLM Routing, Strava API · Link: [runny-ai.onrender.com](https://runny-ai.onrender.com/)"
+      - name: Hệ thống Quản lý Bệnh viện Thông minh
         date: 2025
         link: https://github.com/k4spi4n/cmec-hms-web-app
         highlights:
           - Tự phát triển full-stack và AI backend; AI tóm tắt hồ sơ y tế, gợi ý chẩn đoán và trợ lý chat ngay trong hồ sơ bệnh án.
           - "Công nghệ: Next.js, FastAPI, Supabase (PostgreSQL), LLM"
-      - name: Website hỗ trợ cá nhân hoá học tập dựa trên AI
-        date: 2025
-        highlights:
-          - "Backend developer (.NET, MongoDB): tự động sinh đề thi, bài tập, cá nhân hóa lộ trình học, dashboard cho giáo viên."
-          - "Công nghệ: Angular, .NET, MongoDB, AI"
     Giải thưởng:
       - bullet: "**Giải Khuyến khích bảng B, CSCV 2026** - Cuộc thi Sinh viên An ninh mạng 2026 (CTF jeopardy); đội trưởng CMC.CBS, hạng 10/47 đội chung khảo (chọn từ 334 đội thi trong nước và quốc tế) với 2.080 điểm (2026)"
       - bullet: "**Top 10 NEU Startup Olympiad 2026** - Dự án DynaTour, Đại học Kinh tế Quốc dân (2026)"
@@ -69,7 +69,7 @@ cv:
       - label: Cơ sở dữ liệu & BaaS
         details: PostgreSQL, Supabase, MongoDB
       - label: Công cụ
-        details: Git, Docker, Unity
+        details: Git, Docker, Unity, Godot
       - label: Chứng chỉ
         details: Chứng chỉ AI Samsung Innovation Campus (SIC), NVIDIA DLI Deep Learning
 
