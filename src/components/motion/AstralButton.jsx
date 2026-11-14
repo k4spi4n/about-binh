@@ -2,10 +2,10 @@ import PropTypes from "prop-types";
 import { cn } from "@/lib/utils";
 
 /**
- * Pill-shaped call-to-action with a cosmic idle state: a comet circles the
- * rim, a soft halo follows it, faint stars twinkle inside and a sparkle
- * glints now and then. On hover it fills with a drifting nebula, the stars
- * streak past as if at warp, and sparkles burst from the edges.
+ * Pill-shaped call-to-action tuned like a receiver: quiet at rest, two carrier
+ * waves of different wavelength travel through dark glass beneath the label.
+ * On hover the signal locks: the waves swell under the label, the rim
+ * lights up and a soft glow spreads underneath.
  *
  * Renders an <a> by default; pass `as="button"` for form buttons. All other
  * props (href, onClick, type, disabled, aria-*) go straight through.
@@ -21,11 +21,7 @@ export const AstralButton = ({
     className={cn("astral-btn", icon && "astral-btn--icon", className)}
     {...rest}
   >
-    <span className="astral-nebula" aria-hidden="true" />
-    <span className="astral-stars" aria-hidden="true" />
-    <span className="astral-spark astral-spark--a" aria-hidden="true" />
-    <span className="astral-spark astral-spark--b" aria-hidden="true" />
-    <span className="astral-spark astral-spark--c" aria-hidden="true" />
+    <span className="astral-wave" aria-hidden="true" />
     <span className="astral-label">{children}</span>
   </Tag>
 );
