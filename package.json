@@ -2,6 +2,7 @@
   "name": "beautiful-portfolio",
   "homepage": "https://k4spi4n.github.io/about-binh/",
   "private": true,
+  "license": "MPL-2.0",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
