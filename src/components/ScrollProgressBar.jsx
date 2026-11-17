@@ -1,55 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
+import { ScrollTrigger } from "@/lib/gsap";
 
 export const ScrollProgressBar = () => {
-  const [progress, setProgress] = useState(0);
+  const headRef = useRef(null);
 
+  // Page progress goes out as --scroll-p on <html>: the hairline draws from
+  // it (motion.css) and so does the atmosphere fog. ScrollTrigger caches the
+  // page height, so a scroll frame is one style write: no layout read, no
+  // React render.
   useEffect(() => {
-    const calculateProgress = () => {
-      const scrollTop = window.scrollY || window.pageYOffset;
-      const scrollableHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-
-      if (scrollableHeight <= 0) {
-        setProgress(0);
-        return;
-      }
-
-      const nextProgress = Math.min(
-        1,
-        Math.max(0, scrollTop / scrollableHeight),
-      );
-
-      // Shared with the atmosphere fog.
-      document.documentElement.style.setProperty(
-        "--scroll-p",
-        nextProgress.toFixed(4),
-      );
-      setProgress(nextProgress);
+    const root = document.documentElement;
+    const write = ({ progress }) => {
+      root.style.setProperty("--scroll-p", progress.toFixed(4));
+      if (headRef.current) headRef.current.hidden = progress === 0;
     };
-
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (ticking) {
-        return;
-      }
-
-      ticking = true;
-      window.requestAnimationFrame(() => {
-        calculateProgress();
-        ticking = false;
-      });
-    };
-
-    calculateProgress();
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", calculateProgress);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", calculateProgress);
-    };
+    const st = ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      onUpdate: write,
+      onRefresh: write,
+    });
+    return () => st.kill();
   }, []);
 
   // A hairline with a glowing comet head riding at the current position.
@@ -59,13 +30,8 @@ export const ScrollProgressBar = () => {
       className="hairline pointer-events-none fixed inset-x-0 top-0 z-[60] h-px"
       aria-hidden="true"
     >
-      <div
-        className="hairline-fill"
-        style={{ transform: `scaleX(${progress})` }}
-      />
-      {progress > 0 && (
-        <i className="hairline-head" style={{ left: `${progress * 100}%` }} />
-      )}
+      <div className="hairline-fill" />
+      <i ref={headRef} className="hairline-head" hidden />
     </div>
   );
 };

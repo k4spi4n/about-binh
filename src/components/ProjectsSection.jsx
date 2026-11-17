@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { useMotionValueEvent, useScroll } from "framer-motion";
+import { ScrollTrigger } from "@/lib/gsap";
 import { Github } from "./BrandIcons";
 import "./Projects.css";
 import { projects } from "../data/projects";
@@ -10,18 +10,43 @@ import { DripText } from "./motion/DripText";
 import { AstralButton } from "./motion/AstralButton";
 import { useLang } from "../i18n/useLang";
 
-// One planet per project, innermost first: colour, size (rem) and whether it
-// wears a ring. Orbit width, speed and starting angle follow from the index.
+// One real planet per project, innermost first (Mercury to Uranus; Neptune
+// has no project to carry). au = semi-major axis, days = sidereal period,
+// L0 = mean heliocentric longitude at J2000 (JPL), r = equatorial radius in
+// Earth radii, sat = colour saturation.
 const PLANETS = [
-  { hue: 250, size: 0.95 },
-  { hue: 187, size: 1.2 },
-  { hue: 292, size: 1.05 },
-  { hue: 35, size: 1.45, ringed: true },
-  { hue: 150, size: 1 },
-  { hue: 330, size: 1.25 },
-  { hue: 8, size: 1.1 },
+  { name: "Mercury", au: 0.387, days: 87.969, L0: 252.25, r: 0.383, hue: 30, sat: 0.3 },
+  { name: "Venus", au: 0.723, days: 224.701, L0: 181.98, r: 0.949, hue: 48, sat: 0.85 },
+  { name: "Earth", au: 1, days: 365.256, L0: 100.46, r: 1, hue: 212, sat: 1 },
+  { name: "Mars", au: 1.524, days: 686.98, L0: 355.45, r: 0.532, hue: 10, sat: 1 },
+  { name: "Jupiter", au: 5.203, days: 4332.59, L0: 34.4, r: 11.21, hue: 28, sat: 0.8 },
+  { name: "Saturn", au: 9.537, days: 10759.22, L0: 49.95, r: 9.45, hue: 44, sat: 0.85, ringed: true },
+  { name: "Uranus", au: 19.19, days: 30688.5, L0: 313.24, r: 4.01, hue: 186, sat: 0.8 },
 ];
 const planetOf = (i) => PLANETS[i % PLANETS.length];
+
+// Calibration knobs. One Earth year plays in YEAR_S seconds, so every
+// period keeps its true ratio (Mercury 14s, Uranus 84 minutes). Orbit width
+// follows the log of the distance: the planets sit roughly evenly on that
+// scale, so the inner four (the spotlight projects) get as much room as the
+// giants instead of huddling round the sun. The innermost orbit starts at
+// 30% so the tilted view never passes Mercury through the sun (8%).
+const YEAR_S = 60;
+const J2000 = Date.UTC(2000, 0, 1, 12);
+const [AU_MIN, AU_MAX] = [PLANETS[0].au, PLANETS[PLANETS.length - 1].au];
+const orbitWidth = (au) =>
+  30 + (66 * Math.log(au / AU_MIN)) / Math.log(AU_MAX / AU_MIN);
+// Diameter follows the cube root of the real radius: Jupiter still reads as
+// the giant without Mercury shrinking out of sight. In cqw (% of the
+// system's width) so it scales with the stage; the floor keeps the rocky
+// planets visible on phones.
+const SIZE_CQW = 1.7;
+const planetSize = (r) =>
+  `max(0.45rem, ${(SIZE_CQW * Math.cbrt(r)).toFixed(2)}cqw)`;
+// Where the planet really is today, as degrees counter-clockwise from the
+// vernal equinox direction (the right-hand edge of the stage).
+const longitudeNow = ({ L0, days }) =>
+  (((L0 + (360 * (Date.now() - J2000)) / 864e5 / days) % 360) + 360) % 360;
 const pad = (n) => String(n).padStart(2, "0");
 
 // Loops only while on screen, so off-screen clips don't keep decoding, and
@@ -58,37 +83,63 @@ export const ProjectsSection = () => {
 
   // The stage pins while the tall track scrolls past, and how far through
   // the track you are decides which planet is tuned in. Scroll is the single
-  // source of truth: picking a planet just scrolls to its stop.
+  // source of truth: picking a planet just scrolls to its stop. When scrolling
+  // comes to rest inside the track it settles on the nearest planet, or on
+  // the track's ends so leaving the section is never fought.
   const trackRef = useRef(null);
+  const stRef = useRef(null);
   const [active, setActive] = useState(0);
-  // Where each planet starts on its orbit, rolled fresh on every visit: a
-  // random turn for the whole system, golden-angle spacing so neighbours
-  // never line up, and some scatter on top.
-  const [phases] = useState(() => {
-    const turn = Math.random() * 360;
-    return projects.map(
-      (_, i) => (turn + i * 137.5 + (Math.random() - 0.5) * 70) % 360,
-    );
-  });
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start start", "end end"],
-  });
-  useMotionValueEvent(scrollYProgress, "change", (p) =>
-    setActive(Math.min(count - 1, Math.floor(p * count))),
+  // Each planet starts where it really is in the sky today. CSS rotates
+  // clockwise, so the counter-clockwise longitude is negated.
+  const [phases] = useState(() =>
+    projects.map((_, i) => -longitudeNow(planetOf(i))),
   );
+  useEffect(() => {
+    const tune = ({ progress }) =>
+      setActive(Math.min(count - 1, Math.floor(progress * count)));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const st = ScrollTrigger.create({
+      trigger: trackRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: tune,
+      onRefresh: tune,
+      snap: reduce
+        ? undefined
+        : {
+            snapTo: [0, ...projects.map((_, i) => (i + 0.5) / count), 1],
+            duration: { min: 0.2, max: 0.6 },
+            delay: 0.1,
+            ease: "power1.inOut",
+          },
+    });
+    stRef.current = st;
+    return () => st.kill();
+  }, [count]);
+
+  // Off screen the system holds still (data-idle pauses its animations)
+  const solarRef = useRef(null);
+  useEffect(() => {
+    const el = solarRef.current;
+    const io = new IntersectionObserver(([entry]) =>
+      el.toggleAttribute("data-idle", !entry.isIntersecting),
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const pick = (i) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const top = window.scrollY + track.getBoundingClientRect().top;
-    const span = track.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: top + ((i + 0.5) / count) * span, behavior: "smooth" });
+    const st = stRef.current;
+    if (!st) return;
+    const top = st.start + ((i + 0.5) / count) * (st.end - st.start);
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   const project = projects[active];
   const title = l(project.title);
   const src = `${import.meta.env.BASE_URL}${project.image}`;
+  const next = (active + 1) % count;
+  const nextSrc = `${import.meta.env.BASE_URL}${projects[next].image}`;
 
   return (
     <section id="projects" className="pt-24 pb-12 px-4 relative">
@@ -110,39 +161,42 @@ export const ProjectsSection = () => {
               className="solar-title"
             />
             <div className="solar-side">
-              <div className="solar">
-                <i className="solar-sun" aria-hidden="true" />
-                {projects.map((p, i) => {
-                  const { hue, size, ringed } = planetOf(i);
-                  return (
-                    <div
-                      key={p.id}
-                      className="solar-orbit"
-                      data-active={i === active || undefined}
-                      style={{
-                        "--d": `${28 + (i * 62) / Math.max(1, count - 1)}%`,
-                        "--period": `${40 + i * 16}s`,
-                        "--phase": `${phases[i]}deg`,
-                        "--hue": hue,
-                        "--size": `${size}rem`,
-                      }}
-                    >
-                      <i className="solar-beam" aria-hidden="true" />
-                      {/* The legend below is the keyboard path; planets are
-                          a moving pointer target only */}
-                      <button
-                        type="button"
-                        className="solar-planet"
-                        tabIndex={-1}
-                        aria-hidden="true"
-                        title={l(p.title)}
-                        onClick={() => pick(i)}
+              <div className="solar" ref={solarRef}>
+                <div className="solar-plane">
+                  <i className="solar-sun" aria-hidden="true" />
+                  {projects.map((p, i) => {
+                    const planet = planetOf(i);
+                    const { hue, sat, r, ringed } = planet;
+                    return (
+                      <div
+                        key={p.id}
+                        className="solar-orbit"
+                        data-active={i === active || undefined}
+                        style={{
+                          "--r": orbitWidth(planet.au) / 100,
+                          "--period": `${(planet.days / 365.256) * YEAR_S}s`,
+                          "--phase": `${phases[i]}deg`,
+                          "--hue": hue,
+                          "--sat": sat,
+                          "--size": planetSize(r),
+                        }}
                       >
-                        {ringed && <i />}
-                      </button>
-                    </div>
-                  );
-                })}
+                        <i className="solar-beam" aria-hidden="true" />
+                        {/* The legend below is the keyboard path; planets are
+                            a moving pointer target only */}
+                        <button
+                          type="button"
+                          className="solar-planet"
+                          tabIndex={-1}
+                          aria-hidden="true"
+                          title={`${planet.name} · ${l(p.title)}`}
+                          onClick={() => pick(i)}
+                        />
+                        {ringed && <i className="solar-ring" aria-hidden="true" />}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
               <div className="solar-legend" role="group" aria-label={t("projects.pick")}>
@@ -153,7 +207,7 @@ export const ProjectsSection = () => {
                     aria-pressed={i === active}
                     aria-label={l(p.title)}
                     title={l(p.title)}
-                    style={{ "--hue": planetOf(i).hue }}
+                    style={{ "--hue": planetOf(i).hue, "--sat": planetOf(i).sat }}
                     onClick={() => pick(i)}
                   >
                     {l(p.label)}
@@ -183,7 +237,7 @@ export const ProjectsSection = () => {
                   {project.image.endsWith(".mp4") ? (
                     <AutoplayVideo src={src} />
                   ) : (
-                    <img src={src} alt={title} />
+                    <img src={src} alt={title} loading="lazy" decoding="async" />
                   )}
                 </div>
 
@@ -240,6 +294,24 @@ export const ProjectsSection = () => {
                   )}
                 </div>
               </article>
+
+              <button
+                key={projects[next].id}
+                type="button"
+                className="signal-next"
+                style={{ "--hue": planetOf(next).hue }}
+                aria-label={`${t("projects.next")}: ${l(projects[next].title)}`}
+                onClick={() => pick(next)}
+              >
+                {nextSrc.endsWith(".mp4") ? (
+                  <video src={nextSrc} muted preload="metadata" />
+                ) : (
+                  <img src={nextSrc} alt="" loading="lazy" decoding="async" />
+                )}
+                <span aria-hidden="true">
+                  {t("projects.next")} · {pad(next + 1)}
+                </span>
+              </button>
             </div>
           </div>
         </div>
