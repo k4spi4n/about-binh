@@ -9,7 +9,7 @@ cv:
       username: k4spi4n
   sections:
     summary:
-      - "Full-stack Developer & AI Engineer (CMC University, full scholarship, IELTS 7.5) with a hands-on, product-driven mindset and a solid systems foundation. Author of a B2B LMS running in production for real businesses, lead engineer of the 3D/AI project DynaTour (Top 10, NEU Startup Olympiad 2026) and captain of the team that placed Top 10 at the CSCV 2026 finals."
+      - "Full-stack Developer & AI Engineer with a hands-on, product-driven mindset and a solid systems foundation. Author of a B2B LMS running in production for real businesses, lead engineer of the DynaTour 3D real-estate tour platform and captain of the cybersecurity research team that placed Top 10 at the CSCV 2026 finals."
     education:
       - institution: CMC University
         area: Software Engineering
@@ -70,7 +70,7 @@ cv:
       - label: Tools & Platforms
         details: Git, Docker, Unity, Godot
       - label: Certifications
-        details: Samsung Innovation Campus (SIC) AI Certification, NVIDIA DLI Deep Learning
+        details: Certified LLM Security Expert (CLLMSE, Red Team Leaders), Samsung Innovation Campus (SIC) AI Certification, NVIDIA DLI Deep Learning
 
 design:
   theme: engineeringresumes

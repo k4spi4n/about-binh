@@ -696,10 +696,12 @@
 
 /* ── Hairline scroll progress ──────────────────────────────────────── */
 
+/* Both ride --scroll-p, written by ScrollProgressBar */
 .hairline-fill {
   position: absolute;
   inset: 0;
   transform-origin: left;
+  transform: scaleX(var(--scroll-p));
   background: linear-gradient(
     90deg,
     hsl(var(--primary) / 0.2),
@@ -712,6 +714,7 @@
 .hairline-head {
   position: absolute;
   top: 0;
+  left: calc(var(--scroll-p) * 100%);
   width: 5px;
   height: 5px;
   margin: -2px 0 0 -2.5px;

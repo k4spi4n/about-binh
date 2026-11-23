@@ -9,7 +9,7 @@ cv:
       username: k4spi4n
   sections:
     Giới thiệu:
-      - "Lập trình viên Full-stack & AI Engineer (Đại học CMC, Học bổng toàn phần, IELTS 7.5) với tư duy phát triển sản phẩm thực chiến và nền tảng hệ thống vững chắc. Tác giả hệ thống LMS B2B đang vận hành doanh nghiệp thực tế, Kỹ sư trưởng dự án 3D/AI DynaTour (Top 10 NEU Startup Olympiad 2026) và Đội trưởng đội thi đạt Top 10 Chung khảo CSCV 2026."
+      - "Lập trình viên Full-stack & AI Engineer với tư duy phát triển sản phẩm thực chiến và nền tảng hệ thống vững chắc. Tác giả hệ thống LMS B2B đang vận hành doanh nghiệp thực tế, Kỹ sư chính nền tảng tour 3D bất động sản DynaTour và Đội trưởng đội nghiên cứu an ninh mạng đạt Top 10 Chung khảo CSCV 2026."
     Học vấn:
       - institution: Đại Học CMC
         area: Kỹ Thuật Phần Mềm
@@ -70,7 +70,7 @@ cv:
       - label: Công cụ
         details: Git, Docker, Unity, Godot
       - label: Chứng chỉ
-        details: Chứng chỉ AI Samsung Innovation Campus (SIC), NVIDIA DLI Deep Learning
+        details: Certified LLM Security Expert (CLLMSE, Red Team Leaders), Chứng chỉ AI Samsung Innovation Campus (SIC), NVIDIA DLI Deep Learning
 
 locale:
   language: vietnamese

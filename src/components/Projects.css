@@ -24,12 +24,17 @@
 }
 
 .solar-stage {
+  /* Breaks out of the section's container on wide screens: the tilted
+     system is wide and short, and the room goes to it */
+  --w: max(100%, min(100vw - 6rem, 88rem));
+  width: var(--w);
+  margin-left: calc((100% - var(--w)) / 2);
   position: sticky;
   top: 0;
   height: 100vh;
   height: 100svh;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 31rem);
   grid-template-rows: auto minmax(0, 1fr);
   align-items: center;
   gap: 1.25rem 3rem;
@@ -52,45 +57,87 @@
 
 /* ── The system ────────────────────────────────────────────────────── */
 
+/* Seen from a cinematic three-quarter angle: the orbital plane tips back by
+   --tilt, flattening it by cos(--tilt). Keep aspect-ratio at
+   1 / cos(--tilt) (50deg: 1.55) so the box fits the tipped disc. */
 .solar {
+  --tilt: 50deg;
+  /* One heartbeat of the sun: a wave rolls out across the plane */
+  --pulse: 10s;
   position: relative;
-  width: min(100%, 100vh - 20rem);
-  aspect-ratio: 1;
+  width: min(100%, 155vh - 30rem);
+  aspect-ratio: 1.55;
+  perspective: 1600px;
+  /* Planet sizes are in cqw of this box */
+  container-type: inline-size;
 }
 
-/* The sun: where the signal comes from. It keeps emitting faint rings. */
+/* The orbital plane: square, centred in the box and tipped back. The sun
+   and planets on it turn back to face the camera. */
+.solar-plane {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  aspect-ratio: 1;
+  translate: 0 -50%;
+  transform: rotateX(var(--tilt));
+  transform-style: preserve-3d;
+  /* Tipped towards the camera, its near edge swells past the box and over
+     the legend below; only the planets take the pointer */
+  pointer-events: none;
+  /* Nebula haze lying in the plane */
+  background: radial-gradient(
+    closest-side,
+    hsl(270 90% 65% / 0.22),
+    hsl(300 85% 55% / 0.1) 30%,
+    hsl(220 90% 60% / 0.06) 65%,
+    transparent
+  );
+}
+
+/* The pulse: a ring of colour that rolls out from the sun at constant
+   speed, over the first 60% of each beat. Each orbit flashes as it passes
+   (--hit on .solar-orbit is timed from the same numbers). */
+.solar-plane::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    hsl(255 95% 72%),
+    hsl(305 95% 66%),
+    hsl(190 95% 62%),
+    hsl(255 95% 72%)
+  );
+  mask: radial-gradient(closest-side, transparent 90%, #000 97%, transparent);
+  opacity: 0;
+  animation: solar-wave var(--pulse) linear infinite;
+}
+
+/* The sun: where the signal comes from. It beats once per pulse. */
 .solar-sun {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 11%;
+  width: 8%;
   aspect-ratio: 1;
   translate: -50% -50%;
+  transform: rotateX(calc(-1 * var(--tilt)));
   border-radius: 9999px;
   background: radial-gradient(
-    circle at 40% 35%,
-    #fff,
-    hsl(250 90% 82%) 35%,
-    hsl(var(--primary)) 70%,
-    hsl(292 84% 45%)
+    circle at 42% 38%,
+    #fff 0 8%,
+    hsl(45 100% 92%) 18%,
+    hsl(265 100% 80%) 40%,
+    hsl(var(--primary)) 62%,
+    hsl(300 85% 50%) 85%,
+    hsl(320 90% 32%)
   );
   box-shadow:
-    0 0 24px 4px hsl(var(--primary) / 0.7),
-    0 0 70px 18px hsl(var(--primary) / 0.25);
-}
-
-.solar-sun::before,
-.solar-sun::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 1px solid hsl(var(--primary) / 0.7);
-  animation: solar-emit 4s ease-out infinite;
-}
-
-.solar-sun::after {
-  animation-delay: -2s;
+    0 0 10px 2px hsl(270 95% 70% / 0.55),
+    0 0 28px 6px hsl(300 90% 60% / 0.15);
+  animation: solar-beat var(--pulse) ease-out infinite;
 }
 
 /* An orbit is a ring that turns; its planet rides the right-hand edge.
@@ -99,38 +146,93 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: var(--d);
+  width: calc(var(--r) * 100%);
   aspect-ratio: 1;
   translate: -50% -50%;
   rotate: var(--phase);
   border-radius: 9999px;
-  border: 1px solid hsl(var(--foreground) / 0.1);
+  border: 1px solid hsl(var(--hue) calc(60% * var(--sat)) 70% / 0.14);
   pointer-events: none;
+  transform-style: preserve-3d;
+  /* When the pulse reaches this orbit: it starts at the sun (8%) and
+     crosses the plane in 60% of a beat */
+  --hit: calc((var(--r) - 0.08) / 0.92 * 0.6 * var(--pulse));
   animation: solar-turn var(--period) linear infinite;
   transition: border-color 0.6s var(--ease-settle);
+}
+
+/* The orbit lights up as the pulse passes. A ring fading in and out rather
+   than the border changing colour, so the flash stays on the compositor
+   instead of repainting the orbit every frame. */
+.solar-orbit::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid hsl(var(--hue) 95% 75% / 0.4);
+  opacity: 0;
+  animation: solar-flash var(--pulse) ease-out var(--hit) infinite;
 }
 
 .solar-orbit[data-active] {
   border-color: hsl(var(--hue) 85% 68% / 0.5);
 }
 
-/* Hovering the system holds it still, so a planet is easy to pick */
-.solar:hover .solar-orbit {
-  animation-play-state: paused;
+/* A fading trail behind each planet in its own colour, so even the small
+   ones read at a glance. It turns with the orbit, so it stays behind. */
+.solar-orbit::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 90deg,
+    hsl(var(--hue) calc(85% * var(--sat)) 68%),
+    transparent 60deg
+  );
+  mask: radial-gradient(
+    closest-side,
+    transparent calc(100% - 3px),
+    #000 calc(100% - 2.5px)
+  );
+  opacity: 0.45;
+  transition: opacity 0.6s var(--ease-settle);
+}
+
+.solar-orbit[data-active]::before {
+  opacity: 1;
+}
+
+/* Off screen nothing turns or beats (ProjectsSection sets data-idle), so
+   the system costs no frames while the rest of the page scrolls */
+.solar[data-idle] *,
+.solar[data-idle] *::before,
+.solar[data-idle] *::after {
+  /* over the more specific `animation` shorthands below, which reset it */
+  animation-play-state: paused !important;
+}
+
+/* Hovering the system holds the orbits still, so a planet is easy to pick;
+   the pulse keeps beating */
+.solar:hover .solar-orbit,
+.solar:hover .solar-planet {
+  animation-play-state: paused, running;
 }
 
 /* The signal from the sun to the tuned-in planet */
 .solar-beam {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: calc(50% - 1px);
   width: 50%;
-  height: 1px;
+  height: 2px;
+  overflow: hidden;
   background: linear-gradient(
     90deg,
-    transparent 10%,
-    hsl(var(--hue) 85% 68% / 0.9)
+    transparent 8%,
+    hsl(var(--hue) 90% 70% / 0.9)
   );
+  box-shadow: 0 0 6px hsl(var(--hue) 90% 65% / 0.7);
   transform-origin: left;
   transform: scaleX(0);
   transition: transform 0.7s var(--ease-settle);
@@ -138,6 +240,15 @@
 
 .solar-orbit[data-active] .solar-beam {
   transform: scaleX(1);
+}
+
+/* Packets of light running out along the beam */
+.solar-orbit[data-active] .solar-beam::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 42%, hsl(var(--hue) 90% 85% / 0.8) 50%, transparent 58%);
+  animation: solar-packet 2.5s linear infinite;
 }
 
 .solar-planet {
@@ -152,13 +263,25 @@
   border-radius: 9999px;
   cursor: pointer;
   pointer-events: auto;
+  /* Billboard: undo the orbit's turn and the plane's tilt so the planet
+     faces the camera, then turn back by the orbit angle so its lit side
+     (the gradient's left) still points at the sun. solar-face keeps this in
+     step with solar-turn on the orbit. */
+  transform: rotate(calc(-1 * var(--phase)))
+    rotateX(calc(-1 * var(--tilt))) rotate(var(--phase));
+  animation:
+    solar-face var(--period) linear infinite,
+    solar-ping var(--pulse) ease-out var(--hit) infinite;
   background: radial-gradient(
-    circle at 35% 30%,
-    hsl(var(--hue) 90% 86%),
-    hsl(var(--hue) 75% 58%) 45%,
-    hsl(var(--hue) 70% 22%)
+    circle at 25% 45%,
+    hsl(var(--hue) calc(100% * var(--sat)) 90%),
+    hsl(var(--hue) calc(90% * var(--sat)) 62%) 35%,
+    hsl(var(--hue) calc(85% * var(--sat)) 32%) 68%,
+    hsl(var(--hue) calc(60% * var(--sat)) 10%)
   );
-  box-shadow: 0 0 10px hsl(var(--hue) 85% 60% / 0.45);
+  box-shadow:
+    0 0 8px 1px hsl(var(--hue) 90% 62% / 0.55),
+    0 0 20px 4px hsl(var(--hue) 90% 62% / 0.18);
   transition:
     scale 0.5s var(--ease-settle),
     box-shadow 0.5s var(--ease-settle);
@@ -209,18 +332,34 @@
   scale: 1;
 }
 
-/* One ringed planet */
-.solar-planet i {
+/* Saturn's rings lie flat in the orbital plane: the tilt alone gives them
+   their ellipse, and the planet passes through them in depth. Bands run
+   from 1.25 to 2.4 planet radii, with the Cassini gap between. */
+.solar-ring {
   position: absolute;
-  left: 50%;
+  left: 100%;
   top: 50%;
-  width: 190%;
-  height: 46%;
+  width: calc(var(--size) * 2.4);
+  aspect-ratio: 1;
   translate: -50% -50%;
-  rotate: -24deg;
   border-radius: 50%;
-  border: 1px solid hsl(var(--hue) 80% 78% / 0.8);
-  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    transparent 52%,
+    hsl(var(--hue) 70% 78% / 0.75) 55% 74%,
+    transparent 76% 79%,
+    hsl(var(--hue) 60% 70% / 0.45) 81% 97%,
+    transparent 99%
+  );
+  transition: scale 0.5s var(--ease-settle);
+}
+
+.solar-planet:hover + .solar-ring {
+  scale: 1.25;
+}
+
+.solar-orbit[data-active] .solar-ring {
+  scale: 1.45;
 }
 
 /* ── Picker under the system ───────────────────────────────────────── */
@@ -256,7 +395,7 @@
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 9999px;
-  background: hsl(var(--hue) 80% 62%);
+  background: hsl(var(--hue) calc(80% * var(--sat, 1)) 62%);
 }
 
 .solar-legend button:hover,
@@ -290,7 +429,7 @@
   border-radius: 0.75rem;
   border: 1px solid transparent;
   background:
-    linear-gradient(hsl(var(--card) / 0.85), hsl(var(--card) / 0.85))
+    linear-gradient(hsl(var(--card) / 0.94), hsl(var(--card) / 0.94))
       padding-box,
     linear-gradient(
         145deg,
@@ -299,7 +438,9 @@
         hsl(var(--border))
       )
       border-box;
-  backdrop-filter: blur(6px);
+  /* No backdrop blur: the starfield behind animates, so it would re-blur
+     every frame */
+  z-index: 1;
   /* Each newly tuned-in project comes into focus */
   animation: signal-tune 0.7s var(--ease-settle) both;
 }
@@ -443,28 +584,141 @@
 }
 
 .solar-panel {
+  position: relative;
   height: 100%;
   min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0.5rem;
+  /* Room on the right for the next project to peek out */
+  padding: 0.5rem 3.5rem 0.5rem 0.5rem;
 }
 
+/* The next project waits behind the current one like a second screen,
+   tipped away and a little lower; picking it tunes it in. It reaches into
+   the stage's right padding, still clear of the section rail. */
+.signal-next {
+  position: absolute;
+  right: -2rem;
+  top: 50%;
+  width: 13rem;
+  height: min(60%, 28rem);
+  padding: 0;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid hsl(var(--hue) 80% 62% / 0.5);
+  background: hsl(var(--card));
+  box-shadow: 0 24px 60px -24px hsl(var(--hue) 85% 55% / 0.7);
+  /* One transform, no separate `translate`: the build minifier drops a
+     `translate` that shares a rule with `transform` */
+  transform: translate(0, -42%) perspective(900px) rotateY(-24deg) scale(0.92);
+  transform-origin: right;
+  opacity: 0.7;
+  cursor: pointer;
+  animation: signal-next-in 0.9s 0.2s var(--ease-settle) backwards;
+  transition:
+    opacity 0.4s,
+    transform 0.5s var(--ease-settle);
+}
+
+.signal-next > img,
+.signal-next > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top right;
+}
+
+.signal-next > span {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.6rem;
+  padding: 0.6rem 0.3rem;
+  border-radius: 9999px;
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: hsl(var(--hue) 85% 80%);
+  background: hsl(var(--background) / 0.8);
+  border: 1px solid hsl(var(--hue) 80% 62% / 0.4);
+}
+
+.signal-next:hover,
+.signal-next:focus-visible {
+  opacity: 1;
+  transform: translate(0.75rem, -42%) perspective(900px) rotateY(-12deg)
+    scale(0.95);
+  outline: none;
+}
+
+/* Counter-clockwise: every planet orbits prograde, as seen from above the
+   sun's north pole */
 @keyframes solar-turn {
   to {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 }
 
-@keyframes solar-emit {
+/* The planet's billboard over one orbit (see .solar-planet) */
+@keyframes solar-face {
+  to {
+    transform: rotate(calc(360deg - var(--phase)))
+      rotateX(calc(-1 * var(--tilt))) rotate(calc(var(--phase) - 360deg));
+  }
+}
+
+@keyframes solar-wave {
   from {
+    scale: 0.08;
+    opacity: 0.35;
+  }
+  60%,
+  to {
     scale: 1;
-    opacity: 0.8;
+    opacity: 0;
+  }
+}
+
+@keyframes solar-beat {
+  4% {
+    scale: 1.05;
+    filter: brightness(1.15);
+  }
+  35% {
+    scale: 1;
+    filter: none;
+  }
+}
+
+/* An orbit and its planet light up as the pulse passes */
+@keyframes solar-flash {
+  3% {
+    opacity: 1;
+  }
+}
+
+@keyframes solar-ping {
+  3% {
+    filter: brightness(1.3);
+  }
+}
+
+@keyframes solar-packet {
+  from {
+    translate: -50%;
   }
   to {
-    scale: 3.2;
+    translate: 50%;
+  }
+}
+
+@keyframes signal-next-in {
+  from {
     opacity: 0;
+    transform: translate(-60%, -42%) perspective(900px) rotateY(-24deg)
+      scale(0.92);
   }
 }
 
@@ -505,7 +759,7 @@
   }
 
   .solar {
-    width: min(78vw, 27vh);
+    width: min(100%, 80vh);
   }
 
   .solar-hint {
@@ -514,6 +768,11 @@
 
   .solar-panel {
     justify-content: flex-start;
+    padding-right: 0.5rem;
+  }
+
+  .signal-next {
+    display: none;
   }
 
   .signal-media {
@@ -523,9 +782,13 @@
 
 @media (prefers-reduced-motion: reduce) {
   .solar-orbit,
-  .solar-sun::before,
-  .solar-sun::after,
+  .solar-orbit::after,
+  .solar-planet,
+  .solar-plane::before,
+  .solar-sun,
+  .solar-beam::after,
   .signal-card,
+  .signal-next,
   .signal-media::after {
     animation: none;
   }

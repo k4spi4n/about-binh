@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { ScrollTrigger } from "@/lib/gsap";
 import { navItems } from "../data/navigation";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { useLang } from "../i18n/useLang";
@@ -21,18 +22,14 @@ export const SectionRail = () => {
   // Ticks are evenly spaced but sections aren't, so raw page progress drifts
   // off them. Instead the probe moves piecewise: it sits exactly on tick i
   // when section i's top reaches the top of the viewport (where jumps land).
+  // Section tops are measured only when ScrollTrigger refreshes (resize,
+  // load, height change), never per scroll frame.
   useEffect(() => {
-    let frame = 0;
+    let stops = [];
 
     const update = () => {
-      frame = 0;
+      if (stops.length < 2) return;
       const y = window.scrollY;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const stops = ids.map((id, i) => {
-        const el = i && document.getElementById(id);
-        return el ? Math.min(el.getBoundingClientRect().top + y, max) : 0;
-      });
-
       let i = 0;
       while (i < stops.length - 2 && y >= stops[i + 1]) i++;
       const span = stops[i + 1] - stops[i];
@@ -43,18 +40,23 @@ export const SectionRail = () => {
       );
     };
 
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
+    const measure = () => {
+      const y = window.scrollY;
+      const max = ScrollTrigger.maxScroll(window);
+      stops = ids.map((id, i) => {
+        const el = i && document.getElementById(id);
+        return el ? Math.min(el.getBoundingClientRect().top + y, max) : 0;
+      });
+      update();
     };
 
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-    };
+    const st = ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      onUpdate: update,
+      onRefresh: measure,
+    });
+    return () => st.kill();
   }, []);
 
   return (
