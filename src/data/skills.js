@@ -6,18 +6,11 @@ export const skills = [
       vi: "Cử nhân Kỹ thuật Phần mềm (Học bổng toàn phần)",
       en: "Bachelor of Software Engineering (Full scholarship)",
     },
-    institution: { vi: "Đại Học CMC", en: "CMC University" },
-    year: "(2024-2027)",
-    category: "Học vấn",
-  },
-
-  {
-    name: {
-      vi: "GPA: 3.5 (tính đến học kỳ Hè 2026)",
-      en: "GPA: 3.5 (as of Summer 2026)",
+    institution: {
+      vi: "Đại Học CMC - GPA: 3.5 (tính đến học kỳ Hè 2026)",
+      en: "CMC University - GPA: 3.5 (as of Summer 2026)",
     },
-    institution: { vi: "Đại Học CMC", en: "CMC University" },
-    year: "(2026)",
+    year: "(2024-2027)",
     category: "Học vấn",
   },
 
@@ -51,17 +44,18 @@ export const skills = [
   { name: "Java/C++/C#", level: 3, category: "Ngôn ngữ lập trình" },
 
   // Frontend
+  { name: "HTML/CSS", level: 4, category: "Frontend" },
   { name: "React/Next.js", level: 4, category: "Frontend" },
   { name: "Tailwind CSS", level: 4, category: "Frontend" },
   { name: "Ant Design", level: 4, category: "Frontend" },
-  { name: "HTML/CSS", level: 4, category: "Frontend" },
 
   // Backend
   { name: "Django/FastAPI", level: 4, category: "Backend" },
-  { name: "NoSQL (MongoDB)", level: 3, category: "Backend" },
+  { name: "NoSQL (MongoDB)", level: 2, category: "Backend" },
   { name: "SQL (PostgreSQL)", level: 4, category: "Backend" },
   { name: "Node.js/NestJS", level: 3, category: "Backend" },
   { name: ".NET", level: 2, category: "Backend" },
+  { name: "Git/GitHub", level: 4, category: "Backend" },
 
   // AI
   { name: "PyTorch", level: 4, category: "AI" },
@@ -70,10 +64,9 @@ export const skills = [
   { name: "Generative AI (ComfyUI)", level: 4, category: "AI" },
   { name: "Transformers (LLM/VISION)", level: 4, category: "AI" },
 
-  // Tools
-  { name: "Unity", level: 4, category: "Công cụ" },
-  { name: "Photoshop/Premiere", level: 3, category: "Công cụ" },
-  { name: "Office 365", level: 4, category: "Công cụ" },
-  { name: "Git/GitHub", level: 4, category: "Công cụ" },
-  { name: "VS Code", level: 5, category: "Công cụ" },
+  // Security
+  { name: "CTF (Jeopardy)", level: 4, category: "Bảo mật" },
+  { name: "Web Exploitation", level: 3, category: "Bảo mật" },
+  { name: "LLM & AI Agent Security (MCP/RAG)", level: 4, category: "Bảo mật" },
+  { name: "Reverse Engineering / Malware Analysis", level: 4, category: "Bảo mật" },
 ];

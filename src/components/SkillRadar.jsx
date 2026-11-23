@@ -8,7 +8,7 @@ import { useLang } from "../i18n/useLang";
 const categories = [
   "Backend",
   "Frontend",
-  "Công cụ",
+  "Bảo mật",
   "Ngôn ngữ lập trình",
   "AI",
 ];
@@ -20,10 +20,12 @@ const categories = [
 const categoryColors = {
   Backend: "#8b5cf6",
   Frontend: "#06b6d4",
-  "Công cụ": "#d946ef",
+  "Bảo mật": "#d946ef",
   "Ngôn ngữ lập trình": "#0ea5e9",
   AI: "#ec4899",
 };
+
+const TOP_N = 3;
 
 const skillLabels = [
   "Novice",
@@ -43,15 +45,18 @@ export const SkillRadar = ({ skills }) => {
   const { t } = useLang();
   const [activeCategory, setActiveCategory] = useState(null);
 
-  // Group and calculate averages
+  // Group and score each axis by its strongest TOP_N skills, so one weak
+  // tool (.NET) doesn't drag a whole category down.
   const radarData = useMemo(() => {
     return categories.map((cat) => {
       const catSkills = skills.filter((s) => s.category === cat);
-      const avg =
-        catSkills.length > 0
-          ? catSkills.reduce((acc, curr) => acc + curr.level, 0) /
-            catSkills.length
-          : 0;
+      const top = catSkills
+        .map((s) => s.level)
+        .sort((a, b) => b - a)
+        .slice(0, TOP_N);
+      const avg = top.length
+        ? top.reduce((acc, v) => acc + v, 0) / top.length
+        : 0;
       return {
         category: cat,
         value: avg,

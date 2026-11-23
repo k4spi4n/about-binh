@@ -65,10 +65,10 @@ cv:
         details: Python, JavaScript, TypeScript, Dart, Java, C++, C#
       - label: Frameworks & Libraries
         details: React, Flutter, Next.js, FastAPI, Django, Node.js, .NET, Tailwind CSS, PyTorch, OpenCV, NumPy
-      - label: Cơ sở dữ liệu & BaaS
-        details: PostgreSQL, Supabase, MongoDB
-      - label: Công cụ
-        details: Git, Docker, Unity, Godot
+      - label: Cơ sở dữ liệu & DevOps
+        details: PostgreSQL, Supabase, MongoDB, Git, Docker
+      - label: Bảo mật
+        details: CTF (jeopardy), LLM & AI Agent Security (MCP/RAG), Reverse Engineering / Malware Analysis, Web Exploitation
       - label: Chứng chỉ
         details: Certified LLM Security Expert (CLLMSE, Red Team Leaders), Chứng chỉ AI Samsung Innovation Campus (SIC), NVIDIA DLI Deep Learning
 
