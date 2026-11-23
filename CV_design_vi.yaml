@@ -70,7 +70,7 @@ cv:
       - label: Công cụ
         details: Git, Docker, Unity, Godot
       - label: Chứng chỉ
-        details: Chứng chỉ AI Samsung Innovation Campus (SIC), NVIDIA DLI Deep Learning
+        details: Certified LLM Security Expert (CLLMSE, Red Team Leaders), Chứng chỉ AI Samsung Innovation Campus (SIC), NVIDIA DLI Deep Learning
 
 locale:
   language: vietnamese

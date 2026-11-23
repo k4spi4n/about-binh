@@ -55,6 +55,19 @@ export const achievements = [
   },
   {
     name: {
+      vi: "Chứng chỉ Certified LLM Security Expert (CLLMSE)",
+      en: "Certified LLM Security Expert (CLLMSE) Certificate",
+    },
+    institution: {
+      vi: "Hoàn thành và vượt qua kỳ thi chứng chỉ bảo mật LLM của Red Team Leaders",
+      en: "Completed and passed the LLM security certification exam from Red Team Leaders",
+    },
+    year: "2026",
+    file: "skills/cert_RTL_CLLMSE.pdf",
+    fileLabel: { vi: "Chứng chỉ", en: "Certificate" },
+  },
+  {
+    name: {
       vi: "Chứng chỉ AI của Samsung Innovation Campus (SIC)",
       en: "Samsung Innovation Campus (SIC) AI Certificate",
     },
