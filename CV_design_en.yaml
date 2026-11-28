@@ -14,7 +14,7 @@ cv:
       - institution: CMC University
         area: Software Engineering
         degree: Bachelor's Degree
-        date: "Sept 2024 – 2027 (expected)"
+        date: "09/2024 – 2027 (expected)"
         highlights:
           - "GPA: 3.5/4.0 (As of Summer 2026) · Full scholarship recipient"
           - "IELTS 7.5"
@@ -79,6 +79,7 @@ design:
       show_icons: true
   page:
     size: a4
+    show_top_note: false
     top_margin: 0.35in
     bottom_margin: 0.35in
     left_margin: 0.45in
@@ -92,6 +93,8 @@ design:
     font_family: Source Sans 3
     line_spacing: 0.45em
     alignment: justified
+  templates:
+    single_date: MONTH_IN_TWO_DIGITS/YEAR
   sections:
     space_between_regular_entries: 0.55em
     space_between_text_based_entries: 0.25em
