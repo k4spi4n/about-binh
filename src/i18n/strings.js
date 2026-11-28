@@ -47,7 +47,7 @@ export const strings = {
     "cat.Backend": "Backend",
     "cat.Frontend": "Frontend",
     "cat.AI": "AI",
-    "cat.Công cụ": "Công cụ",
+    "cat.Bảo mật": "Bảo mật",
     "cat.Ngôn ngữ lập trình": "Ngôn ngữ lập trình",
 
     "achv.lead": "Thành Tích &",
@@ -143,7 +143,7 @@ export const strings = {
     "cat.Backend": "Backend",
     "cat.Frontend": "Frontend",
     "cat.AI": "AI",
-    "cat.Công cụ": "Tools",
+    "cat.Bảo mật": "Security",
     "cat.Ngôn ngữ lập trình": "Languages",
 
     "achv.lead": "Achievements &",

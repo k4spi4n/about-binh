@@ -9,12 +9,12 @@ cv:
       username: k4spi4n
   sections:
     Giới thiệu:
-      - "Lập trình viên Full-stack & AI Engineer với tư duy phát triển sản phẩm thực chiến và nền tảng hệ thống vững chắc. Tác giả hệ thống LMS B2B đang vận hành doanh nghiệp thực tế, Kỹ sư chính nền tảng tour 3D bất động sản DynaTour và Đội trưởng đội nghiên cứu an ninh mạng đạt Top 10 Chung khảo CSCV 2026."
+      - "Full-stack & AI Engineer với tư duy phát triển sản phẩm thực chiến và nền tảng hệ thống vững chắc. Tác giả hệ thống LMS B2B đang vận hành doanh nghiệp thực tế, Kỹ sư chính nền tảng tour 3D bất động sản DynaTour và Đội trưởng đội nghiên cứu an ninh mạng đạt Top 10 Chung khảo CSCV 2026."
     Học vấn:
-      - institution: Đại Học CMC
-        area: Kỹ Thuật Phần Mềm
+      - institution: Đại học CMC
+        area: Kỹ thuật phần mềm
         degree: Cử nhân ngành
-        date: "Th09 2024 – 2027 (dự kiến)"
+        date: "09/2024 – 2027 (dự kiến)"
         highlights:
           - "GPA: 3.5/4.0 (Tính đến học kỳ Hè 2026) · Học bổng toàn phần"
           - "IELTS 7.5"
@@ -65,10 +65,10 @@ cv:
         details: Python, JavaScript, TypeScript, Dart, Java, C++, C#
       - label: Frameworks & Libraries
         details: React, Flutter, Next.js, FastAPI, Django, Node.js, .NET, Tailwind CSS, PyTorch, OpenCV, NumPy
-      - label: Cơ sở dữ liệu & BaaS
-        details: PostgreSQL, Supabase, MongoDB
-      - label: Công cụ
-        details: Git, Docker, Unity, Godot
+      - label: Cơ sở dữ liệu & DevOps
+        details: PostgreSQL, Supabase, MongoDB, Git, Docker
+      - label: Bảo mật
+        details: CTF (jeopardy), LLM & AI Agent Security (MCP/RAG), Reverse Engineering / Malware Analysis, Web Exploitation
       - label: Chứng chỉ
         details: Certified LLM Security Expert (CLLMSE, Red Team Leaders), Chứng chỉ AI Samsung Innovation Campus (SIC), NVIDIA DLI Deep Learning
 
@@ -84,6 +84,7 @@ design:
       show_icons: true
   page:
     size: a4
+    show_top_note: false
     top_margin: 0.35in
     bottom_margin: 0.35in
     left_margin: 0.45in
@@ -97,6 +98,8 @@ design:
     font_family: Source Sans 3
     line_spacing: 0.45em
     alignment: justified
+  templates:
+    single_date: MONTH_IN_TWO_DIGITS/YEAR
   sections:
     space_between_regular_entries: 0.55em
     space_between_text_based_entries: 0.25em

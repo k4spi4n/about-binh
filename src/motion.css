@@ -694,37 +694,6 @@
   }
 }
 
-/* ── Hairline scroll progress ──────────────────────────────────────── */
-
-/* Both ride --scroll-p, written by ScrollProgressBar */
-.hairline-fill {
-  position: absolute;
-  inset: 0;
-  transform-origin: left;
-  transform: scaleX(var(--scroll-p));
-  background: linear-gradient(
-    90deg,
-    hsl(var(--primary) / 0.2),
-    hsl(var(--primary)),
-    #d946ef 80%,
-    #22d3ee
-  );
-}
-
-.hairline-head {
-  position: absolute;
-  top: 0;
-  left: calc(var(--scroll-p) * 100%);
-  width: 5px;
-  height: 5px;
-  margin: -2px 0 0 -2.5px;
-  border-radius: 9999px;
-  background: #fff;
-  box-shadow:
-    0 0 6px 2px hsl(292 84% 70% / 0.9),
-    0 0 18px 6px hsl(var(--primary) / 0.45);
-}
-
 /* ── Side rail ─────────────────────────────────────────────────────── */
 
 .rail {
@@ -1163,9 +1132,7 @@
    the page (html[data-idle], set by useQuietChrome) and step back when they
    stop to read. Each piece of information is shown once:
    · the right rail is the detailed tracker: visible only while scrolling
-     and away from the hero, or when its edge is hovered;
-   · the top hairline is the quiet one: it stays as a faint line, and its
-     comet head only appears on small screens, where there is no rail. */
+     and away from the hero, or when its edge is hovered. */
 
 /* Pops in fast when scrolling starts, eases out a little slower */
 .rail {
@@ -1193,25 +1160,6 @@
 :root[data-idle="true"] .rail:not(:hover) *,
 .rail.is-home:not(:hover) * {
   animation-play-state: paused;
-}
-
-.hairline-fill,
-.hairline-head {
-  transition: opacity 0.8s var(--ease-settle);
-}
-
-:root[data-idle="true"] .hairline-fill {
-  opacity: 0.35;
-}
-
-:root[data-idle="true"] .hairline-head {
-  opacity: 0;
-}
-
-@media (width >= 1024px) {
-  .hairline-head {
-    display: none;
-  }
 }
 
 /* The "scroll down" hint has done its job once the visitor scrolls */
